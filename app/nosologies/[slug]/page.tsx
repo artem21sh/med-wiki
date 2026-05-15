@@ -2,7 +2,14 @@ import Link from 'next/link';
 import { getNosologies, getNosologyById } from '@/lib/notion';
 import NosologyContent from '@/app/components/NosologyContent';
 
-export const revalidate = 3600;
+export const revalidate = 60;
+
+export async function generateStaticParams() {
+  const nosologies = await getNosologies();
+  return nosologies
+    .filter(n => n.title && !n.title.match(/^\d+ нозология$/))
+    .map(n => ({ slug: n.slug }));
+}
 
 export default async function NosologyPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
