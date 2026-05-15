@@ -10,6 +10,7 @@ const n2m = new NotionToMarkdown({ notionClient: notion as any });
 const DATABASE_ID = process.env.NOTION_DB_ID!;
 
 function cleanMarkdown(md: string): string {
+  if (!md) return '';
   return md
     .split('\n')
     .map(line => line.replace(/^[\t ]+/, ''))
@@ -47,6 +48,6 @@ export async function getNosologyById(id: string) {
     title: (page as any).properties.Page?.title?.[0]?.plain_text ?? 'Без названия',
     tags: (page as any).properties.Tags?.multi_select?.map((t: any) => t.name) ?? [],
     lastEdited: (page as any).last_edited_time,
-    markdown: cleanMarkdown(markdown.parent),
+    markdown: cleanMarkdown(markdown?.parent ?? ''),
   };
 }
