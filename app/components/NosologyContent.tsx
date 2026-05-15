@@ -57,11 +57,11 @@ export default function NosologyContent({ markdown }: { markdown: string }) {
   const namedSections = sections.filter(s => s.title);
   const intro = sections.find(s => !s.title);
 
-  const [open, setOpen] = useState({});
+  const [open, setOpen] = useState<Record<string, boolean>>({});
   const [search, setSearch] = useState('');
 
-  const toggleAll = (val) => {
-    const next = {};
+  const toggleAll = (val: boolean) => {
+    const next: Record<string, boolean> = {};
     namedSections.forEach(s => { next[s.anchor] = val; });
     setOpen(next);
   };
