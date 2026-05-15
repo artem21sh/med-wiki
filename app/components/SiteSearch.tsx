@@ -3,40 +3,61 @@
 import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 
+interface IndexEntry {
+  id: string;
+  title: string;
+  slug: string;
+  content: string;
+}
+
 interface Result {
   id: string;
   title: string;
   slug: string;
+  snippet: string;
+}
+
+function getSnippet(text: string, query: string): string {
+  const lower = text.toLowerCase();
+  const idx = lower.indexOf(query.toLowerCase());
+  if (idx === -1) return '';
+  const start = Math.max(0, idx - 60);
+  const end = Math.min(text.length, idx + query.length + 60);
+  return (start > 0 ? '...' : '') + text.slice(start, end) + (end < text.length ? '...' : '');
 }
 
 export default function SiteSearch() {
   const [query, setQuery] = useState('');
+  const [index, setIndex] = useState<IndexEntry[]>([]);
   const [results, setResults] = useState<Result[]>([]);
-  const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (query.length < 2) {
+    fetch('/search-index.json').then(r => r.json()).then(setIndex).catch(() => {});
+  }, []);
+
+  useEffect(() => {
+    if (query.length < 2 || index.length === 0) {
       setResults([]);
       setOpen(false);
       return;
     }
 
-    const timer = setTimeout(async () => {
-      setLoading(true);
-      try {
-        const res = await fetch(`/api/search?q=${encodeURIComponent(query)}`);
-        const data = await res.json();
-        setResults(data);
-        setOpen(true);
-      } finally {
-        setLoading(false);
-      }
-    }, 300);
+    const q = query.toLowerCase();
+    const found = index
+      .filter(e => e.title.toLowerCase().includes(q) || e.content.toLowerCase().includes(q))
+      .slice(0, 8)
+      .map(e => ({
+        id: e.id,
+        title: e.title,
+        slug: e.slug,
+        snippet: getSnippet(e.content.replace(/[#*`|]/g, ''), query),
+      }));
 
-    return () => clearTimeout(timer);
-  }, [query]);
+    setResults(found);
+    setOpen(true);
+  }, [query, index]);
 
   useEffect(() => {
     function handleClick(e: MouseEvent) {
@@ -57,9 +78,6 @@ export default function SiteSearch() {
         onChange={e => setQuery(e.target.value)}
         className="w-full px-4 py-3 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-blue-400 bg-white"
       />
-      {loading && (
-        <div className="absolute right-4 top-3.5 text-gray-400 text-xs">Поиск...</div>
-      )}
       {open && results.length > 0 && (
         <div className="absolute z-10 w-full mt-2 bg-white border border-gray-200 rounded-xl shadow-lg overflow-hidden">
           {results.map(r => (
@@ -69,12 +87,15 @@ export default function SiteSearch() {
               className="block px-4 py-3 hover:bg-gray-50 border-b border-gray-100 last:border-0"
               onClick={() => setOpen(false)}
             >
-              <span className="text-sm text-gray-900">{r.title}</span>
+              <div className="text-sm font-medium text-gray-900">{r.title}</div>
+              {r.snippet && (
+                <div className="text-xs text-gray-400 mt-0.5 truncate">{r.snippet}</div>
+              )}
             </Link>
           ))}
         </div>
       )}
-      {open && results.length === 0 && !loading && query.length >= 2 && (
+      {open && results.length === 0 && query.length >= 2 && (
         <div className="absolute z-10 w-full mt-2 bg-white border border-gray-200 rounded-xl shadow-lg px-4 py-3">
           <span className="text-sm text-gray-400">Ничего не найдено</span>
         </div>
