@@ -24,6 +24,7 @@ async function main() {
     if (!title) continue;
     console.log('Processing: ' + title);
     const slug = page.id.replace(/-/g, '');
+    await new Promise(r => setTimeout(r, 500));
     try {
       const mdBlocks = await n2m.pageToMarkdown(page.id);
       const markdown = n2m.toMarkdownString(mdBlocks);
