@@ -62,6 +62,7 @@ export default function NosologyContent({ markdown }: { markdown: string }) {
   const intro = sections.find(s => !s.title);
 
   const [open, setOpen] = useState<Record<string, boolean>>({});
+  const [tocOpen, setTocOpen] = useState(false);
 
   useEffect(() => {
     const hash = window.location.hash.replace('#', '');
@@ -108,31 +109,43 @@ export default function NosologyContent({ markdown }: { markdown: string }) {
       </div>
 
       {search === '' && (
-        <div className="bg-gray-50 border border-gray-200 rounded-xl p-4 mb-8">
-          <div className="flex items-center justify-between mb-3">
+        <div className="bg-gray-50 border border-gray-200 rounded-xl mb-8 overflow-hidden">
+          <button
+            onClick={() => setTocOpen(prev => !prev)}
+            className="w-full flex items-center justify-between px-4 py-3 hover:bg-gray-100 transition-colors"
+          >
             <span className="text-sm font-medium text-gray-700">Содержание</span>
-            <div className="flex gap-3 text-xs text-blue-500">
-              <button onClick={() => toggleAll(true)} className="hover:underline">развернуть все</button>
-              <button onClick={() => toggleAll(false)} className="hover:underline">свернуть все</button>
+            <div className="flex items-center gap-3">
+              <span
+                className="text-xs text-blue-500 hover:underline"
+                onClick={e => { e.stopPropagation(); toggleAll(!Object.values(open).some(Boolean)); }}
+              >
+                {Object.values(open).some(Boolean) ? 'свернуть все' : 'развернуть все'}
+              </span>
+              <span className="text-gray-400">{tocOpen ? '−' : '+'}</span>
             </div>
-          </div>
-          <ol className="list-none space-y-1">
-            {namedSections.map((s, i) => (
-              <li key={s.anchor}>
-                <button
-                  className="text-sm text-blue-600 hover:underline text-left"
-                  onClick={() => {
-                    setOpen(prev => ({ ...prev, [s.anchor]: true }));
-                    setTimeout(() => {
-                      document.getElementById(s.anchor)?.scrollIntoView({ behavior: 'smooth' });
-                    }, 50);
-                  }}
-                >
-                  {s.title}
-                </button>
-              </li>
-            ))}
-          </ol>
+          </button>
+          {tocOpen && (
+            <div className="px-4 pb-4">
+              <ol className="list-none space-y-1">
+                {namedSections.map((s, i) => (
+                  <li key={s.anchor}>
+                    <button
+                      className="text-sm text-blue-600 hover:underline text-left"
+                      onClick={() => {
+                        setOpen(prev => ({ ...prev, [s.anchor]: true }));
+                        setTimeout(() => {
+                          document.getElementById(s.anchor)?.scrollIntoView({ behavior: 'smooth' });
+                        }, 50);
+                      }}
+                    >
+                      {s.title}
+                    </button>
+                  </li>
+                ))}
+              </ol>
+            </div>
+          )}
         </div>
       )}
 
@@ -166,15 +179,20 @@ export default function NosologyContent({ markdown }: { markdown: string }) {
                       {getSnippet(s.content.replace(/[#*`|]/g, ''), search)}
                     </p>
                     <button
-                      className="text-xs text-blue-500 hover:underline"
+                      className="text-xs text-blue-500 hover:underline mt-1 block"
                       onClick={() => {
                         setOpen(prev => ({ ...prev, [s.anchor]: !prev[s.anchor] }));
+                        if (!open[s.anchor]) {
+                          setTimeout(() => {
+                            document.getElementById(s.anchor)?.scrollIntoView({ behavior: 'smooth' });
+                          }, 50);
+                        }
                       }}
                     >
-                      {open[s.anchor] ? 'Скрыть раздел' : 'Показать полный раздел'}
+                      {open[s.anchor] ? 'Свернуть' : 'Открыть раздел →'}
                     </button>
                     {open[s.anchor] && (
-                      <div className="prose prose-gray max-w-none mt-4">
+                      <div className="prose prose-gray max-w-none mt-4 border-t border-gray-100 pt-4">
                         <ReactMarkdown remarkPlugins={[remarkGfm]}>{s.content}</ReactMarkdown>
                       </div>
                     )}
