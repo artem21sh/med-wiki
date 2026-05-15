@@ -20,9 +20,9 @@ function cleanMarkdown(md: string): string {
       const rest = clean.replace(/^> .*?[🚨⚠️❌🏥]\s*/, '').replace(/^> /, '');
       if (prefix) {
         result.push('> **' + prefix.trim() + '**');
-        rest.split(' - ').filter(Boolean).forEach(item => result.push('> - ' + item.trim()));
+        rest.split(' - ').map(i => i.trim()).filter(i => i.length > 0).forEach(item => result.push('> - ' + item));
       } else {
-        clean.replace(/^> /, '').split(' - ').filter(Boolean).forEach(item => result.push('> - ' + item.trim()));
+        clean.replace(/^> /, '').split(' - ').map(i => i.trim()).filter(i => i.length > 0).forEach(item => result.push('> - ' + item));
       }
     } else {
       result.push(clean);
