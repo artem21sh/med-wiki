@@ -51,3 +51,19 @@ export async function getNosologyById(id: string) {
     markdown: cleanMarkdown(markdown?.parent ?? ''),
   };
 }
+
+export async function searchNosologies(query: string) {
+  const response = await notion.search({
+    query,
+    filter: { property: 'object', value: 'page' },
+    sort: { direction: 'descending', timestamp: 'last_edited_time' },
+  });
+
+  return response.results
+    .filter((r: any) => r.parent?.database_id?.replace(/-/g, '') === DATABASE_ID.replace(/-/g, ''))
+    .map((page: any) => ({
+      id: page.id,
+      title: page.properties.Page?.title?.[0]?.plain_text ?? 'Без названия',
+      slug: page.id.replace(/-/g, ''),
+    }));
+}
