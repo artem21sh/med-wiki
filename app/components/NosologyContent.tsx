@@ -151,9 +151,24 @@ export default function NosologyContent({ markdown }: { markdown: string }) {
             {isOpen(s.anchor) && (
               <div className="px-6 pb-6 border-t border-gray-100 pt-4">
                 {search ? (
-                  <p className="text-sm text-gray-600 bg-yellow-50 border border-yellow-100 rounded-lg px-4 py-3">
-                    {getSnippet(s.content.replace(/[#*`|]/g, ''), search)}
-                  </p>
+                  <div>
+                    <p className="text-sm text-gray-600 bg-yellow-50 border border-yellow-100 rounded-lg px-4 py-3 mb-3">
+                      {getSnippet(s.content.replace(/[#*`|]/g, ''), search)}
+                    </p>
+                    <button
+                      className="text-xs text-blue-500 hover:underline"
+                      onClick={() => {
+                        setOpen(prev => ({ ...prev, [s.anchor]: true }));
+                      }}
+                    >
+                      Показать полный раздел
+                    </button>
+                    {open[s.anchor] && (
+                      <div className="prose prose-gray max-w-none mt-4">
+                        <ReactMarkdown remarkPlugins={[remarkGfm]}>{s.content}</ReactMarkdown>
+                      </div>
+                    )}
+                  </div>
                 ) : (
                   <div className="prose prose-gray max-w-none">
                     <ReactMarkdown remarkPlugins={[remarkGfm]}>{s.content}</ReactMarkdown>
