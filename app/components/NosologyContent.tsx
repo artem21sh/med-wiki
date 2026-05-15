@@ -101,7 +101,7 @@ export default function NosologyContent({ markdown }: { markdown: string }) {
         />
         {search && filtered.length > 0 && (
           <div className="absolute z-10 w-full mt-2 bg-white border border-gray-200 rounded-xl shadow-lg overflow-hidden">
-            {namedSections.map(s => (
+            {filtered.map(s => (
               <button
                 key={s.anchor}
                 className="w-full text-left px-4 py-3 hover:bg-gray-50 border-b border-gray-100 last:border-0"
