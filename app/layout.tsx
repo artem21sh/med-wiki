@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { AppProgressBar as ProgressBar } from 'next-nprogress-bar';
+import ProgressBar from '@/app/components/ProgressBar';
 
 export const metadata: Metadata = {
   title: "МедСправочник",
@@ -11,8 +11,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="ru">
       <body>
+        <ProgressBar />
         {children}
-        <ProgressBar height="3px" color="#3b82f6" options={{ showSpinner: false }} shallowRouting />
       </body>
     </html>
   );
