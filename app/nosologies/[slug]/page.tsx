@@ -2,12 +2,7 @@ import Link from 'next/link';
 import { getNosologies, getNosologyById } from '@/lib/notion';
 import NosologyContent from '@/app/components/NosologyContent';
 
-export const revalidate = 60;
-
-export async function generateStaticParams() {
-  const nosologies = await getNosologies();
-  return nosologies.map((n) => ({ slug: n.slug }));
-}
+export const dynamic = 'force-dynamic';
 
 export default async function NosologyPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
