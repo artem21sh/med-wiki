@@ -20,6 +20,12 @@ function cleanMarkdown(md: string): string {
 export async function getNosologies() {
   const response = await notion.databases.query({
     database_id: DATABASE_ID,
+    filter: {
+      property: 'Статус',
+      select: {
+        equals: 'Готово',
+      },
+    },
     sorts: [{ property: 'Page', direction: 'ascending' }],
   });
 
