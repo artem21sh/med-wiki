@@ -49,7 +49,7 @@ function getAllSnippets(content: string, query: string): Snippet[] {
     if (/^#{1,2}\s+\d+/.test(line)) {
       headers.push({
         title: line.replace(/^#+\s+/, '').trim(),
-        anchor: 'section-' + secIdx,
+        anchor: 'section-' + (secIdx + 1),
         pos,
       });
       secIdx++;
