@@ -14,16 +14,23 @@ interface Result {
   id: string;
   title: string;
   slug: string;
-  snippet: string;
+  snippets: string[];
 }
 
-function getSnippet(text: string, query: string): string {
+function getAllSnippets(text: string, query: string): string[] {
   const lower = text.toLowerCase();
-  const idx = lower.indexOf(query.toLowerCase());
-  if (idx === -1) return '';
-  const start = Math.max(0, idx - 60);
-  const end = Math.min(text.length, idx + query.length + 60);
-  return (start > 0 ? '...' : '') + text.slice(start, end) + (end < text.length ? '...' : '');
+  const q = query.toLowerCase();
+  const snippets: string[] = [];
+  let pos = 0;
+  while (true) {
+    const idx = lower.indexOf(q, pos);
+    if (idx === -1) break;
+    const start = Math.max(0, idx - 60);
+    const end = Math.min(text.length, idx + q.length + 60);
+    snippets.push((start > 0 ? '...' : '') + text.slice(start, end) + (end < text.length ? '...' : ''));
+    pos = idx + q.length;
+  }
+  return snippets;
 }
 
 export default function SiteSearch() {
@@ -52,7 +59,7 @@ export default function SiteSearch() {
         id: e.id,
         title: e.title,
         slug: e.slug,
-        snippet: getSnippet(e.content.replace(/[#*`|]/g, ''), query),
+        snippets: getAllSnippets(e.content.replace(/[#*`|]/g, ''), query),
       }));
 
     setResults(found);
@@ -88,9 +95,9 @@ export default function SiteSearch() {
               onClick={() => setOpen(false)}
             >
               <div className="text-sm font-medium text-gray-900">{r.title}</div>
-              {r.snippet && (
-                <div className="text-xs text-gray-400 mt-0.5 truncate">{r.snippet}</div>
-              )}
+              {r.snippets.map((s, i) => (
+                <div key={i} className="text-xs text-gray-400 mt-0.5">{s}</div>
+              ))}
             </Link>
           ))}
         </div>
