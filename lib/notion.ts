@@ -11,11 +11,24 @@ const DATABASE_ID = process.env.NOTION_DB_ID!;
 
 function cleanMarkdown(md: string): string {
   if (!md) return '';
-  return md
-    .split('\n')
-    .map(line => line.replace(/^[\t ]+/, ''))
-    .map(line => line.replace(/^"+/, '').replace(/"+$/, ''))
-    .join('\n');
+  const lines = md.split('\n').map(line => line.replace(/^[\t ]+/, ''));
+  const result = [];
+  for (const line of lines) {
+    const clean = line.replace(/^"+/, '').replace(/"+$/, '');
+    if (clean.startsWith('> ') && clean.includes(' - ')) {
+      const prefix = clean.match(/^> (.*?[🚨⚠️❌🏥]\s*)/)?.[1] || '';
+      const rest = clean.replace(/^> .*?[🚨⚠️❌🏥]\s*/, '').replace(/^> /, '');
+      if (prefix) {
+        result.push('> **' + prefix.trim() + '**');
+        rest.split(' - ').filter(Boolean).forEach(item => result.push('> - ' + item.trim()));
+      } else {
+        clean.replace(/^> /, '').split(' - ').filter(Boolean).forEach(item => result.push('> - ' + item.trim()));
+      }
+    } else {
+      result.push(clean);
+    }
+  }
+  return result.join('\n');
 }
 
 export async function getNosologies() {
