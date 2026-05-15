@@ -28,10 +28,7 @@ function cleanMarkdown(md: string): string {
       result.push(clean);
     }
   }
-  const cleaned = result.map((line: string) =>
-    line.replace(/\p{Emoji}/gu, '').trim()
-  ).filter((line: string) => line !== '> -' && line !== '>' && line.trim() !== '-');
-  return cleaned.join('\n');
+  return result.filter((line: string) => line.trim() !== '> -' && line.trim() !== '>').join('\n');
 }
 
 export async function getNosologies() {
