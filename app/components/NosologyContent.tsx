@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 
@@ -62,6 +62,16 @@ export default function NosologyContent({ markdown }: { markdown: string }) {
   const intro = sections.find(s => !s.title);
 
   const [open, setOpen] = useState<Record<string, boolean>>({});
+
+  useEffect(() => {
+    const hash = window.location.hash.replace('#', '');
+    if (hash) {
+      setOpen(prev => ({ ...prev, [hash]: true }));
+      setTimeout(() => {
+        document.getElementById(hash)?.scrollIntoView({ behavior: 'smooth' });
+      }, 100);
+    }
+  }, []);
   const [search, setSearch] = useState('');
 
   const toggleAll = (val: boolean) => {
