@@ -1,0 +1,9 @@
+import { NextRequest, NextResponse } from 'next/server';
+import { searchNosologies } from '@/lib/notion';
+
+export async function GET(request: NextRequest) {
+  const query = request.nextUrl.searchParams.get('q') || '';
+  if (!query || query.length < 2) return NextResponse.json([]);
+  const results = await searchNosologies(query);
+  return NextResponse.json(results);
+}
