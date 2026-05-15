@@ -5,6 +5,7 @@ import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 
 interface Section { title: string; anchor: string; content: string; }
+
 function parseSections(markdown: string): Section[] {
   const lines = markdown.split('\n');
   const sections: Section[] = [];
@@ -42,14 +43,17 @@ function parseSections(markdown: string): Section[] {
   return sections;
 }
 
-function highlight(text: string, query: string): string {
-  if (!query) return text;
-  const parts = text.split(new RegExp('(' + query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + ')', 'gi'));
-  return parts.map((part: string, i: number) =>
-    part.toLowerCase() === query.toLowerCase()
-      ? '<mark style="background:#fef08a;border-radius:2px;padding:0 2px">' + part + '</mark>'
-      : part
-  ).join('');
+
+function getSnippet(text: string, query: string, radius: number = 120): string {
+  const lower = text.toLowerCase();
+  const idx = lower.indexOf(query.toLowerCase());
+  if (idx === -1) return text.slice(0, radius) + '...';
+  const start = Math.max(0, idx - radius / 2);
+  const end = Math.min(text.length, idx + query.length + radius / 2);
+  const before = start > 0 ? '...' : '';
+  const after = end < text.length ? '...' : '';
+  const snippet = text.slice(start, end);
+  return before + snippet + after;
 }
 
 export default function NosologyContent({ markdown }: { markdown: string }) {
@@ -89,9 +93,7 @@ export default function NosologyContent({ markdown }: { markdown: string }) {
           className="w-full px-4 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:border-blue-400"
         />
         {search && (
-          <p className="text-xs text-gray-400 mt-2">
-            Найдено разделов: {filtered.length}
-          </p>
+          <p className="text-xs text-gray-400 mt-2">Найдено разделов: {filtered.length}</p>
         )}
       </div>
 
@@ -107,11 +109,9 @@ export default function NosologyContent({ markdown }: { markdown: string }) {
           <ol className="list-none space-y-1">
             {namedSections.map((s, i) => (
               <li key={s.anchor}>
-                <a
-                  href={'#' + s.anchor}
-                  className="text-sm text-blue-600 hover:underline"
-                  onClick={e => {
-                    e.preventDefault();
+                <button
+                  className="text-sm text-blue-600 hover:underline text-left"
+                  onClick={() => {
                     setOpen(prev => ({ ...prev, [s.anchor]: true }));
                     setTimeout(() => {
                       document.getElementById(s.anchor)?.scrollIntoView({ behavior: 'smooth' });
@@ -119,7 +119,7 @@ export default function NosologyContent({ markdown }: { markdown: string }) {
                   }}
                 >
                   {s.title}
-                </a>
+                </button>
               </li>
             ))}
           </ol>
@@ -143,10 +143,7 @@ export default function NosologyContent({ markdown }: { markdown: string }) {
               }}
               className="w-full flex items-center justify-between px-6 py-4 text-left hover:bg-gray-50 transition-colors"
             >
-              <span
-                className="font-semibold text-gray-900"
-                dangerouslySetInnerHTML={{ __html: highlight(s.title, search) }}
-              />
+              <span className="font-semibold text-gray-900">{s.title}</span>
               {search === '' && (
                 <span className="text-gray-400 text-lg ml-4">{isOpen(s.anchor) ? '-' : '+'}</span>
               )}
@@ -154,10 +151,9 @@ export default function NosologyContent({ markdown }: { markdown: string }) {
             {isOpen(s.anchor) && (
               <div className="px-6 pb-6 border-t border-gray-100 pt-4">
                 {search ? (
-                  <div
-                    className="prose prose-gray max-w-none"
-                    dangerouslySetInnerHTML={{ __html: highlight(s.content.replace(/[<>]/g, c => c === '<' ? '&lt;' : '&gt;'), search) }}
-                  />
+                  <p className="text-sm text-gray-600 bg-yellow-50 border border-yellow-100 rounded-lg px-4 py-3">
+                    {getSnippet(s.content.replace(/[#*`|]/g, ''), search)}
+                  </p>
                 ) : (
                   <div className="prose prose-gray max-w-none">
                     <ReactMarkdown remarkPlugins={[remarkGfm]}>{s.content}</ReactMarkdown>
@@ -170,7 +166,7 @@ export default function NosologyContent({ markdown }: { markdown: string }) {
       </div>
 
       {filtered.length === 0 && search !== '' && (
-        <p className="text-gray-400 text-center py-12">Ничего не найдено по запросу {search}</p>
+        <p className="text-gray-400 text-center py-12">Ничего не найдено</p>
       )}
     </div>
   );
