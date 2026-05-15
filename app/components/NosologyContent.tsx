@@ -175,11 +175,8 @@ export default function NosologyContent({ markdown }: { markdown: string }) {
               <div className="px-6 pb-6 border-t border-gray-100 pt-4">
                 {search ? (
                   <div>
-                    <p className="text-sm text-gray-600 bg-yellow-50 border border-yellow-100 rounded-lg px-4 py-3 mb-3">
-                      {getSnippet(s.content.replace(/[#*`|]/g, ''), search)}
-                    </p>
                     <button
-                      className="text-xs text-blue-500 hover:underline mt-1 block"
+                      className="w-full text-left text-sm text-gray-600 bg-yellow-50 border border-yellow-100 rounded-lg px-4 py-3 hover:bg-yellow-100 transition-colors"
                       onClick={() => {
                         setOpen(prev => ({ ...prev, [s.anchor]: !prev[s.anchor] }));
                         if (!open[s.anchor]) {
@@ -189,7 +186,8 @@ export default function NosologyContent({ markdown }: { markdown: string }) {
                         }
                       }}
                     >
-                      {open[s.anchor] ? 'Свернуть' : 'Открыть раздел →'}
+                      {getSnippet(s.content.replace(/[#*`|]/g, ''), search)}
+                      <span className="block text-xs text-blue-500 mt-1">{open[s.anchor] ? 'Свернуть' : 'Открыть раздел →'}</span>
                     </button>
                     {open[s.anchor] && (
                       <div className="prose prose-gray max-w-none mt-4 border-t border-gray-100 pt-4">
