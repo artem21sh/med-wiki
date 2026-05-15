@@ -115,15 +115,7 @@ export default function NosologyContent({ markdown }: { markdown: string }) {
             className="w-full flex items-center justify-between px-4 py-3 hover:bg-gray-100 transition-colors"
           >
             <span className="text-sm font-medium text-gray-700">Содержание</span>
-            <div className="flex items-center gap-3">
-              <span
-                className="text-xs text-blue-500 hover:underline"
-                onClick={e => { e.stopPropagation(); toggleAll(!Object.values(open).some(Boolean)); }}
-              >
-                {Object.values(open).some(Boolean) ? 'свернуть все' : 'развернуть все'}
-              </span>
-              <span className="text-gray-400">{tocOpen ? '−' : '+'}</span>
-            </div>
+            <span className="text-gray-400">{tocOpen ? '−' : '+'}</span>
           </button>
           {tocOpen && (
             <div className="px-4 pb-4">
@@ -155,6 +147,14 @@ export default function NosologyContent({ markdown }: { markdown: string }) {
         </div>
       )}
 
+      <div className="flex justify-end mb-2">
+        <button
+          onClick={() => toggleAll(!Object.values(open).some(Boolean))}
+          className="text-xs text-blue-500 hover:underline"
+        >
+          {Object.values(open).some(Boolean) ? 'Свернуть все' : 'Развернуть все'}
+        </button>
+      </div>
       <div className="flex flex-col gap-3">
         {filtered.map(s => (
           <div key={s.anchor} id={s.anchor} className="border border-gray-200 rounded-xl overflow-hidden">
