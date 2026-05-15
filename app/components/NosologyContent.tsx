@@ -158,10 +158,10 @@ export default function NosologyContent({ markdown }: { markdown: string }) {
                     <button
                       className="text-xs text-blue-500 hover:underline"
                       onClick={() => {
-                        setOpen(prev => ({ ...prev, [s.anchor]: true }));
+                        setOpen(prev => ({ ...prev, [s.anchor]: !prev[s.anchor] }));
                       }}
                     >
-                      Показать полный раздел
+                      {open[s.anchor] ? 'Скрыть раздел' : 'Показать полный раздел'}
                     </button>
                     {open[s.anchor] && (
                       <div className="prose prose-gray max-w-none mt-4">
