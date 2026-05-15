@@ -4,7 +4,7 @@ import { useState } from 'react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 
-function parseSections(markdown) {
+function parseSections(markdown: string) {
   const lines = markdown.split('\n');
   const sections = [];
   let currentSection = null;
@@ -51,7 +51,7 @@ function highlight(text, query) {
   ).join('');
 }
 
-export default function NosologyContent({ markdown }) {
+export default function NosologyContent({ markdown }: { markdown: string }) {
   const sections = parseSections(markdown);
   const namedSections = sections.filter(s => s.title);
   const intro = sections.find(s => !s.title);
