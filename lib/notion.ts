@@ -14,6 +14,7 @@ function cleanMarkdown(md: string): string {
   return md
     .split('\n')
     .map(line => line.replace(/^[\t ]+/, ''))
+    .map(line => line.replace(/^"+/, '').replace(/"+$/, ''))
     .join('\n');
 }
 
