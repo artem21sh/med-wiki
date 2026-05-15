@@ -81,21 +81,17 @@ export default function NosologyContent({ markdown }: { markdown: string }) {
     setOpen(next);
   };
 
-  const filtered = search === ''
-    ? namedSections
-    : namedSections.filter(s =>
-        s.title.toLowerCase().includes(search.toLowerCase()) ||
-        s.content.toLowerCase().includes(search.toLowerCase())
-      );
+  const filtered = namedSections.filter(s =>
+    search === '' ||
+    s.title.toLowerCase().includes(search.toLowerCase()) ||
+    s.content.toLowerCase().includes(search.toLowerCase())
+  );
 
-  const isOpen = (anchor: string) => {
-    if (search !== '') return true;
-    return open[anchor] === true;
-  };
+  const isOpen = (anchor: string) => open[anchor] === true;
 
   return (
     <div>
-      <div className="mb-6">
+      <div className="mb-6 relative">
         <input
           type="text"
           placeholder="Поиск по странице..."
@@ -103,8 +99,30 @@ export default function NosologyContent({ markdown }: { markdown: string }) {
           onChange={e => setSearch(e.target.value)}
           className="w-full px-4 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:border-blue-400"
         />
-        {search && (
-          <p className="text-xs text-gray-400 mt-2">Найдено разделов: {filtered.length}</p>
+        {search && filtered.length > 0 && (
+          <div className="absolute z-10 w-full mt-2 bg-white border border-gray-200 rounded-xl shadow-lg overflow-hidden">
+            {namedSections.map(s => (
+              <button
+                key={s.anchor}
+                className="w-full text-left px-4 py-3 hover:bg-gray-50 border-b border-gray-100 last:border-0"
+                onClick={() => {
+                  setSearch('');
+                  setOpen(prev => ({ ...prev, [s.anchor]: true }));
+                  setTimeout(() => {
+                    document.getElementById(s.anchor)?.scrollIntoView({ behavior: 'smooth' });
+                  }, 50);
+                }}
+              >
+                <div className="text-xs font-medium text-blue-500 mb-0.5">{s.title}</div>
+                <div className="text-xs text-gray-500">{getSnippet(s.content.replace(/[#*`|]/g, ''), search)}</div>
+              </button>
+            ))}
+          </div>
+        )}
+        {search && filtered.length === 0 && (
+          <div className="absolute z-10 w-full mt-2 bg-white border border-gray-200 rounded-xl shadow-lg px-4 py-3">
+            <span className="text-sm text-gray-400">Ничего не найдено</span>
+          </div>
         )}
       </div>
 
@@ -156,7 +174,7 @@ export default function NosologyContent({ markdown }: { markdown: string }) {
         </button>
       </div>
       <div className="flex flex-col gap-3">
-        {filtered.map(s => (
+        {namedSections.map(s => (
           <div key={s.anchor} id={s.anchor} className="border border-gray-200 rounded-xl overflow-hidden">
             <button
               onClick={() => {
@@ -206,9 +224,7 @@ export default function NosologyContent({ markdown }: { markdown: string }) {
         ))}
       </div>
 
-      {filtered.length === 0 && search !== '' && (
-        <p className="text-gray-400 text-center py-12">Ничего не найдено</p>
-      )}
+
     </div>
   );
 }
