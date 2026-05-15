@@ -42,10 +42,10 @@ function parseSections(markdown: string): Section[] {
   return sections;
 }
 
-function highlight(text, query) {
+function highlight(text: string, query: string): string {
   if (!query) return text;
   const parts = text.split(new RegExp('(' + query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + ')', 'gi'));
-  return parts.map((part, i) =>
+  return parts.map((part: string, i: number) =>
     part.toLowerCase() === query.toLowerCase()
       ? '<mark style="background:#fef08a;border-radius:2px;padding:0 2px">' + part + '</mark>'
       : part
