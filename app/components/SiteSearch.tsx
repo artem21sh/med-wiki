@@ -14,20 +14,63 @@ interface Result {
   id: string;
   title: string;
   slug: string;
-  snippets: string[];
+  snippets: Snippet[];
 }
 
-function getAllSnippets(text: string, query: string): string[] {
-  const lower = text.toLowerCase();
+interface Snippet { text: string; section: string; anchor: string; }
+
+function getAllSnippets(content: string, query: string): Snippet[] {
+  const lines = content.split('\n');
   const q = query.toLowerCase();
-  const snippets: string[] = [];
+  const snippets: Snippet[] = [];
+  let currentSection = '';
+  let currentAnchor = '';
+  let sectionIndex = 0;
+  let fullText = '';
+  let sectionStart = 0;
+
+  for (const line of lines) {
+    const isHeader = /^#{1,2}\s+\d+/.test(line);
+    if (isHeader) {
+      currentSection = line.replace(/^#+\s+/, '').trim();
+      currentAnchor = 'section-' + sectionIndex;
+      sectionIndex++;
+      sectionStart = fullText.length;
+    }
+    fullText += line + '\n';
+  }
+
+  const lower = fullText.toLowerCase();
   let pos = 0;
+  let secIdx = 0;
+  const headers: { title: string; anchor: string; pos: number }[] = [];
+
+  for (const line of content.split('\n')) {
+    if (/^#{1,2}\s+\d+/.test(line)) {
+      headers.push({
+        title: line.replace(/^#+\s+/, '').trim(),
+        anchor: 'section-' + secIdx,
+        pos,
+      });
+      secIdx++;
+    }
+    pos += line.length + 1;
+  }
+
+  pos = 0;
   while (true) {
     const idx = lower.indexOf(q, pos);
     if (idx === -1) break;
     const start = Math.max(0, idx - 60);
-    const end = Math.min(text.length, idx + q.length + 60);
-    snippets.push((start > 0 ? '...' : '') + text.slice(start, end) + (end < text.length ? '...' : ''));
+    const end = Math.min(fullText.length, idx + q.length + 60);
+    const snippet = (start > 0 ? '...' : '') + fullText.slice(start, end).replace(/[#*`|]/g, '') + (end < fullText.length ? '...' : '');
+
+    let sec = { title: '', anchor: '' };
+    for (const h of headers) {
+      if (h.pos <= idx) sec = h;
+    }
+
+    snippets.push({ text: snippet, section: sec.title, anchor: sec.anchor });
     pos = idx + q.length;
   }
   return snippets;
@@ -59,7 +102,7 @@ export default function SiteSearch() {
         id: e.id,
         title: e.title,
         slug: e.slug,
-        snippets: getAllSnippets(e.content.replace(/[#*`|]/g, ''), query),
+        snippets: getAllSnippets(e.content, query),
       }));
 
     setResults(found);
@@ -88,17 +131,19 @@ export default function SiteSearch() {
       {open && results.length > 0 && (
         <div className="absolute z-10 w-full mt-2 bg-white border border-gray-200 rounded-xl shadow-lg overflow-hidden">
           {results.map(r => (
-            <Link
-              key={r.id}
-              href={`/nosologies/${r.slug}`}
-              className="block px-4 py-3 hover:bg-gray-50 border-b border-gray-100 last:border-0"
-              onClick={() => setOpen(false)}
-            >
-              <div className="text-sm font-medium text-gray-900">{r.title}</div>
+            <div key={r.id}>
               {r.snippets.map((s, i) => (
-                <div key={i} className="text-xs text-gray-400 mt-0.5">{s}</div>
+                <Link
+                  key={i}
+                  href={`/nosologies/${r.slug}#${s.anchor}`}
+                  className="block px-4 py-3 hover:bg-gray-50 border-b border-gray-100 last:border-0"
+                  onClick={() => setOpen(false)}
+                >
+                  <div className="text-xs text-blue-500 font-medium mb-0.5">{r.title}{s.section ? ` — ${s.section}` : ''}</div>
+                  <div className="text-xs text-gray-500">{s.text}</div>
+                </Link>
               ))}
-            </Link>
+            </div>
           ))}
         </div>
       )}
