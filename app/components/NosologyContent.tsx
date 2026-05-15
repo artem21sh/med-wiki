@@ -15,7 +15,7 @@ function parseSections(markdown: string): Section[] {
   let inSection = false;
 
   for (const line of lines) {
-    const isHeader = /^#{1,2}\s+/.test(line);
+    const isHeader = /^#{1,2}\s+\d+/.test(line) || /^#{1,2}\s+Список/.test(line);
     if (isHeader) {
       if (currentSection) {
         currentSection.content = contentLines.join('\n').trim();
