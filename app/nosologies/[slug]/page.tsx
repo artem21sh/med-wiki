@@ -1,7 +1,6 @@
 import Link from 'next/link';
-import ReactMarkdown from 'react-markdown';
-import remarkGfm from 'remark-gfm';
 import { getNosologies, getNosologyById } from '@/lib/notion';
+import NosologyContent from '@/app/components/NosologyContent';
 
 export const revalidate = 60;
 
@@ -30,9 +29,7 @@ export default async function NosologyPage({ params }: { params: Promise<{ slug:
             ))}
           </div>
         )}
-        <div className="bg-white border border-gray-200 rounded-xl px-8 py-8 prose prose-gray max-w-none overflow-x-auto">
-          <ReactMarkdown remarkPlugins={[remarkGfm]}>{nosology.markdown}</ReactMarkdown>
-        </div>
+        <NosologyContent markdown={nosology.markdown} />
         <p className="text-gray-400 text-xs mt-6 text-right">
           Обновлено: {new Date(nosology.lastEdited).toLocaleDateString('ru-RU')}
         </p>
