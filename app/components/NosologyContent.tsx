@@ -4,12 +4,13 @@ import { useState } from 'react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 
-function parseSections(markdown: string) {
+interface Section { title: string; anchor: string; content: string; }
+function parseSections(markdown: string): Section[] {
   const lines = markdown.split('\n');
-  const sections = [];
-  let currentSection = null;
-  let contentLines = [];
-  let preamble = [];
+  const sections: Section[] = [];
+  let currentSection: Section | null = null;
+  let contentLines: string[] = [];
+  let preamble: string[] = [];
   let inSection = false;
 
   for (const line of lines) {
