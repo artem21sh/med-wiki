@@ -73,7 +73,7 @@ export default function NosologyContent({ markdown }: { markdown: string }) {
         s.content.toLowerCase().includes(search.toLowerCase())
       );
 
-  const isOpen = (anchor) => {
+  const isOpen = (anchor: string) => {
     if (search !== '') return true;
     return open[anchor] === true;
   };
