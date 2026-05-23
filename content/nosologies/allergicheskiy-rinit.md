@@ -4,22 +4,18 @@ publishedAt: "2026-05-22"
 status: "published"
 ---
 
-**АЛЛЕРГИЧЕСКИЙ РИНИТ**   |   Клинический справочник
+*Allergic Rhinitis · Hay Fever · Аллергический риносинусит*
 
-**АЛЛЕРГИЧЕСКИЙ РИНИТ**
+**Разделы медицины:** Аллергология · Оториноларингология · Общая врачебная практика
 
-*Allergic Rhinitis  •  Hay Fever  •  Аллергический риносинусит*
-
-Аллергология  •  Оториноларингология  •  Общая врачебная практика
-
-Список сокращений
+<details>
+<summary>Список сокращений</summary>
 
 | **Сокращение** | **Расшифровка** |
 | --- | --- |
 | АР | Аллергический ринит |
 | IgE / sIgE | Иммуноглобулин E / специфический IgE к аллергену |
 | ARIA | Allergic Rhinitis and its Impact on Asthma — международные рекомендации по АР (ВОЗ) |
-| ICAR | International Consensus on Allergy and Rhinology |
 | КП / SPT | Кожный прик-тест (skin prick test) — скарификационный тест |
 | RAST / ImmunoCAP | Радиоаллергосорбентный тест / флуороиммуноферментный анализ sIgE in vitro |
 | NAAT / ПЦР | Тест амплификации нуклеиновых кислот / полимеразная цепная реакция |
@@ -39,6 +35,8 @@ status: "published"
 | НПВП | Нестероидные противовоспалительные препараты |
 | ИПП | Ингибиторы протонной помпы |
 | СДВГ | Синдром дефицита внимания и гиперактивности |
+
+</details>
 
 # 1. Определение
 
@@ -140,12 +138,6 @@ status: "published"
 
 # 4. Красные флаги
 
-| **⚠ Признаки, требующие расширенного обследования и направления к специалисту** Одностороннее снижение слуха или односторонняя заложенность носа → инородное тело, полип, опухоль Кровянистые выделения из носа, язвы слизистой → гранулематоз с полиангиитом (ГПА), рецидивирующий полихондрит, опухоль Рецидивирующий синусит или полипы носа, не отвечающие на лечение → ХРС, NARES, муковисцидоз, аспириновая бронхиальная астма Аносмия → ХРС с полипами, ГПА «Седловидная» деформация носа → рецидивирующий полихондрит, ГПА, предшествующая травма Симптомы аллергического ринита у ребёнка < 2 лет → аллергический ринит маловероятен в этом возрасте; исключить гипертрофию аденоидов, атрезию хоан, инородное тело Стойкая заложенность носа у пожилого с новыми симптомами → вазомоторный, атрофический ринит, медикаментозный ринит, лекарственный ринит Системные симптомы (лихорадка, потеря веса, суставные симптомы) + ринит → системное аутоиммунное заболевание |
-| --- |
-
-| **⚠ Клинические ситуации, требующие аллергологического направления** Симптомы тяжёлые или плохо контролируемые, несмотря на стандартную терапию Симптомы нарушают обучение, работу или качество жизни Планирование аллергенспецифической иммунотерапии (АСИТ / SCIT / SLIT) Подозрение на профессиональный аллергический ринит Сопутствующая астма, рецидивирующий синусит или средний отит Желание пациента максимально избегать аллергенов и лекарственных препаратов Неясный диагноз после первичной оценки |
-| --- |
-
 # 5. Диагностика
 
 Диагностические критерии
@@ -234,9 +226,6 @@ status: "published"
 
 # 7. Симптоматические варианты с неопределённой эффективностью
 
-| **Методы с ограниченной или противоречивой доказательной базой** Промывание носа солевым раствором — уменьшает отёк слизистой, очищает аллергены; полезна как дополнение, но не как монотерапия; данные умеренного качества Акупунктура — отдельные небольшие исследования показали умеренный эффект; систематические обзоры неоднозначны; нет места в стандартных руководствах как доказанный метод Гомеопатия — нет убедительных данных клинической эффективности при АР; не рекомендуется Биорезонансная и электроакупунктурная диагностика (Voll) — не имеют доказательной базы; неверифицированные диагностические методы, не рекомендованные ни одним профессиональным обществом Специальные диеты и элиминационные диеты без подтверждённой пищевой аллергии — нет доказательств влияния на АР; не рекомендованы Пробиотики — отдельные исследования предполагают умеренное снижение тяжести АР; данные неоднозначны; рутинно не рекомендованы Кверцетин, витамин С и другие антиоксиданты — ограниченные данные; рутинно не рекомендованы Иммунотерапия при пыльцево-пищевом синдроме (ПФС/СОА) — неоднозначные результаты; не назначается исключительно для лечения ПФС |
-| --- |
-
 # 8. Осложнения
 
 | **Осложнение** | **Механизм / Характеристика** |
@@ -321,71 +310,66 @@ status: "published"
 
 # 11. Методы без доказанной эффективности
 
-| **Методы, не рекомендованные при АР** Деконгестанты интраназальные (оксиметазолин, ксилометазолин) более 3–5 дней — рибунд-эффект(рикошетный отёк слизистой) : медикаментозный ринит (rhinitis medicamentosa); отёк слизистой усиливается после отмены Фенилэфрин пероральный — несмотря на широкое применение, многочисленные исследования показали неотличимость от плацебо; FDA отзыв ряда безрецептурных препаратов с фенилэфрином (2023) Непроверенные диагностические тесты: цитотоксические тесты, провокационно-нейтрализационное тестирование, определение специфических IgG4 — результаты бесполезны для диагностики и лечения АР; не рекомендованы AAAI и другими обществами Антигистаминные 1-го поколения (дифенгидрамин, хлоропирамин, клемастин) для длительного ежедневного применения — выраженные седация и антихолинергические эффекты; нарушение когнитивных функций, снижение успеваемости у детей; предпочтение должно отдаваться неседативным препаратам 2-го поколения Системные ГКС для длительного применения при хроническом АР — только кратковременные курсы при тяжёлых обострениях; длительный приём → системные побочные эффекты (остеопороз, надпочечниковая недостаточность, СД, катаракта, АГ) АСИТ исключительно для лечения пыльцево-пищевого синдрома (ПФС/СОА) — неоднозначные результаты; назначается АСИТ при наличии АР, а не изолированно для ПФС Определение уровня специфических IgG4 — не имеет диагностической или терапевтической ценности при АР; не является маркером успеха АСИТ; не рекомендовано ни одним профессиональным обществом Массовое IgE-панельное тестирование без клинического обоснования — риск ложноположительных результатов; интерпретация затруднена; экономически нецелесообразно; должен выбираться только клинически релевантный набор аллергенов Интерфероны и «противовирусные иммуномодуляторы» (интерферон альфа, индукторы интерферона и др.) — не имеют доказанной эффективности при аллергическом рините; АР не является вирусным заболеванием Бактериофаги при неосложнённом АР— не имеют доказательной базы; не рекомендованы международными руководствами «Сложные капли» в нос (комбинации антибиотиков, антисептиков, ГКС, сосудосуживающих и др. без стандартизированного состава) — отсутствуют стандартизированные схемы и доказательная база; риск медикаментозного ринита, раздражения слизистой и системных побочных эффектов Рутинное назначение энтеросорбентов — не имеет доказанной эффективности при АР |
-| --- |
-
 # 12. Источники
 
-*Все источники из оригинального документа (UpToDate). Нумерация соответствует оригиналу.*
+- **Iordache A, Balica NC, Horhat ID, et al. **An overview of the relationship between allergic rhinitis and asthma: epidemiology, diagnosis, and treatment. *Curr Health Sci J 2023; 49:5.
 
-- **Iordache A, Balica NC, Horhat ID, et al. ***An overview of the relationship between allergic rhinitis and asthma: epidemiology, diagnosis, and treatment. *Curr Health Sci J 2023; 49:5.
+- **Dykewicz MS, Wallace DV, Amrol DJ, et al. **Rhinitis 2020: A practice parameter update. *J Allergy Clin Immunol 2020; 146:721.
 
-- **Dykewicz MS, Wallace DV, Amrol DJ, et al. ***Rhinitis 2020: A practice parameter update. *J Allergy Clin Immunol 2020; 146:721.
+- **Wise SK, Damask C, Roland LT, et al. **International consensus statement on allergy and rhinology: Allergic rhinitis — 2023. *Int Forum Allergy Rhinol 2023; 13:293.
 
-- **Wise SK, Damask C, Roland LT, et al. ***International consensus statement on allergy and rhinology: Allergic rhinitis — 2023. *Int Forum Allergy Rhinol 2023; 13:293.
+- **Mallol J, Crane J, von Mutius E, et al. **The International Study of Asthma and Allergies in Childhood (ISAAC) Phase Three: a global synthesis. *Allergol Immunopathol (Madr) 2013; 41:73.
 
-- **Mallol J, Crane J, von Mutius E, et al. ***The International Study of Asthma and Allergies in Childhood (ISAAC) Phase Three: a global synthesis. *Allergol Immunopathol (Madr) 2013; 41:73.
+- **Licari A, Manti P, De Silvestri A, et al. **Epidemiology of allergic rhinitis in children: a systematic review and meta-analysis. *J Allergy Clin Immunol Pract 2023; 11:2547.
 
-- **Licari A, Manti P, De Silvestri A, et al. ***Epidemiology of allergic rhinitis in children: a systematic review and meta-analysis. *J Allergy Clin Immunol Pract 2023; 11:2547.
+- **Pinart M, Keller T, Reich A, et al. **Sex-related allergic rhinitis prevalence switch from childhood to adulthood: a systematic review and meta-analysis. *Int Arch Allergy Immunol 2017; 172:224.
 
-- **Pinart M, Keller T, Reich A, et al. ***Sex-related allergic rhinitis prevalence switch from childhood to adulthood: a systematic review and meta-analysis. *Int Arch Allergy Immunol 2017; 172:224.
+- **Pu S, Zheng M, Ge S, et al. **The prevalence of allergic rhinitis in China is still growing without reaching a plateau: analysis of three waves of national surveys from 2005 to 2019. *Allergy 2026.
 
-- **Pu S, Zheng M, Ge S, et al. ***The prevalence of allergic rhinitis in China is still growing without reaching a plateau: analysis of three waves of national surveys from 2005 to 2019. *Allergy 2026.
+- **Meiklejohn DA, Tummala N, Lalakea ML. **Climate change, allergic rhinitis, and sinusitis. *JAMA 2026; 335:175.
 
-- **Meiklejohn DA, Tummala N, Lalakea ML. ***Climate change, allergic rhinitis, and sinusitis. *JAMA 2026; 335:175.
+- **Vandenplaas O, Vinnikov D, Blanc PD, et al. **Impact of rhinitis on work productivity: a systematic review. *J Allergy Clin Immunol Pract 2018; 6:1274.
 
-- **Vandenplaas O, Vinnikov D, Blanc PD, et al. ***Impact of rhinitis on work productivity: a systematic review. *J Allergy Clin Immunol Pract 2018; 6:1274.
+- **Meltzer EO, Bukstein DA. **The economic impact of allergic rhinitis and current guidelines for treatment. *Ann Allergy Asthma Immunol 2011; 106:S12.
 
-- **Meltzer EO, Bukstein DA. ***The economic impact of allergic rhinitis and current guidelines for treatment. *Ann Allergy Asthma Immunol 2011; 106:S12.
+- **Eifan AO, Durham SR. **Pathogenesis of rhinitis. *Clin Exp Allergy 2016; 46:1139.
 
-- **Eifan AO, Durham SR. ***Pathogenesis of rhinitis. *Clin Exp Allergy 2016; 46:1139.
+- **Wise SK, Damask C, Greenhawt M, et al. **Brief summary of recommendations for the diagnosis and management of allergic rhinitis from ICAR 2023. *J Allergy Clin Immunol Pract 2023; 11:773.
 
-- **Wise SK, Damask C, Greenhawt M, et al. ***Brief summary of recommendations for the diagnosis and management of allergic rhinitis from ICAR 2023. *J Allergy Clin Immunol Pract 2023; 11:773.
+- **Lindqvist M, Leth-Möller KB, Linnebjerg A, et al. **Natural course of pollen-induced allergic rhinitis from childhood to adulthood: 20-year follow-up. *Allergy 2024; 79:884.
 
-- **Lindqvist M, Leth-Möller KB, Linnebjerg A, et al. ***Natural course of pollen-induced allergic rhinitis from childhood to adulthood: 20-year follow-up. *Allergy 2024; 79:884.
+- **Gendo K, Larson EB. **Evidence-based diagnostic strategies for evaluating suspected allergic rhinitis. *Ann Intern Med 2004; 140:278.
 
-- **Gendo K, Larson EB. ***Evidence-based diagnostic strategies for evaluating suspected allergic rhinitis. *Ann Intern Med 2004; 140:278.
+- **Bousquet J, Van Cauwenberge P, Khaltaev N, et al. **Allergic rhinitis and its impact on asthma. *J Allergy Clin Immunol 2001; 108:S147.
 
-- **Bousquet J, Van Cauwenberge P, Khaltaev N, et al. ***Allergic rhinitis and its impact on asthma. *J Allergy Clin Immunol 2001; 108:S147.
+- **Bousquet J, Khaltaev N, Cruz AA, et al. **Allergic rhinitis and its impact on asthma (ARIA) 2008 update. *Allergy 2008; 63 Suppl 86:8.
 
-- **Bousquet J, Khaltaev N, Cruz AA, et al. ***Allergic rhinitis and its impact on asthma (ARIA) 2008 update. *Allergy 2008; 63 Suppl 86:8.
+- **Hurst DS. **The role of allergy in otitis media with effusion. *Otolaryngol Clin North Am 2011; 44:637.
 
-- **Hurst DS. ***The role of allergy in otitis media with effusion. *Otolaryngol Clin North Am 2011; 44:637.
+- **Greiner AN, Hellings PW, Rotiroti G, Scadding GK. **Allergic rhinitis. *Lancet 2011; 378:2112.
 
-- **Greiner AN, Hellings PW, Rotiroti G, Scadding GK. ***Allergic rhinitis. *Lancet 2011; 378:2112.
+- **Global Initiative for Asthma (GINA) Report 2025. **Global Strategy for Asthma Management and Prevention. *https://ginasthma.org/2025-gina-strategy-report/
 
-- **Global Initiative for Asthma (GINA) Report 2025. ***Global Strategy for Asthma Management and Prevention. *https://ginasthma.org/2025-gina-strategy-report/
+- **Seidman MD, Gurgel RK, Lin SY, et al. **Clinical practice guideline: Allergic rhinitis. *Otolaryngol Head Neck Surg 2015; 152:S1.
 
-- **Seidman MD, Gurgel RK, Lin SY, et al. ***Clinical practice guideline: Allergic rhinitis. *Otolaryngol Head Neck Surg 2015; 152:S1.
+- **Ellis AK, Cook V, Keith PK, et al. **Focused practice recommendations for the management of allergic rhinitis in Canada. *Allergy Asthma Clin Immunol 2024; 20:45.
 
-- **Ellis AK, Cook V, Keith PK, et al. ***Focused practice recommendations for the management of allergic rhinitis in Canada. *Allergy Asthma Clin Immunol 2024; 20:45.
+- **Hammersley VS, Harris J, Sheikh A, et al. **Development and testing of a screening instrument for predicting that people do not have IgE-mediated allergy. *Br J Gen Pract 2017; 67:e293.
 
-- **Hammersley VS, Harris J, Sheikh A, et al. ***Development and testing of a screening instrument for predicting that people do not have IgE-mediated allergy. *Br J Gen Pract 2017; 67:e293.
+- **Bousquet J, Heinzerling L, Bachert C, et al. **Practical guide to skin prick tests in allergy to aeroallergens. *Allergy 2012; 67:18.
 
-- **Bousquet J, Heinzerling L, Bachert C, et al. ***Practical guide to skin prick tests in allergy to aeroallergens. *Allergy 2012; 67:18.
+- **Cox L, Nelson H, Lockey R, et al. **Allergen immunotherapy: a practice parameter third update. *J Allergy Clin Immunol 2011; 127:S1.
 
-- **Cox L, Nelson H, Lockey R, et al. ***Allergen immunotherapy: a practice parameter third update. *J Allergy Clin Immunol 2011; 127:S1.
+- **Rondon C, Eguiluz-Gracia I, Campo P. **Is the evidence for local allergic rhinitis growing? *Curr Opin Allergy Clin Immunol 2018; 18:342.
 
-- **Rondon C, Eguiluz-Gracia I, Campo P. ***Is the evidence for local allergic rhinitis growing? *Curr Opin Allergy Clin Immunol 2018; 18:342.
+- **American Academy of Allergy, Asthma and Immunology. **Measurement of specific and nonspecific IgG4 levels as diagnostic and prognostic tests in clinical allergy. *J Allergy Clin Immunol 1995; 95:652.
 
-- **American Academy of Allergy, Asthma and Immunology. ***Measurement of specific and nonspecific IgG4 levels as diagnostic and prognostic tests in clinical allergy. *J Allergy Clin Immunol 1995; 95:652.
+- **Meltzer EO, Hamilos DL, Hadley JA, et al. **Rhinosinusitis: establishing definitions for clinical research and patient care. *J Allergy Clin Immunol 2004; 114:155.
 
-- **Meltzer EO, Hamilos DL, Hadley JA, et al. ***Rhinosinusitis: establishing definitions for clinical research and patient care. *J Allergy Clin Immunol 2004; 114:155.
+- **Ramey JT, Bailen E, Lockey RF. **Rhinitis medicamentosa. *J Investig Allergol Clin Immunol 2006; 16:148.
 
-- **Ramey JT, Bailen E, Lockey RF. ***Rhinitis medicamentosa. *J Investig Allergol Clin Immunol 2006; 16:148.
+- **Rondon C, Campo P, Togias A, et al. **Local allergic rhinitis: concept, pathophysiology, and management. *J Allergy Clin Immunol 2012; 129:1460.
 
-- **Rondon C, Campo P, Togias A, et al. ***Local allergic rhinitis: concept, pathophysiology, and management. *J Allergy Clin Immunol 2012; 129:1460.
-
-- **Campo P, Eguiluz-Gracia I, Bogas G, et al. ***Local allergic rhinitis: implications for management. *Clin Exp Allergy 2019; 49:6.
+- **Campo P, Eguiluz-Gracia I, Bogas G, et al. **Local allergic rhinitis: implications for management. *Clin Exp Allergy 2019; 49:6.
 
 1
