@@ -1,3 +1,6 @@
 import { OutstaticApi } from 'outstatic'
 
-export const { GET, POST } = OutstaticApi()
+const handler = OutstaticApi()
+
+export const GET = handler.GET
+export const POST = handler.POST
