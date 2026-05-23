@@ -4,5 +4,6 @@ import { OstClient } from 'outstatic/client'
 
 export default async function Page({ params }: { params: Promise<{ ost: string[] }> }) {
   const ostData = await Outstatic()
-  return <OstClient ostData={ostData} params={params} />
+  const resolvedParams = await params
+  return <OstClient ostData={ostData} params={resolvedParams} />
 }
