@@ -136,8 +136,8 @@ export default function NosologyContent({ markdown, externalSearch = '', onResul
               remarkPlugins={[remarkGfm]}
               rehypePlugins={[rehypeRaw]}
               components={{
-                pre: ({node, ...props}) => <div {...props} />,
-                code: ({node, inline, ...props}) => <span {...props} />,
+                pre: ({node, ...props}: any) => <div {...props} />,
+                code: ({node, inline, ...props}: any) => <span {...props} />,
               }}
             >{intro.content}</ReactMarkdown>
         </div>
@@ -226,8 +226,8 @@ export default function NosologyContent({ markdown, externalSearch = '', onResul
               remarkPlugins={[remarkGfm]}
               rehypePlugins={[rehypeRaw]}
               components={{
-                pre: ({node, ...props}) => <div {...props} />,
-                code: ({node, inline, ...props}) => <span {...props} />,
+                pre: ({node, ...props}: any) => <div {...props} />,
+                code: ({node, inline, ...props}: any) => <span {...props} />,
               }}
             >{s.content}</ReactMarkdown>
                       </div>
@@ -239,8 +239,8 @@ export default function NosologyContent({ markdown, externalSearch = '', onResul
               remarkPlugins={[remarkGfm]}
               rehypePlugins={[rehypeRaw]}
               components={{
-                pre: ({node, ...props}) => <div {...props} />,
-                code: ({node, inline, ...props}) => <span {...props} />,
+                pre: ({node, ...props}: any) => <div {...props} />,
+                code: ({node, inline, ...props}: any) => <span {...props} />,
               }}
             >{s.content}</ReactMarkdown>
                   </div>
