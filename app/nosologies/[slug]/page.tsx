@@ -19,7 +19,6 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
       title={nosology.title}
       content={nosology.content}
       updatedAt={nosology.updatedAt}
-      slug={slug}
     />
   );
 }
