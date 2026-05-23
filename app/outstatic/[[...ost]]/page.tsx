@@ -1,6 +1,8 @@
 import 'outstatic/outstatic.css'
-import { Outstatic } from 'outstatic'
+import { Outstatic, OutstaticData } from 'outstatic'
+import { OstClient } from 'outstatic/client'
 
-export default function Page() {
-  return <Outstatic />
+export default async function Page() {
+  const ostData = await Outstatic()
+  return <OstClient {...ostData} />
 }
