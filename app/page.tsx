@@ -1,8 +1,8 @@
 import Link from 'next/link';
-import { getNosologies } from '@/lib/notion';
+import { getNosologies } from '@/lib/content';
 import SiteSearch from '@/app/components/SiteSearch';
 
-export const revalidate = 60;
+export const revalidate = 0;
 
 export default async function Home() {
   const nosologies = await getNosologies();
@@ -15,11 +15,10 @@ export default async function Home() {
           <p className="text-gray-500 mb-6">База знаний нозологий</p>
           <SiteSearch />
         </div>
-
         <div className="flex flex-col gap-3">
           {nosologies.map((item) => (
             <Link
-              key={item.id}
+              key={item.slug}
               href={`/nosologies/${item.slug}`}
               className="bg-white border border-gray-200 rounded-xl px-6 py-4 hover:border-blue-300 hover:shadow-sm transition-all"
             >

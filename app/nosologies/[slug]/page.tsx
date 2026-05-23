@@ -1,39 +1,27 @@
-import Link from 'next/link';
-import { getNosologies, getNosologyById } from '@/lib/notion';
+import { getNosologies, getNosologyBySlug } from '@/lib/content';
 import NosologyContent from '@/app/components/NosologyContent';
+import Link from 'next/link';
+import { notFound } from 'next/navigation';
 
-export const revalidate = 60;
+export const revalidate = 0;
 
 export async function generateStaticParams() {
   const nosologies = await getNosologies();
-  return nosologies
-    .filter(n => n.title && !n.title.match(/^\d+ нозология$/))
-    .map(n => ({ slug: n.slug }));
+  return nosologies.map(n => ({ slug: n.slug }));
 }
 
-export default async function NosologyPage({ params }: { params: Promise<{ slug: string }> }) {
-  const { slug } = await params;
-  const nosology = await getNosologyById(slug);
+export default async function NosologyPage({ params }: { params: { slug: string } }) {
+  const nosology = await getNosologyBySlug(params.slug);
+  if (!nosology) notFound();
 
   return (
     <main className="min-h-screen bg-gray-50">
       <div className="max-w-4xl mx-auto px-4 py-12">
-        <Link href="/" className="text-blue-500 text-sm hover:underline mb-8 block">
-          ← Все нозологии
-        </Link>
-        <h1 className="text-3xl font-semibold text-gray-900 mb-2">{nosology.title}</h1>
-        {nosology.tags.length > 0 && (
-          <div className="flex gap-2 mb-8">
-            {nosology.tags.map((tag: string) => (
-              <span key={tag} className="text-xs bg-blue-50 text-blue-600 px-2 py-0.5 rounded-full">
-                {tag}
-              </span>
-            ))}
-          </div>
-        )}
-        <NosologyContent markdown={nosology.markdown} />
-        <p className="text-gray-400 text-xs mt-6 text-right">
-          Обновлено: {new Date(nosology.lastEdited).toLocaleDateString('ru-RU')}
+        <Link href="/" className="text-blue-500 text-sm hover:underline mb-6 block">← Все нозологии</Link>
+        <h1 className="text-3xl font-semibold text-gray-900 mb-8">{nosology.title}</h1>
+        <NosologyContent content={nosology.content} />
+        <p className="text-xs text-gray-400 text-right mt-8">
+          Обновлено: {new Date(nosology.updatedAt).toLocaleDateString('ru-RU')}
         </p>
       </div>
     </main>

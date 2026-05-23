@@ -11,8 +11,10 @@
   "dependencies": {
     "@notionhq/client": "^2.2.15",
     "@tailwindcss/typography": "^0.5.19",
+    "gray-matter": "^4.0.3",
     "next": "16.2.6",
     "notion-to-md": "^3.1.9",
+    "outstatic": "^2.1.9",
     "react": "19.2.4",
     "react-dom": "19.2.4",
     "react-markdown": "^10.1.0",

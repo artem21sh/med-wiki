@@ -1,43 +1,37 @@
-import { Client } from '@notionhq/client';
-import { NotionToMarkdown } from 'notion-to-md';
-import { writeFileSync, mkdirSync } from 'fs';
+import { readFileSync, readdirSync, writeFileSync, mkdirSync, existsSync } from 'fs';
+import { join } from 'path';
 
-const notion = new Client({ auth: process.env.NOTION_TOKEN });
-const n2m = new NotionToMarkdown({ notionClient: notion });
+const contentDir = './content/nosologies';
+const index = [];
 
-function cleanMarkdown(md) {
-  if (!md) return '';
-  return md.split('\n').map(l => l.replace(/^[\t ]+/, '')).join('\n');
+if (!existsSync(contentDir)) {
+  console.log('No content directory, skipping index build');
+  writeFileSync('public/search-index.json', '[]');
+  process.exit(0);
 }
 
-async function main() {
-  console.log('Fetching nosologies...');
-  const response = await notion.databases.query({
-    database_id: process.env.NOTION_DB_ID,
-    sorts: [{ property: 'Page', direction: 'ascending' }],
-  });
+const files = readdirSync(contentDir).filter(f => f.endsWith('.md'));
 
-  const index = [];
-
-  for (const page of response.results) {
-    const title = page.properties.Page?.title?.[0]?.plain_text ?? '';
-    if (!title) continue;
-    console.log('Processing: ' + title);
-    const slug = page.id.replace(/-/g, '');
-    await new Promise(r => setTimeout(r, 500));
-    try {
-      const mdBlocks = await n2m.pageToMarkdown(page.id);
-      const markdown = n2m.toMarkdownString(mdBlocks);
-      const content = cleanMarkdown(markdown?.parent ?? '');
-      index.push({ id: page.id, title, slug, content });
-    } catch (e) {
-      index.push({ id: page.id, title, slug, content: '' });
-    }
+for (const file of files) {
+  const slug = file.replace('.md', '');
+  const raw = readFileSync(join(contentDir, file), 'utf-8');
+  
+  // Parse frontmatter manually
+  const fmMatch = raw.match(/^---\n([\s\S]*?)\n---\n/);
+  let title = slug;
+  let content = raw;
+  
+  if (fmMatch) {
+    const fm = fmMatch[1];
+    const titleMatch = fm.match(/title:\s*["']?(.+?)["']?\s*$/m);
+    if (titleMatch) title = titleMatch[1];
+    content = raw.slice(fmMatch[0].length);
   }
-
-  mkdirSync('public', { recursive: true });
-  writeFileSync('public/search-index.json', JSON.stringify(index));
-  console.log('Done! ' + index.length + ' nosologies indexed.');
+  
+  console.log(`Indexing: ${title}`);
+  index.push({ id: slug, title, slug, content });
 }
 
-main();
+mkdirSync('public', { recursive: true });
+writeFileSync('public/search-index.json', JSON.stringify(index));
+console.log(`Done! ${index.length} nosologies indexed.`);
