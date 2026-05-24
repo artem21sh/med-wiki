@@ -4,7 +4,7 @@ publishedAt: "2026-05-22"
 status: "published"
 ---
 
-*Otitis Media with Effusion · OME ·
+*Otitis Media with Effusion · OME*
 
 **Разделы медицины:** Педиатрия · Оториноларингология
 
