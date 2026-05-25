@@ -14,7 +14,7 @@ interface SubSection {
 interface Section {
   title: string;
   anchor: string;
-  content: string;       // content before first subsection
+  content: string;
   subsections: SubSection[];
 }
 
@@ -65,7 +65,6 @@ function parseSections(markdown: string): Section[] {
       currentSection = { title, anchor, content: '', subsections: [] };
       contentLines = [];
     } else if (isH2 && currentSection) {
-      // Save current content to section or previous subsection
       if (currentSubSection) {
         flushSubSection();
       } else {
@@ -92,9 +91,7 @@ function getSnippet(text: string, query: string, radius: number = 120): string {
   if (idx === -1) return text.slice(0, radius) + '...';
   const start = Math.max(0, idx - radius / 2);
   const end = Math.min(text.length, idx + query.length + radius / 2);
-  const before = start > 0 ? '...' : '';
-  const after = end < text.length ? '...' : '';
-  return before + text.slice(start, end) + after;
+  return (start > 0 ? '...' : '') + text.slice(start, end) + (end < text.length ? '...' : '');
 }
 
 const MD_COMPONENTS = {
@@ -102,10 +99,21 @@ const MD_COMPONENTS = {
   code: ({ node, inline, ...props }: any) => <span {...props} />,
 };
 
-function SubSectionBlock({ sub, defaultOpen = false }: { sub: SubSection; defaultOpen?: boolean }) {
-  const [open, setOpen] = useState(defaultOpen);
+function SubSectionBlock({
+  sub,
+  forceOpen = false,
+}: {
+  sub: SubSection;
+  forceOpen?: boolean;
+}) {
+  const [open, setOpen] = useState(forceOpen);
+
+  useEffect(() => {
+    if (forceOpen) setOpen(true);
+  }, [forceOpen]);
+
   return (
-    <div className="border border-gray-100 rounded-lg overflow-hidden mt-2">
+    <div id={sub.anchor} className="border border-gray-100 rounded-lg overflow-hidden mt-2">
       <button
         onClick={() => setOpen(p => !p)}
         className="w-full flex items-center justify-between px-4 py-3 text-left hover:bg-gray-50 transition-colors"
@@ -142,9 +150,9 @@ export default function NosologyContent({
   const intro = sections.find(s => !s.title);
 
   const [open, setOpen] = useState<Record<string, boolean>>({});
+  const [openSubs, setOpenSubs] = useState<Record<string, boolean>>({});
   const [tocOpen, setTocOpen] = useState(false);
-  const [internalSearch, setInternalSearch] = useState('');
-  const search = externalSearch || internalSearch;
+  const search = externalSearch;
 
   useEffect(() => {
     const hash = window.location.hash.replace('#', '');
@@ -159,7 +167,17 @@ export default function NosologyContent({
   useEffect(() => {
     if (onOpenSection) {
       onOpenSection((anchor: string) => {
+        // anchor could be a section or subsection
         setOpen(prev => ({ ...prev, [anchor]: true }));
+        // also open parent section if it's a subsection
+        namedSections.forEach(s => {
+          s.subsections.forEach(sub => {
+            if (sub.anchor === anchor) {
+              setOpen(prev => ({ ...prev, [s.anchor]: true }));
+              setOpenSubs(prev => ({ ...prev, [sub.anchor]: true }));
+            }
+          });
+        });
         setTimeout(() => {
           document.getElementById(anchor)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }, 50);
@@ -171,19 +189,33 @@ export default function NosologyContent({
     if (!onResults) return;
     if (!search) { onResults([]); return; }
     const q = search.toLowerCase();
-    const res = namedSections
-      .filter(s => {
-        const allContent = s.content + s.subsections.map(sub => sub.title + ' ' + sub.content).join(' ');
-        return s.title.toLowerCase().includes(q) || allContent.toLowerCase().includes(q);
-      })
-      .map(s => {
-        const allContent = s.content + ' ' + s.subsections.map(sub => sub.content).join(' ');
-        return {
-          anchor: s.anchor,
-          title: s.title,
-          snippet: getSnippet(allContent.replace(/[#*`|]/g, ''), search),
-        };
-      });
+    const res: { anchor: string; title: string; snippet: string }[] = [];
+
+    namedSections.forEach(s => {
+      const sectionAllText = s.content + ' ' + s.subsections.map(sub => sub.title + ' ' + sub.content).join(' ');
+      if (s.title.toLowerCase().includes(q) || sectionAllText.toLowerCase().includes(q)) {
+        // Check if match is in a subsection
+        let matchAnchor = s.anchor;
+        let matchTitle = s.title;
+        let matchSnippet = '';
+
+        s.subsections.forEach(sub => {
+          const subText = sub.title + ' ' + sub.content;
+          if (sub.title.toLowerCase().includes(q) || sub.content.toLowerCase().includes(q)) {
+            matchAnchor = sub.anchor;
+            matchTitle = s.title + ' → ' + sub.title;
+            matchSnippet = getSnippet(subText.replace(/[#*`|]/g, ''), search);
+          }
+        });
+
+        if (!matchSnippet) {
+          matchSnippet = getSnippet(sectionAllText.replace(/[#*`|]/g, ''), search);
+        }
+
+        res.push({ anchor: matchAnchor, title: matchTitle, snippet: matchSnippet });
+      }
+    });
+
     onResults(res);
   }, [search, onResults]);
 
@@ -232,6 +264,26 @@ export default function NosologyContent({
                     >
                       {s.title}
                     </button>
+                    {s.subsections.length > 0 && (
+                      <ol className="list-none pl-4 mt-1 space-y-1">
+                        {s.subsections.map(sub => (
+                          <li key={sub.anchor}>
+                            <button
+                              className="text-xs text-blue-500 hover:underline text-left"
+                              onClick={() => {
+                                setOpen(prev => ({ ...prev, [s.anchor]: true }));
+                                setOpenSubs(prev => ({ ...prev, [sub.anchor]: true }));
+                                setTimeout(() => {
+                                  document.getElementById(sub.anchor)?.scrollIntoView({ behavior: 'smooth' });
+                                }, 50);
+                              }}
+                            >
+                              {sub.title}
+                            </button>
+                          </li>
+                        ))}
+                      </ol>
+                    )}
                   </li>
                 ))}
               </ol>
@@ -253,22 +305,15 @@ export default function NosologyContent({
         {namedSections.map(s => (
           <div key={s.anchor} id={s.anchor} className="border border-gray-200 rounded-xl overflow-hidden">
             <button
-              onClick={() => {
-                if (search === '') {
-                  setOpen(prev => ({ ...prev, [s.anchor]: !prev[s.anchor] }));
-                }
-              }}
+              onClick={() => setOpen(prev => ({ ...prev, [s.anchor]: !prev[s.anchor] }))}
               className="w-full flex items-center justify-between px-6 py-4 text-left hover:bg-gray-50 transition-colors"
             >
               <span className="font-semibold text-gray-900">{s.title}</span>
-              {search === '' && (
-                <span className="text-gray-400 text-lg ml-4">{isOpen(s.anchor) ? '−' : '+'}</span>
-              )}
+              <span className="text-gray-400 text-lg ml-4">{isOpen(s.anchor) ? '−' : '+'}</span>
             </button>
 
             {isOpen(s.anchor) && (
               <div className="px-6 pb-6 border-t border-gray-100 pt-4">
-                {/* Main content of section (before subsections) */}
                 {s.content && (
                   <div className="prose prose-gray max-w-none mb-2">
                     <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeRaw]} components={MD_COMPONENTS}>
@@ -276,12 +321,14 @@ export default function NosologyContent({
                     </ReactMarkdown>
                   </div>
                 )}
-
-                {/* Subsections as nested collapsible blocks */}
                 {s.subsections.length > 0 && (
                   <div className="mt-2 flex flex-col gap-1">
                     {s.subsections.map(sub => (
-                      <SubSectionBlock key={sub.anchor} sub={sub} />
+                      <SubSectionBlock
+                        key={sub.anchor}
+                        sub={sub}
+                        forceOpen={openSubs[sub.anchor] === true}
+                      />
                     ))}
                   </div>
                 )}
