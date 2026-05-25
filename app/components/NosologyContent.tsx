@@ -5,32 +5,76 @@ import ReactMarkdown from 'react-markdown';
 import rehypeRaw from 'rehype-raw';
 import remarkGfm from 'remark-gfm';
 
-interface Section { title: string; anchor: string; content: string; }
+interface SubSection {
+  title: string;
+  anchor: string;
+  content: string;
+}
+
+interface Section {
+  title: string;
+  anchor: string;
+  content: string;       // content before first subsection
+  subsections: SubSection[];
+}
 
 function parseSections(markdown: string): Section[] {
-  if (!markdown) { console.log('NO MARKDOWN'); return []; }
-  console.log('MARKDOWN LENGTH:', markdown.length, 'FIRST 100:', markdown.slice(0, 100));
+  if (!markdown) return [];
+
   const lines = markdown.split('\n');
   const sections: Section[] = [];
   let currentSection: Section | null = null;
+  let currentSubSection: SubSection | null = null;
   let contentLines: string[] = [];
   let preamble: string[] = [];
   let inSection = false;
 
-  for (const line of lines) {
-    const isHeader = /^#{1,2}\s+\d+/.test(line) || /^#{1,2}\s+Список/.test(line);
-    if (isHeader) {
-      if (currentSection) {
+  const flushSubSection = () => {
+    if (currentSubSection && currentSection) {
+      currentSubSection.content = contentLines.join('\n').trim();
+      currentSection.subsections.push(currentSubSection);
+      currentSubSection = null;
+      contentLines = [];
+    }
+  };
+
+  const flushSection = () => {
+    if (currentSection) {
+      if (currentSubSection) {
+        flushSubSection();
+      } else {
         currentSection.content = contentLines.join('\n').trim();
-        sections.push(currentSection);
-      } else if (preamble.length > 0) {
-        sections.push({ title: '', anchor: 'intro', content: preamble.join('\n').trim() });
+        contentLines = [];
       }
+      sections.push(currentSection);
+      currentSection = null;
+    } else if (preamble.length > 0) {
+      sections.push({ title: '', anchor: 'intro', content: preamble.join('\n').trim(), subsections: [] });
+    }
+  };
+
+  for (const line of lines) {
+    const isH1 = /^#\s+/.test(line) && !/^##/.test(line);
+    const isH2 = /^##\s+/.test(line);
+
+    if (isH1) {
+      flushSection();
       inSection = true;
       const title = line.replace(/^#+\s+/, '').trim();
       const anchor = 'section-' + sections.length;
-      currentSection = { title, anchor, content: '' };
+      currentSection = { title, anchor, content: '', subsections: [] };
       contentLines = [];
+    } else if (isH2 && currentSection) {
+      // Save current content to section or previous subsection
+      if (currentSubSection) {
+        flushSubSection();
+      } else {
+        currentSection.content = contentLines.join('\n').trim();
+        contentLines = [];
+      }
+      const title = line.replace(/^#+\s+/, '').trim();
+      const anchor = 'subsection-' + sections.length + '-' + currentSection.subsections.length;
+      currentSubSection = { title, anchor, content: '' };
     } else if (!inSection) {
       preamble.push(line);
     } else {
@@ -38,14 +82,9 @@ function parseSections(markdown: string): Section[] {
     }
   }
 
-  if (currentSection) {
-    currentSection.content = contentLines.join('\n').trim();
-    sections.push(currentSection);
-  }
-
+  flushSection();
   return sections;
 }
-
 
 function getSnippet(text: string, query: string, radius: number = 120): string {
   const lower = text.toLowerCase();
@@ -55,17 +94,57 @@ function getSnippet(text: string, query: string, radius: number = 120): string {
   const end = Math.min(text.length, idx + query.length + radius / 2);
   const before = start > 0 ? '...' : '';
   const after = end < text.length ? '...' : '';
-  const snippet = text.slice(start, end);
-  return before + snippet + after;
+  return before + text.slice(start, end) + after;
 }
 
-export default function NosologyContent({ markdown, externalSearch = '', onResults, onOpenSection }: { markdown: string; externalSearch?: string; onResults?: (r: {anchor: string; title: string; snippet: string}[]) => void; onOpenSection?: (fn: (anchor: string) => void) => void }) {
+const MD_COMPONENTS = {
+  pre: ({ node, ...props }: any) => <div {...props} />,
+  code: ({ node, inline, ...props }: any) => <span {...props} />,
+};
+
+function SubSectionBlock({ sub, defaultOpen = false }: { sub: SubSection; defaultOpen?: boolean }) {
+  const [open, setOpen] = useState(defaultOpen);
+  return (
+    <div className="border border-gray-100 rounded-lg overflow-hidden mt-2">
+      <button
+        onClick={() => setOpen(p => !p)}
+        className="w-full flex items-center justify-between px-4 py-3 text-left hover:bg-gray-50 transition-colors"
+      >
+        <span className="font-medium text-gray-800 text-sm">{sub.title}</span>
+        <span className="text-gray-400 ml-4">{open ? '−' : '+'}</span>
+      </button>
+      {open && (
+        <div className="px-4 pb-4 border-t border-gray-100 pt-3">
+          <div className="prose prose-gray max-w-none prose-sm">
+            <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeRaw]} components={MD_COMPONENTS}>
+              {sub.content}
+            </ReactMarkdown>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+export default function NosologyContent({
+  markdown,
+  externalSearch = '',
+  onResults,
+  onOpenSection,
+}: {
+  markdown: string;
+  externalSearch?: string;
+  onResults?: (r: { anchor: string; title: string; snippet: string }[]) => void;
+  onOpenSection?: (fn: (anchor: string) => void) => void;
+}) {
   const sections = parseSections(markdown);
   const namedSections = sections.filter(s => s.title);
   const intro = sections.find(s => !s.title);
 
   const [open, setOpen] = useState<Record<string, boolean>>({});
   const [tocOpen, setTocOpen] = useState(false);
+  const [internalSearch, setInternalSearch] = useState('');
+  const search = externalSearch || internalSearch;
 
   useEffect(() => {
     const hash = window.location.hash.replace('#', '');
@@ -76,8 +155,6 @@ export default function NosologyContent({ markdown, externalSearch = '', onResul
       }, 100);
     }
   }, []);
-  const [internalSearch, setInternalSearch] = useState('');
-  const search = externalSearch || internalSearch;
 
   useEffect(() => {
     if (onOpenSection) {
@@ -95,18 +172,18 @@ export default function NosologyContent({ markdown, externalSearch = '', onResul
     if (!search) { onResults([]); return; }
     const q = search.toLowerCase();
     const res = namedSections
-      .filter(s => s.title.toLowerCase().includes(q) || s.content.toLowerCase().includes(q))
-      .map(s => ({
-        anchor: s.anchor,
-        title: s.title,
-        snippet: getSnippet(s.content.replace(/[#*`|]/g, ''), search),
-      }));
-    const openAndScroll = (anchor: string) => {
-      setOpen(prev => ({ ...prev, [anchor]: true }));
-      setTimeout(() => {
-        document.getElementById(anchor)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }, 50);
-    };
+      .filter(s => {
+        const allContent = s.content + s.subsections.map(sub => sub.title + ' ' + sub.content).join(' ');
+        return s.title.toLowerCase().includes(q) || allContent.toLowerCase().includes(q);
+      })
+      .map(s => {
+        const allContent = s.content + ' ' + s.subsections.map(sub => sub.content).join(' ');
+        return {
+          anchor: s.anchor,
+          title: s.title,
+          snippet: getSnippet(allContent.replace(/[#*`|]/g, ''), search),
+        };
+      });
     onResults(res);
   }, [search, onResults]);
 
@@ -116,30 +193,17 @@ export default function NosologyContent({ markdown, externalSearch = '', onResul
     setOpen(next);
   };
 
-  const filtered = namedSections.filter(s =>
-    search === '' ||
-    s.title.toLowerCase().includes(search.toLowerCase()) ||
-    s.content.toLowerCase().includes(search.toLowerCase())
-  );
-
   const isOpen = (anchor: string) => open[anchor] === true;
 
   return (
     <div>
-      <div className="mb-6 relative">
-
-      </div>
+      <div className="mb-6 relative" />
 
       {intro && search === '' && (
         <div className="prose prose-gray max-w-none mb-6">
-          <ReactMarkdown
-              remarkPlugins={[remarkGfm]}
-              rehypePlugins={[rehypeRaw]}
-              components={{
-                pre: ({node, ...props}: any) => <div {...props} />,
-                code: ({node, inline, ...props}: any) => <span {...props} />,
-              }}
-            >{intro.content}</ReactMarkdown>
+          <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeRaw]} components={MD_COMPONENTS}>
+            {intro.content}
+          </ReactMarkdown>
         </div>
       )}
 
@@ -155,7 +219,7 @@ export default function NosologyContent({ markdown, externalSearch = '', onResul
           {tocOpen && (
             <div className="px-4 pb-4">
               <ol className="list-none space-y-1">
-                {namedSections.map((s, i) => (
+                {namedSections.map(s => (
                   <li key={s.anchor}>
                     <button
                       className="text-sm text-blue-600 hover:underline text-left"
@@ -176,8 +240,6 @@ export default function NosologyContent({ markdown, externalSearch = '', onResul
         </div>
       )}
 
-
-
       <div className="flex justify-end mb-2">
         <button
           onClick={() => toggleAll(!Object.values(open).some(Boolean))}
@@ -186,6 +248,7 @@ export default function NosologyContent({ markdown, externalSearch = '', onResul
           {Object.values(open).some(Boolean) ? 'Свернуть все' : 'Развернуть все'}
         </button>
       </div>
+
       <div className="flex flex-col gap-3">
         {namedSections.map(s => (
           <div key={s.anchor} id={s.anchor} className="border border-gray-200 rounded-xl overflow-hidden">
@@ -199,50 +262,27 @@ export default function NosologyContent({ markdown, externalSearch = '', onResul
             >
               <span className="font-semibold text-gray-900">{s.title}</span>
               {search === '' && (
-                <span className="text-gray-400 text-lg ml-4">{isOpen(s.anchor) ? '-' : '+'}</span>
+                <span className="text-gray-400 text-lg ml-4">{isOpen(s.anchor) ? '−' : '+'}</span>
               )}
             </button>
+
             {isOpen(s.anchor) && (
               <div className="px-6 pb-6 border-t border-gray-100 pt-4">
-                {search ? (
-                  <div>
-                    <button
-                      className="w-full text-left text-sm text-gray-600 bg-yellow-50 border border-yellow-100 rounded-lg px-4 py-3 hover:bg-yellow-100 transition-colors"
-                      onClick={() => {
-                        setOpen(prev => ({ ...prev, [s.anchor]: !prev[s.anchor] }));
-                        if (!open[s.anchor]) {
-                          setTimeout(() => {
-                            document.getElementById(s.anchor)?.scrollIntoView({ behavior: 'smooth' });
-                          }, 50);
-                        }
-                      }}
-                    >
-                      {getSnippet(s.content.replace(/[#*`|]/g, ''), search)}
-                      <span className="block text-xs text-blue-500 mt-1">{open[s.anchor] ? 'Свернуть' : 'Открыть раздел →'}</span>
-                    </button>
-                    {open[s.anchor] && (
-                      <div className="prose prose-gray max-w-none mt-4 border-t border-gray-100 pt-4">
-                        <ReactMarkdown
-              remarkPlugins={[remarkGfm]}
-              rehypePlugins={[rehypeRaw]}
-              components={{
-                pre: ({node, ...props}: any) => <div {...props} />,
-                code: ({node, inline, ...props}: any) => <span {...props} />,
-              }}
-            >{s.content}</ReactMarkdown>
-                      </div>
-                    )}
+                {/* Main content of section (before subsections) */}
+                {s.content && (
+                  <div className="prose prose-gray max-w-none mb-2">
+                    <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeRaw]} components={MD_COMPONENTS}>
+                      {s.content}
+                    </ReactMarkdown>
                   </div>
-                ) : (
-                  <div className="prose prose-gray max-w-none">
-                    <ReactMarkdown
-              remarkPlugins={[remarkGfm]}
-              rehypePlugins={[rehypeRaw]}
-              components={{
-                pre: ({node, ...props}: any) => <div {...props} />,
-                code: ({node, inline, ...props}: any) => <span {...props} />,
-              }}
-            >{s.content}</ReactMarkdown>
+                )}
+
+                {/* Subsections as nested collapsible blocks */}
+                {s.subsections.length > 0 && (
+                  <div className="mt-2 flex flex-col gap-1">
+                    {s.subsections.map(sub => (
+                      <SubSectionBlock key={sub.anchor} sub={sub} />
+                    ))}
                   </div>
                 )}
               </div>
@@ -250,9 +290,6 @@ export default function NosologyContent({ markdown, externalSearch = '', onResul
           </div>
         ))}
       </div>
-
-
     </div>
   );
 }
-
