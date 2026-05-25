@@ -4,12 +4,6 @@ publishedAt: "2026-05-22"
 status: "published"
 ---
 
-*Otitis Media with Effusion · OME* Серозный средний отит
-
-**Разделы медицины:** Педиатрия · Оториноларингология
-
-Экссудативный средний отит у детей
-
 <details>
 <summary>Список сокращений</summary>
 
@@ -28,7 +22,7 @@ status: "published"
 
 </details>
 
-**Определение**
+# 1. Определение
 
 Экссудативный средний отит (ЭСО), также называемый серозным средним отитом, — это наличие жидкости в полости среднего уха без признаков острого воспаления.
 
@@ -39,738 +33,226 @@ status: "published"
 Активное лечение чаще требуется детям:
 
 - с нарушением слуха;
-
 - задержкой речевого или психического развития;
-
 - краниофациальными аномалиями;
-
 - расщелиной нёба;
-
 - другими факторами риска стойкого или рецидивирующего течения.
 
-**Клиническая картина**
+# 2. Клиническая картина / Симптомы
 
-Основные симптомы
+**Основные симптомы**
 
 - снижение слуха (чаще кондуктивное);
-
 - ощущение заложенности уха;
-
 - чувство давления;
-
 - аутофония;
-
 - шум в ухе.
 
-Обычно отсутствуют
+**Обычно отсутствуют**
 
 - выраженная боль;
-
 - лихорадка;
-
 - признаки интоксикации.
 
-Красные флаги
+# 3. Красные флаги
 
-# 1. Структурные изменения барабанной перепонки и среднего уха
+> ⚠ При наличии следующих признаков показано активное вмешательство.
 
-Подозрительные признаки
+**1. Структурные изменения барабанной перепонки и среднего уха**
 
+Подозрительные признаки:
 - ретракция барабанной перепонки;
-
 - ретракционный карман;
-
 - ателектаз;
-
 - перфорация;
-
 - подозрение на холестеатому;
-
 - оторея.
 
-Возможные последствия
-
+Возможные последствия:
 - эрозия слуховых косточек;
-
 - хроническая перфорация;
-
 - формирование холестеатомы;
-
 - хроническое поражение среднего уха.
 
-# 2. Значимая потеря слуха
+**2. Значимая потеря слуха**
 
-Критерий
+Критерий: кондуктивная тугоухость ≥41 дБ.
 
-- кондуктивная тугоухость ≥41 дБ.
+Риски: нарушение речевого развития, ухудшение обучения, когнитивные нарушения, снижение качества жизни.
 
-Риски
+**3. Длительно сохраняющийся выпот**
 
-- нарушение речевого развития;
-
-- ухудшение обучения;
-
-- когнитивные нарушения;
-
-- снижение качества жизни.
-
-# 3. Длительно сохраняющийся выпот
-
-Неблагоприятные признаки
-
+Неблагоприятные признаки:
 - двусторонний ЭСО ≥3 месяцев;
-
 - односторонний ЭСО ≥6 месяцев;
-
 - суммарная длительность ЭСО ≥6 месяцев за последние 12 месяцев.
 
-Возможные последствия
-
-- снижение вероятности спонтанного разрешения;
-
-- повышение риска структурного повреждения барабанной перепонки.
-
-# 4. Дети группы риска
+**4. Дети группы риска**
 
 К группе риска относятся дети с:
-
 - исходной потерей слуха;
-
 - задержкой речевого развития;
-
 - расстройствами аутистического спектра;
-
 - СДВГ;
-
 - интеллектуальными нарушениями;
-
 - нарушениями обучения;
-
 - синдромом Дауна;
-
 - синдромом делеции 22q11;
-
 - расщелиной нёба;
-
 - краниофациальными аномалиями;
-
 - некорригируемыми нарушениями зрения.
 
 Даже умеренное снижение слуха у этих пациентов может иметь клинически значимые последствия.
 
-# 5. Симптомы клинически значимого влияния ЭСО
+**5. Симптомы клинически значимого влияния ЭСО**
 
 - снижение школьной успеваемости;
-
 - поведенческие нарушения;
-
 - ухудшение качества жизни;
-
 - нарушение сна;
-
 - дискомфорт в ухе;
-
 - вестибулярные жалобы.
 
-# 6. Рецидивирующий острый средний отит
+**6. Рецидивирующий острый средний отит**
 
-Критерии
+Критерии: ≥3 эпизодов за 6 месяцев или ≥4 эпизодов за 12 месяцев при наличии выпота в среднем ухе на момент осмотра.
 
-- ≥3 эпизодов за 6 месяцев;
-или
+# 4. Диагностика
 
-- ≥4 эпизодов за 12 месяцев
-
-при наличии выпота в среднем ухе на момент осмотра.
-
-Диагностика
-
-Цели диагностики
+**Цели диагностики**
 
 - подтверждение наличия жидкости в среднем ухе;
-
 - оценка состояния барабанной перепонки;
-
 - определение степени снижения слуха;
-
 - выявление структурных изменений;
-
 - определение показаний к хирургическому лечению.
 
-# 1. Отоскопия
+**Отоскопия**
 
-Типичные признаки
+Типичные признаки: втяжение барабанной перепонки, тусклая барабанная перепонка, снижение подвижности, изменение цвета (сероватая, янтарная, желтоватая), уровень жидкости, пузырьки воздуха, визуализация экссудата.
 
-- втяжение барабанной перепонки;
+**Пневматическая отоскопия**
 
-- тусклая барабанная перепонка;
+Характерно: ограничение или отсутствие подвижности барабанной перепонки.
 
-- снижение подвижности;
+**Тимпанометрия**
 
-- изменение цвета:
+- Тип B — характерен для наличия жидкости в среднем ухе.
+- Тип C — характерен для отрицательного давления, дисфункции слуховой трубы, втяжения барабанной перепонки.
 
-- сероватая;
+**Оценка слуха**
 
-- янтарная;
+Показания: длительность заболевания ≥3 месяцев, подозрение на тугоухость, факторы риска нарушения речи и развития, жалобы на снижение слуха.
 
-- желтоватая;
+Методы: тональная аудиометрия, игровая аудиометрия, объективные методы оценки слуха.
 
-- уровень жидкости;
+Типичная аудиологическая картина: кондуктивная тугоухость, чаще снижение слуха 20–28 дБ, иногда >35 дБ.
 
-- пузырьки воздуха;
+**Оценка факторов риска**
 
-- визуализация экссудата.
+Обязательно оцениваются: задержка речи, нарушения обучения, поведенческие нарушения, нейроразвитийные расстройства, синдром Дауна, расщелина нёба, нарушения зрения, рецидивирующие средние отиты.
 
-# 2. Пневматическая отоскопия
+**Оценка структурных изменений**
 
-Характерно:
+Необходимо исключить: выраженную ретракцию, ретракционные карманы, ателектаз, перфорацию, холестеатому.
 
-- ограничение или отсутствие подвижности барабанной перепонки.
+**Критерии хронического ЭСО**
 
-# 3. Тимпанометрия
+Сохранение жидкости в среднем ухе ≥3 месяцев по данным отоскопии, пневматической отоскопии, тимпанометрии или их сочетания.
 
-Тип B
+# 5. Лечение
 
-Характерен для наличия жидкости в среднем ухе.
+**Динамическое наблюдение**
 
-Тип C
+Метод выбора у большинства детей.
 
-Характерен для:
-
-- отрицательного давления;
-
-- дисфункции слуховой трубы;
-
-- втяжения барабанной перепонки.
-
-# 4. Оценка слуха
-
-Показания
-
-- длительность заболевания ≥3 месяцев;
-
-- подозрение на тугоухость;
-
-- факторы риска нарушения речи и развития;
-
-- жалобы на снижение слуха.
-
-Методы
-
-- тональная аудиометрия;
-
-- игровая аудиометрия;
-
-- объективные методы оценки слуха.
-
-Типичная аудиологическая картина
-
-- кондуктивная тугоухость;
-
-- чаще снижение слуха 20–28 дБ;
-
-- иногда >35 дБ.
-
-# 5. Оценка факторов риска
-
-Обязательно оцениваются:
-
-- задержка речи;
-
-- нарушения обучения;
-
-- поведенческие нарушения;
-
-- нейроразвитийные расстройства;
-
-- синдром Дауна;
-
-- расщелина нёба;
-
-- нарушения зрения;
-
-- рецидивирующие средние отиты.
-
-# 6. Оценка структурных изменений
-
-Необходимо исключить:
-
-- выраженную ретракцию;
-
-- ретракционные карманы;
-
-- ателектаз;
-
-- перфорацию;
-
-- холестеатому.
-
-Критерии хронического ЭСО
-
-Сохранение жидкости в среднем ухе ≥3 месяцев по данным:
-
-- отоскопии;
-
-- пневматической отоскопии;
-
-- тимпанометрии;
-
-- либо их сочетания.
-
-Лечение
-
-# 1. Динамическое наблюдение
-
-Метод выбора у большинства детей
-
-Показания
-
+Показания:
 - отсутствие факторов риска;
-
 - отсутствие структурных изменений;
-
 - нормальный слух или лёгкая кондуктивная тугоухость;
-
 - длительность ЭСО менее 3 месяцев.
 
-Срок наблюдения
+Срок наблюдения: 3 месяца от начала выпота либо от момента его выявления.
 
-- 3 месяца от начала выпота либо от момента его выявления.
+Контроль каждые 3–6 месяцев: отоскопия, пневматическая отоскопия, тимпанометрия, оценка слуха, контроль речевого и психического развития.
 
-Контроль в период наблюдения
+Дополнительные меры при лёгкой тугоухости: разговаривать рядом с ребёнком и лицом к лицу, повторять фразы при непонимании, размещать ребёнка ближе к учителю, при необходимости использовать FM-системы.
 
-Каждые 3–6 месяцев:
+**Хирургическое лечение**
 
-- отоскопия;
-
-- пневматическая отоскопия;
-
-- тимпанометрия;
-
-- оценка слуха;
-
-- контроль речевого и психического развития.
-
-Дополнительные меры при лёгкой тугоухости
-
-- разговаривать рядом с ребёнком;
-
-- разговаривать лицом к лицу;
-
-- повторять фразы при непонимании;
-
-- размещать ребёнка ближе к учителю;
-
-- при необходимости использовать FM-системы.
-
-Хирургическое лечение
-
-Тимпаностомия (шунтирование барабанной перепонки)
+*Тимпаностомия (шунтирование барабанной перепонки)*
 
 Основной хирургический метод лечения ЭСО.
 
-Цели
-
-- удаление жидкости;
-
-- восстановление вентиляции среднего уха;
-
-- улучшение слуха;
-
-- профилактика структурных изменений.
-
-Показания к тимпаностомии
-
-Основные показания
-
+Основные показания:
 - кондуктивная тугоухость ≥41 дБ;
-
 - хронический ЭСО;
-
 - структурные изменения барабанной перепонки;
-
 - ретракционные карманы;
-
 - подозрение на холестеатому;
-
 - перфорация;
-
 - оторея;
-
 - дети группы риска.
 
-Дополнительные показания
-
+Дополнительные показания:
 - двусторонний ЭСО ≥3 месяцев;
-
 - односторонний ЭСО ≥6 месяцев;
-
 - суммарная длительность заболевания ≥6 месяцев за 12 месяцев;
-
 - рецидивирующий ОСО;
+- нарушение качества жизни, сна, школьной успеваемости;
+- вестибулярные жалобы, дискомфорт в ухе.
 
-- нарушение качества жизни;
+Эффекты: уменьшается длительность выпота, улучшается слух, уменьшаются симптомы, восстанавливается аэрация среднего уха. Наиболее выраженный эффект — в первые 6–9 месяцев.
 
-- нарушение сна;
+Долгосрочные преимущества в отношении речи, когнитивного развития и обучения убедительно не доказаны.
 
-- плохая школьная успеваемость;
+Возможные осложнения: стойкая перфорация, послеоперационная оторея, образование биоплёнок, ретенция/смещение шунта, атрофия барабанной перепонки, холестеатома.
 
-- вестибулярные жалобы;
+Рецидив ЭСО после выпадения шунта встречается часто; повторное вмешательство требуется примерно у 50% детей.
 
-- дискомфорт в ухе.
+*Аденоидэктомия*
 
-Эффекты тимпаностомии
+Рассматривается у детей ≥4 лет при рецидивирующем или хроническом ЭСО, при необходимости повторного шунтирования. У детей младше 4 лет рутинно не рекомендуется, если отсутствуют нарушение носового дыхания, хронический синусит или синдром обструктивного апноэ сна.
 
-После установки шунта:
+*Миринготомия без установки шунта*
 
-- уменьшается длительность выпота;
+Не рекомендуется как самостоятельный метод лечения: отверстие быстро закрывается, вентиляция сохраняется недостаточно долго.
 
-- улучшается слух;
+# 6. Симптоматические варианты с неопределённой эффективностью
 
-- уменьшаются симптомы;
+**Аутоинсуффляция слуховой трубы**
 
-- восстанавливается аэрация среднего уха.
+Рутинно не рекомендуется. Долгосрочная эффективность не доказана, результаты исследований противоречивы. Может рассматриваться у детей старшего возраста при сохранении симптомов как альтернатива наблюдению. Противопоказана при активных выделениях из носа.
 
-Наиболее выраженный эффект наблюдается в первые 6–9 месяцев.
+# 7. Методы без доказанной эффективности
 
-Ограничения метода
+**Антибиотики** — рутинное применение не рекомендуется: высокая вероятность самостоятельного разрешения, ограниченная и кратковременная эффективность, отсутствие влияния на долгосрочный слух, риск антибиотикорезистентности и побочных эффектов.
 
-Долгосрочные преимущества в отношении:
+**Системные глюкокортикостероиды** — рутинное применение не рекомендуется: только кратковременный эффект, отсутствие доказанного улучшения слуха.
 
-- речи;
+**Интраназальные глюкокортикостероиды** — рутинно не рекомендуются (возможные исключения: аллергический ринит, хронический ринит при наличии показаний).
 
-- когнитивного развития;
+**Антигистаминные препараты и деконгестанты** — не уменьшают длительность заболевания, не предотвращают осложнения и рецидивы.
 
-- обучения
+**Альтернативные методы** — не рекомендуются: гомеопатия, пробиотики, остеопатия, иглорефлексотерапия, специальные диеты, иммуностимуляторы, массаж, фитотерапия, хиропрактика. Отсутствует убедительная доказательная база.
 
-Убедительно не доказаны.
+# 8. Источники
 
-Возможные осложнения
-
-- стойкая перфорация;
-
-- послеоперационная оторея;
-
-- образование биоплёнок;
-
-- ретенция шунта;
-
-- смещение шунта;
-
-- атрофия барабанной перепонки;
-
-- холестеатома.
-
-Повторное шунтирование
-
-Рецидив ЭСО после выпадения шунта встречается часто.
-
-Повторное вмешательство требуется примерно у 50% детей.
-
-Аденоидэктомия
-
-Показания
-
-Рассматривается:
-
-- у детей ≥4 лет;
-
-- при рецидивирующем или хроническом ЭСО;
-
-- при необходимости повторного шунтирования.
-
-У детей младше 4 лет
-
-Рутинно не рекомендуется, если отсутствуют:
-
-- нарушение носового дыхания;
-
-- хронический синусит;
-
-- синдром обструктивного апноэ сна.
-
-Миринготомия без установки шунта
-
-Не рекомендуется как самостоятельный метод лечения.
-
-Причины
-
-- отверстие быстро закрывается;
-
-- вентиляция сохраняется недостаточно долго;
-
-- эффективность значительно ниже шунтирования.
-
-Типичные ошибки ведения
-
-Антибиотики
-
-Рутинное применение не рекомендуется.
-
-Причины
-
-- высокая вероятность самостоятельного разрешения;
-
-- ограниченная и кратковременная эффективность;
-
-- отсутствие влияния на долгосрочный слух;
-
-- отсутствие доказанного влияния на речь и когнитивное развитие;
-
-- риск антибиотикорезистентности;
-
-- риск побочных эффектов.
-
-Возможные побочные эффекты
-
-- диарея;
-
-- рвота;
-
-- кожная сыпь.
-
-Системные глюкокортикостероиды
-
-Рутинное применение не рекомендуется.
-
-Причины
-
-- только кратковременный эффект;
-
-- отсутствие доказанного улучшения слуха;
-
-- отсутствие подтверждённого функционального улучшения.
-
-Интраназальные глюкокортикостероиды
-
-Рутинно не рекомендуются.
-
-Возможные исключения
-
-- аллергический ринит;
-
-- хронический ринит при наличии показаний
-
-Аутоинсуффляция слуховой трубы
-
-Рутинно не рекомендуется.
-
-Ограничения
-
-- долгосрочная эффективность не доказана;
-
-- противоречивые результаты исследований;
-
-- сложно выполнима у части детей;
-
-- возможно усиление боли;
-
-- противопоказана при активных выделениях из носа.
-
-Может рассматриваться
-
-- у детей старшего возраста;
-
-- при сохранении симптомов;
-
-- как альтернатива наблюдению.
-
-Антигистаминные препараты и деконгестанты
-
-Рутинное применение не рекомендуется.
-
-Причины
-
-- не уменьшают длительность заболевания;
-
-- не предотвращают осложнения;
-
-- не снижают риск рецидива;
-
-- не предотвращают развитие ОСО;
-
-- повышают риск побочных эффектов.
-
-Альтернативные методы лечения
-
-Не рекомендуются:
-
-- гомеопатия;
-
-- пробиотики;
-
-- остеопатия;
-
-- иглорефлексотерапия;
-
-- специальные диеты;
-
-- иммуностимуляторы;
-
-- массаж;
-
-- фитотерапия;
-
-- хиропрактика.
-
-Причины
-
-- отсутствие убедительной доказательной базы;
-
-- низкое качество исследований;
-
-- отсутствие стандартизированных схем лечения;
-
-- отсутствие доказанной клинической эффективности.
-
-**Список литературы**
-
-- Розенфельд Р.М., Шин Дж.Дж., Шварц С.Р. и др. Клинические рекомендации по лечению: средний отит с выпотом (обновление) // Otolaryngology–Head and Neck Surgery. 2016. Vol. 154. Suppl. S1.
-
+- Розенфельд Р.М., Шин Дж.Дж., Шварц С.Р. и др. Клинические рекомендации по лечению: средний отит с выпотом (обновление) // Otolaryngology–Head and Neck Surgery. 2016. Vol. 154. Suppl. S1.
 - National Institute for Health and Care Excellence (NICE). Otitis media with effusion in under 12s: surgery. London, 2023.
-
-- Tos M. Epidemiology and natural history of secretory otitis // American Journal of Otology. 1984. Vol. 5. P. 459.
-
-- Williamson I.G., Dunleavey J., Bain J., Robinson D. The natural history of otitis media with effusion — a three-year study // Journal of Laryngology & Otology. 1994. Vol. 108. P. 930.
-
-- Rosenfeld R.M., Kay D. Natural history of untreated otitis media // Laryngoscope. 2003. Vol. 113. P. 1645.
-
-- Teele D.W., Klein J.O., Rosner B.A. Epidemiology of otitis media in children // Annals of Otology, Rhinology & Laryngology Supplement. 1980. Vol. 89. P. 5.
-
-- Principi N., Marchisio P., Esposito S. Otitis media with effusion: benefits and drawbacks of treatment strategies // Expert Review of Anti-infective Therapy. 2016. Vol. 14. P. 415.
-
-- Schilder A.G., Chonmaitree T., Cripps A.W. et al. Otitis media // Nature Reviews Disease Primers. 2016. Vol. 2. 16063.
-
-- Steele D.W., Adam G.P., Di M. et al. Effectiveness of tympanostomy tubes for otitis media: a meta-analysis // Pediatrics. 2017. Vol. 139.
-
-- Tapiainen T., Kujala T., Renko M. et al. Effect of antimicrobial treatment of acute otitis media on daily resolution of middle ear effusion // JAMA Pediatrics. 2014. Vol. 168. P. 635.
-
-- Ruohola A., Laine M.K., Tähtinen P.A. Effect of antimicrobial therapy on middle ear effusion resolution after acute otitis media // Journal of Pediatric Infectious Diseases Society. 2018. Vol. 7. P. 64.
-
-- Fria T.J., Cantekin E.I., Eichler J.A. Hearing acuity in children with otitis media with effusion // Archives of Otolaryngology. 1985. Vol. 111. P. 10.
-
-- Silman S., Silverman C.A., Arick D.S. Assessment of hearing thresholds in children with middle ear effusion // Journal of the American Academy of Audiology. 1994. Vol. 5. P. 173.
-
-- Keogh T., Kei J., Driscoll C., Khan A. Children with minimal conductive hearing loss: speech perception in noise // Audiology & Neurotology. 2010. Vol. 15. P. 27.
-
-- Gordon M.A., Grunstein E., Burton W.B. Seasonal effects on otitis media with effusion resolution rates // International Journal of Pediatric Otorhinolaryngology. 2004. Vol. 68. P. 191.
-
-- van Balen F.A., de Melker R.A. Persistent otitis media with effusion: can it be predicted? // Journal of Family Practice. 2000. Vol. 49. P. 605.
-
-- Rosenfeld R.M., Tunkel D.E., Schwartz S.R. et al. Clinical practice guideline: tympanostomy tubes in children (update) // Otolaryngology–Head and Neck Surgery. 2022. Vol. 166. Suppl. S1.
-
-- Browning G.G., Rovers M.M., Williamson I. et al. Grommets (ventilation tubes) for hearing loss associated with otitis media with effusion in children // Cochrane Database of Systematic Reviews. 2010. CD001801.
-
-- Kuo C.L., Tsao Y.H., Cheng H.M. et al. Grommets for otitis media with effusion in children with cleft palate: systematic review // Pediatrics. 2014. Vol. 134. P. 983.
-
-- Davis J.M., Elfenbein J., Schum R., Bentler R.A. Effects of mild and moderate hearing impairments on language, educational and psychosocial behavior // Journal of Speech and Hearing Disorders. 1986. Vol. 51. P. 53.
-
-- Karchmer M.A., Allen T.E. Functional assessment of deaf and hard-of-hearing students // American Annals of the Deaf. 1999. Vol. 144. P. 68.
-
-- Carney A.E., Moeller M.P. Treatment efficacy: hearing loss in children // Journal of Speech, Language, and Hearing Research. 1998. Vol. 41. Suppl. S61.
-
-- Wallace I.F., Berkman N.D., Lohr K.N. et al. Surgical treatments for otitis media with effusion: systematic review // Pediatrics. 2014. Vol. 133. P. 296.
-
-- Venekamp R.P., Mick P., Schilder A.G., Nunez D.A. Grommets for recurrent acute otitis media in children // Cochrane Database of Systematic Reviews. 2018. Vol. 5. CD012017.
-
-- Bluestone C.D., Klein J.O. Treatment // In: Otitis Media in Infants and Children. 4th ed. Hamilton, Ontario: BC Decker, 2007. P. 213.
-
-- Gravel J.S., Wallace I.F. Effects of otitis media with effusion on hearing during the first 3 years of life // Journal of Speech, Language, and Hearing Research. 2000. Vol. 43. P. 631.
-
-- Richards M., Giannoni C. Quality-of-life outcomes after surgical intervention for otitis media // Archives of Otolaryngology–Head & Neck Surgery. 2002. Vol. 128. P. 776.
-
-- Rosenfeld R.M., Bhaya M.H., Bower C.M. et al. Impact of tympanostomy tubes on child quality of life // Archives of Otolaryngology–Head & Neck Surgery. 2000. Vol. 126. P. 585.
-
-- Brouwer C.N., Maille A.R., Rovers M.M. et al. Health-related quality of life in children with otitis media // International Journal of Pediatric Otorhinolaryngology. 2005. Vol. 69. P. 1031.
-
-- Teele D.W., Klein J.O., Chase C. et al. Otitis media in infancy and intellectual ability, school achievement, speech, and language at age 7 years // Journal of Infectious Diseases. 1990. Vol. 162. P. 685.
-
-- Roberts J.E., Burchinal M.R., Zeisel S.A. Otitis media in early childhood in relation to children’s school-age language and academic skills // Pediatrics. 2002. Vol. 110. P. 696.
-
-- Mandel E.M., Rockette H.E., Bluestone C.D. et al. Myringotomy with and without tympanostomy tubes for chronic otitis media with effusion // Archives of Otolaryngology–Head & Neck Surgery. 1989. Vol. 115. P. 1217.
-
-- Mandel E.M., Rockette H.E., Bluestone C.D. et al. Efficacy of myringotomy with and without tympanostomy tubes // Pediatric Infectious Disease Journal. 1992. Vol. 11. P. 270.
-
-- Boston M., McCook J., Burke B., Derkay C. Incidence and risk factors of additional tympanostomy tube placement // Archives of Otolaryngology–Head & Neck Surgery. 2003. Vol. 129. P. 293.
-
-- Schilder A.G., Marom T., Bhutta M.F. et al. Panel 7: Otitis media — treatment and complications // Otolaryngology–Head and Neck Surgery. 2017. Vol. 156. Suppl. S88.
-
-- Boonacker C.W., Rovers M.M., Browning G.G. et al. Adenoidectomy with or without grommets in children with otitis media: meta-analysis // Health Technology Assessment. 2014. Vol. 18. P. 1.
-
-- Mikals S.J., Brigger M.T. Adenoidectomy as an adjunct to primary tympanostomy: systematic review and meta-analysis // JAMA Otolaryngology–Head & Neck Surgery. 2014. Vol. 140. P. 95.
-
-- Roberts J.E., Rosenfeld R.M., Zeisel S.A. Otitis media and speech and language: meta-analysis of prospective studies // Pediatrics. 2004. Vol. 113. e238.
-
-- Paradise J.L., Feldman H.M., Campbell T.F. et al. Early versus delayed tympanostomy tube insertion and developmental outcomes at age three years // New England Journal of Medicine. 2001. Vol. 344. P. 1179.
-
-- Paradise J.L., Feldman H.M., Campbell T.F. et al. Tympanostomy tubes and developmental outcomes at 9 to 11 years of age // New England Journal of Medicine. 2007. Vol. 356. P. 248.
-
-- Paradise J.L., Dollaghan C.A., Campbell T.F. et al. Otitis media and tympanostomy tube insertion during the first three years of life // Pediatrics. 2003. Vol. 112. P. 265.
-
-- Paradise J.L., Campbell T.F., Dollaghan C.A. et al. Developmental outcomes after early or delayed tympanostomy tube insertion // New England Journal of Medicine. 2005. Vol. 353. P. 576.
-
-- Hellström S., Groth A., Jørgensen F. et al. Ventilation tube treatment: systematic review // Otolaryngology–Head and Neck Surgery. 2011. Vol. 145. P. 383.
-
-- Karkanevatos A., Lesser T.H. Insertion of ventilation tubes in children: parental perceptions // Journal of Laryngology & Otology. 1998. Vol. 112. P. 732.
-
-- Yazici A., Coskun M.E. Impact of ventilation tube insertion on health-related quality of life in children // Clinical Otolaryngology. 2018. Vol. 43. P. 1578.
-
-- Tisch M., Maier H., Sudhoff H. Balloon dilation of the Eustachian tube in children // Acta Otorhinolaryngologica Italica. 2017. Vol. 37. P. 509.
-
-- Leichtle A., Hollfelder D., Wollenberg B., Bruchhage K.L. Balloon Eustachian tuboplasty in children // European Archives of Oto-Rhino-Laryngology. 2017. Vol. 274. P. 2411.
-
-- Jenckel F., Knappo N., Gleiser A. et al. Endonasal dilatation of the Eustachian tube in children // European Archives of Oto-Rhino-Laryngology. 2015. Vol. 272. P. 3677.
-
-- Chrystov F., Gluth M.B. Histopathology of the Eustachian tube mucosa in chronic otitis media with effusion // Annals of Otology, Rhinology & Laryngology. 2018. Vol. 127. P. 817.
-
-- Flanagan P.M., Knight L.C., Thomas A. et al. Hearing aids and otitis media with effusion // Clinical Otolaryngology and Allied Sciences. 1996. Vol. 21. P. 297.
-
-- Jardine A.H., Griffiths M.V., Midgley E. Acceptance of hearing aids in children with otitis media with effusion // Journal of Laryngology & Otology. 1999. Vol. 113. P. 314.
-
-- Gun R.U.K., Overton P., Benton C., Daniel M. Hearing aids for otitis media with effusion: do children use them? // International Journal of Pediatric Otorhinolaryngology. 2017. Vol. 99. P. 117.
-
-- van den Aardweg M.T., Schilder A.G., Herkert E. et al. Adenoidectomy for otitis media in children // Cochrane Database of Systematic Reviews. 2010. CD007810.
-
-- McKean S., Mulvaney C.A., Galbraith K. et al. Adenoidectomy for otitis media with effusion in children // Cochrane Database of Systematic Reviews. 2023. Vol. 10. CD015252.
-
-- Venekamp R.P., Burton M.J., van Dongen T.M. et al. Antibiotics for otitis media with effusion in children // Cochrane Database of Systematic Reviews. 2016. CD009163.
-
-- Mulvaney C.A., Galbraith K., Webster K.E. et al. Oral or topical nasal steroids for otitis media with effusion in children // Cochrane Database of Systematic Reviews. 2023. Vol. 12. CD015255.
-
-- Francis N.A., Cannings-John R., Waldron C.A. et al. Oral steroids for resolution of otitis media with effusion in children (OSTRICH trial) // Lancet. 2018. Vol. 392. P. 557.
-
-- Ranakusuma R.W., McCullough A.R., Safitri E.D. et al. Oral prednisolone for acute otitis media in children (OPAL study) // Pilot and Feasibility Studies. 2020. Vol. 6. P. 121.
-
-- Lennon S., Peterson L.E., Goodman A. Quality measures for care of children with otitis media with effusion // Pediatrics. 2011. Vol. 127. e1490.
-
-- Patel M.M., Eisenberg L., Witsell D., Schulz K.A. Assessment of treatment efficacy in otitis media with effusion // Otolaryngology–Head and Neck Surgery. 2008. Vol. 139. P. 490.
-
-- Simon F., Haggard M., Rosenfeld R.M. et al. International consensus (ICON) on management of otitis media with effusion in children // European Annals of Otorhinolaryngology, Head and Neck Diseases. 2018. Vol. 135. Suppl. S33.
-
-- Hussain A., Fathy H., Amin S.M., Elsisi N. Oral steroids with or without intranasal steroids versus watchful waiting in otitis media with effusion // Journal of Laryngology & Otology. 2017. Vol. 131. P. 907.
-
-- Perera R., Glasziou P.P., Heneghan C.J. et al. Autoinflation for hearing loss associated with otitis media with effusion // Cochrane Database of Systematic Reviews. 2013. CD006285.
-
-- Williamson I., Vennik J., Harnden A. et al. Effect of nasal balloon autoinflation in children with otitis media with effusion // CMAJ. 2015. Vol. 187. P. 961.
-
-- Blanchard J.D., Maw A.R., Bowden R. Conservative management of otitis media with effusion by autoinflation // Clinical Otolaryngology and Allied Sciences. 1993. Vol. 18. P. 188.
-
-- Webster K.E., Mulvaney C.A., Galbraith K. et al. Autoinflation for otitis media with effusion in children // Cochrane Database of Systematic Reviews. 2023. Vol. 9. CD015253.
-
-- Griffin G., Flynn C.A. Antihistamines and/or decongestants for otitis media with effusion in children // Cochrane Database of Systematic Reviews. 2011. CD003423.
-
-- Harrison H., Fixsen A., Vickers A. Randomized comparison of homeopathic and standard treatment of otitis media with effusion // Complementary Therapies in Medicine. 1999. Vol. 7. P. 132.
-
-- Jacobs J., Springer D.A., Crothers D. Homeopathic treatment of acute otitis media in children // Pediatric Infectious Disease Journal. 2001. Vol. 20. P. 177.
-
-- Skovbjerg S., Roos K., Holm S.E. et al. Spray bacteriotherapy reduces middle ear fluid in children with secretory otitis // Archives of Disease in Childhood. 2009. Vol. 94. P. 92.
-
-- Marom T., Marchisio P., Tamir S.O. et al. Complementary and alternative medicine treatment options for otitis media // Medicine (Baltimore). 2016. Vol. 95. e2695.
-
-- Cohen D., Schechter Y., Slatkin M. et al. Laser myringotomy in different age groups // Archives of Otolaryngology–Head & Neck Surgery. 2001. Vol. 127. P. 260.
-
-- Shermeta W., Parameswaran M.S., Isaacson G. Laser-assisted adenoidectomy or incisional myringotomy for otitis media with effusion // Laryngoscope. 2000. Vol. 110. P. 342.
-
-- Koopman J.P., Reuchlin A.G., Kummer E.E. et al. Laser myringotomy versus ventilation tubes in children with otitis media with effusion // Laryngoscope. 2004. Vol. 114. P. 844.
-
-- D’Eredita R., Shah U.K. Contact diode laser myringotomy for intermediate-term middle ear ventilation in children // International Journal of Pediatric Otorhinolaryngology. 2006. Vol. 70. P. 1077.
+- Tos M. Epidemiology and natural history of secretory otitis // American Journal of Otology. 1984. Vol. 5. P. 459.
+- Williamson I.G., Dunleavey J., Bain J., Robinson D. The natural history of otitis media with effusion — a three-year study // Journal of Laryngology & Otology. 1994. Vol. 108. P. 930.
+- Rosenfeld R.M., Kay D. Natural history of untreated otitis media // Laryngoscope. 2003. Vol. 113. P. 1645.
+- Principi N., Marchisio P., Esposito S. Otitis media with effusion: benefits and drawbacks of treatment strategies // Expert Review of Anti-infective Therapy. 2016. Vol. 14. P. 415.
+- Schilder A.G., Chonmaitree T., Cripps A.W. et al. Otitis media // Nature Reviews Disease Primers. 2016. Vol. 2. 16063.
+- Steele D.W., Adam G.P., Di M. et al. Effectiveness of tympanostomy tubes for otitis media: a meta-analysis // Pediatrics. 2017. Vol. 139.
+- Rosenfeld R.M., Tunkel D.E., Schwartz S.R. et al. Clinical practice guideline: tympanostomy tubes in children (update) // Otolaryngology–Head and Neck Surgery. 2022. Vol. 166. Suppl. S1.
+- Browning G.G., Rovers M.M., Williamson I. et al. Grommets (ventilation tubes) for hearing loss associated with otitis media with effusion in children // Cochrane Database of Systematic Reviews. 2010. CD001801.
+- Wallace I.F., Berkman N.D., Lohr K.N. et al. Surgical treatments for otitis media with effusion: systematic review // Pediatrics. 2014. Vol. 133. P. 296.
+- Venekamp R.P., Mick P., Schilder A.G., Nunez D.A. Grommets for recurrent acute otitis media in children // Cochrane Database of Systematic Reviews. 2018. Vol. 5. CD012017.
+- Boonacker C.W., Rovers M.M., Browning G.G. et al. Adenoidectomy with or without grommets in children with otitis media: meta-analysis // Health Technology Assessment. 2014. Vol. 18. P. 1.
+- Simon F., Haggard M., Rosenfeld R.M. et al. International consensus (ICON) on management of otitis media with effusion in children // European Annals of Otorhinolaryngology, Head and Neck Diseases. 2018. Vol. 135. Suppl. S33.
+- Perera R., Glasziou P.P., Heneghan C.J. et al. Autoinflation for hearing loss associated with otitis media with effusion // Cochrane Database of Systematic Reviews. 2013. CD006285.
+- Venekamp R.P., Burton M.J., van Dongen T.M. et al. Antibiotics for otitis media with effusion in children // Cochrane Database of Systematic Reviews. 2016. CD009163.
+- Griffin G., Flynn C.A. Antihistamines and/or decongestants for otitis media with effusion in children // Cochrane Database of Systematic Reviews. 2011. CD003423.
+- Mulvaney C.A., Galbraith K., Webster K.E. et al. Oral or topical nasal steroids for otitis media with effusion in children // Cochrane Database of Systematic Reviews. 2023. Vol. 12. CD015255.

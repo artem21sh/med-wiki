@@ -371,5 +371,3 @@ status: "published"
 - **Rondon C, Campo P, Togias A, et al. **Local allergic rhinitis: concept, pathophysiology, and management. *J Allergy Clin Immunol 2012; 129:1460.
 
 - **Campo P, Eguiluz-Gracia I, Bogas G, et al. **Local allergic rhinitis: implications for management. *Clin Exp Allergy 2019; 49:6.
-
-1
