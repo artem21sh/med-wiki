@@ -99,6 +99,16 @@ const MD_COMPONENTS = {
   code: ({ node, inline, ...props }: any) => <span {...props} />,
 };
 
+function scrollToAnchor(id: string) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  const offset = 72; // sticky header height
+  const top = el.getBoundingClientRect().top + window.scrollY - offset;
+  window.scrollTo({ top, behavior: 'smooth' });
+}
+
+
+
 function SubSectionBlock({
   sub,
   forceOpen = false,
@@ -159,7 +169,7 @@ export default function NosologyContent({
     if (hash) {
       setOpen(prev => ({ ...prev, [hash]: true }));
       setTimeout(() => {
-        document.getElementById(hash)?.scrollIntoView({ behavior: 'smooth' });
+        scrollToAnchor(hash);
       }, 100);
     }
   }, []);
@@ -179,7 +189,7 @@ export default function NosologyContent({
           });
         });
         setTimeout(() => {
-          document.getElementById(anchor)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          scrollToAnchor(anchor);
         }, 50);
       });
     }
@@ -258,7 +268,7 @@ export default function NosologyContent({
                       onClick={() => {
                         setOpen(prev => ({ ...prev, [s.anchor]: true }));
                         setTimeout(() => {
-                          document.getElementById(s.anchor)?.scrollIntoView({ behavior: 'smooth' });
+                          scrollToAnchor(s.anchor);
                         }, 50);
                       }}
                     >
@@ -274,7 +284,7 @@ export default function NosologyContent({
                                 setOpen(prev => ({ ...prev, [s.anchor]: true }));
                                 setOpenSubs(prev => ({ ...prev, [sub.anchor]: true }));
                                 setTimeout(() => {
-                                  document.getElementById(sub.anchor)?.scrollIntoView({ behavior: 'smooth' });
+                                  scrollToAnchor(sub.anchor);
                                 }, 50);
                               }}
                             >
