@@ -97,6 +97,11 @@ function getSnippet(text: string, query: string, radius: number = 120): string {
 const MD_COMPONENTS = {
   pre: ({ node, ...props }: any) => <div {...props} />,
   code: ({ node, inline, ...props }: any) => <span {...props} />,
+  table: ({ node, ...props }: any) => (
+    <div style={{ overflowX: 'auto', WebkitOverflowScrolling: 'touch', maxWidth: '100%' }}>
+      <table {...props} />
+    </div>
+  ),
 };
 
 function scrollToAnchor(id: string) {
