@@ -122,13 +122,25 @@ export default function SiteSearch() {
       }
 
       // 3) Section match — "лечение синусита" → раздел Лечение нозологии Синусит
-      // match if one word hits the nosology (title/alias) AND another hits a section title
-      const nosologyHit =
-        words.some(w => titleLower.includes(w)) ||
-        words.some(w => aliases.some(a => a.toLowerCase().includes(w)));
-      if (nosologyHit) {
+      // Require: at least one word identifies THIS nosology (matches title or alias),
+      // AND a DIFFERENT word matches a section title. The nosology-identifying word
+      // must not itself be the section word (otherwise "лечение" matches every nosology).
+      const aliasesLower = aliases.map(a => a.toLowerCase());
+      // bidirectional partial match to survive russian word endings (синусит ~ синусита)
+      const wordMatchesNosology = (w: string) => {
+        if (w.length < 4) return false;
+        const stem = w.slice(0, Math.max(4, w.length - 2)); // crude stem: drop up to 2 trailing chars
+        if (titleLower.includes(stem)) return true;
+        return aliasesLower.some(a => a.includes(stem) || stem.includes(a) || a.includes(w) || w.includes(a));
+      };
+      const nosologyWords = words.filter(wordMatchesNosology);
+      if (nosologyWords.length > 0) {
+        const sectionWords = words.filter(w => !nosologyWords.includes(w) && w.length >= 4);
         const matchedSection = sections.find(s =>
-          words.some(w => s.title.toLowerCase().includes(w))
+          sectionWords.some(w => {
+            const stem = w.slice(0, Math.max(4, w.length - 2));
+            return s.title.toLowerCase().includes(stem);
+          })
         );
         if (matchedSection) {
           pushUnique(`${e.slug}:sec:${matchedSection.anchor}`, {
