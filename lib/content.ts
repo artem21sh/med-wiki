@@ -9,6 +9,8 @@ export interface Nosology {
   title: string;
   content: string;
   updatedAt: string;
+  icd: string;
+  aliases: string[];
 }
 
 function parseFrontmatter(raw: string): { data: Record<string, string>; content: string } {
@@ -24,11 +26,16 @@ function parseFrontmatter(raw: string): { data: Record<string, string>; content:
     const colon = lines[i].indexOf(':');
     if (colon === -1) continue;
     const key = lines[i].slice(0, colon).trim();
-    const value = lines[i].slice(colon + 1).trim().replace(/^["\'"]|["\'"]$/g, '');
+    const value = lines[i].slice(colon + 1).trim().replace(/^["'"]|["'"]$/g, '');
     data[key] = value;
   }
   const content = lines.slice(endIdx + 1).join('\n').trim();
   return { data, content };
+}
+
+function parseAliases(raw: string | undefined): string[] {
+  if (!raw) return [];
+  return raw.split(',').map(s => s.trim()).filter(Boolean);
 }
 
 export async function getNosologies(): Promise<Nosology[]> {
@@ -46,6 +53,8 @@ export async function getNosologies(): Promise<Nosology[]> {
       title: data.title || slug,
       content,
       updatedAt: data.updatedAt || data.publishedAt || stats.mtime.toISOString(),
+      icd: data.icd || '',
+      aliases: parseAliases(data.aliases),
     };
   })
   .filter(n => n.title && n.title !== n.slug)
@@ -64,5 +73,7 @@ export async function getNosologyBySlug(slug: string): Promise<Nosology | null> 
     title: data.title || slug,
     content,
     updatedAt: data.updatedAt || data.publishedAt || stats.mtime.toISOString(),
+    icd: data.icd || '',
+    aliases: parseAliases(data.aliases),
   };
 }

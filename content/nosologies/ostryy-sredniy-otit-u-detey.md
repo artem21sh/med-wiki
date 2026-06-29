@@ -2,6 +2,8 @@
 title: "Острый средний отит у детей"
 publishedAt: "2026-05-22"
 status: "published"
+icd: "H66.0"
+aliases: "ОСО, острый отит, средний отит, отит у ребёнка, боль в ухе ребёнок, acute otitis media, гнойный отит дети, температура боль в ухе, воспаление среднего уха, отит детский, стреляет в ухе ребёнок, отит лечение дети"
 ---
 
 *Acute Otitis Media · AOM · Гнойный средний отит*
@@ -425,7 +427,7 @@ status: "published"
 
 - Доза: 90 мг/кг в сутки перорально, разделённых на 2 приёма (максимум: 4 г/сут) — высокие дозы для пенициллин-нечувствительных S. pneumoniae
 
-- Более низкие дозы (40-45 мг/кг/сут, разделённых на 2–3 приёма; максимум — 1,5 г/сут) допустимы в регионах с низкой распространённостью пенициллин-резистентных штаммов S. pneumoniae; Россия в настоящее время относится к таким регионам, где чувствительность пневмококка к амоксициллину в целом сохраняется высокой.
+- Более низкие дозы (40 мг/кг в сут, разделённых на 2–3 приёма; максимум: 1,5 г/сут) — при низком уровне устойчивых к пенициллину S. pneumoniae в регионе
 
 Высокая доза (90 мг/кг/сут vs 40 мг/кг/сут): обеспечивает активность против большинства S. pneumoniae (МИК пенициллина от 2 до <4 мкг/мл). Штаммы с МИК ≥8 мкг/мл (<2% пневмококков в США) не реагируют на высокие дозы.
 
@@ -441,7 +443,7 @@ status: "published"
 
 Подростки ≥16 лет (способные глотать большие таблетки): амоксициллин-клавуланат пролонгированного действия 1–2 г амоксициллина + 62,5–125 мг клавуланата каждые 12 часов.
 
-Более низкие дозы (40-45 мг/кг амоксициллина + 5,7 мг/кг клавуланата, разделённых на 2 дозы) — при низкой распространённости пенициллин-нечувствительных S. pneumoniae. Доступность препаратов с соотношением 7:1 варьируется по регионам.
+Более низкие дозы (40 мг/кг амоксициллина + 5,7 мг/кг клавуланата, разделённых на 2 дозы) — при низкой распространённости пенициллин-нечувствительных S. pneumoniae. Доступность препаратов с соотношением 7:1 варьируется по регионам.
 
 Примечание: желудочно-кишечные побочные эффекты (диарея, нарушение микробиома) чаще при амоксициллин-клавуланате; частота клинических неудач аналогична амоксициллину. После широкого применения PCV13 NTHi стал наиболее распространённым патогеном, однако предпочтение амоксициллина сохраняется.
 
@@ -474,7 +476,6 @@ status: "published"
 - Цефуроксим таблетки 250 мг каждые 12 ч для детей >17 кг, способных глотать таблетку
 
 - Цефдинир 14 мг/кг в сут в 1–2 приёма (максимум: 600 мг/сут; фармакокинетика менее благоприятна)
-- Цефиксим 8 мг/кг/сут перорально в 1–2 приёма (максимум: 400 мг/сут). Не является предпочтительным пероральным цефалоспорином при ЛОР-инфекциях из-за менее надёжной активности против Streptococcus pneumoniae, однако в РФ может рассматриваться как альтернативный вариант при ограниченной доступности других препаратов.
 
 Продолжительность пероральных цефалоспоринов — такая же, как амоксициллина.
 
@@ -754,180 +755,222 @@ status: "published"
 # 11. Методы без доказанной эффективности
 
 - Тепло / холод к наружному уху — не рекомендуется
-- Назначение антибиотиков без подтверждённого диагноза ОСО — не показано
-- Сосудосуживающие капли/спреи в нос — не рекомендуются (не улучшают исходы ОСО, не ускоряют разрешение выпота, не уменьшают потребность в антибиотиках; при длительном применении возможен медикаментозный ринит)
-- Антигистаминные препараты при отсутствии аллергического компонента — не рекомендуются (не улучшают разрешение выпота в среднем ухе)
-- Системные деконгестанты — не рекомендуются (не имеют доказанной эффективности при ОСО у детей)
-- Муколитики — не рекомендуются (не имеют доказанной эффективности)
-- Ушные капли с антибиотиками при интактной барабанной перепонке — не показаны (не проникают в полость среднего уха через интактную барабанную перепонку)
-- Комбинированные ушные капли (антибиотик + ГКС) — не рекомендуются рутинно при неосложнённом ОСО без тимпаностомической трубки или стойкой отореи
-- Фитопрепараты и гомеопатия — не рекомендуются (доказательства эффективности отсутствуют)
-- Интраназальные глюкокортикостероиды (например, Mometasone) — не рекомендуются рутинно при ОСО (не имеют убедительной доказательной базы для ускорения разрешения ОСО или выпота в среднем ухе; могут рассматриваться только при сопутствующей патологии носоглотки — например, аллергическом рините или клинически значимой гипертрофии аденоидов)
-- Тепло/холод к наружному уху — не рекомендуется
-- Оливковое масло в слуховой проход — не рекомендуется
-- Растительные экстракты в слуховой проход — не рекомендуются
-- Trimethoprim/sulfamethoxazole при ОСО с перфорацией (при подозрении на БГСА) — не применять
-- Trimethoprim/sulfamethoxazole при неэффективности амоксициллина/амоксициллин-клавуланата — не рекомендуется
-- Макролиды (Azithromycin, Clarithromycin) при неэффективности амоксициллина/амоксициллин-клавуланата — не рекомендуются
-- Clindamycin при неэффективности амоксициллина/амоксициллин-клавуланата — не рекомендуется
-- Пероральные цефалоспорины при неэффективности амоксициллин-клавуланата — не рекомендуются
-- Пероральные цефалоспорины в качестве терапии первой линии — не рекомендуются рутинно (не достигают достаточных концентраций против пенициллин-резистентных Streptococcus pneumoniae)
 
+- Оливковое масло в слуховой проход — не рекомендуется
+
+- Растительные экстракты в слуховой проход — не рекомендуется
+
+- ТМП-СМХ при ОСО с перфорацией (при подозрении на БГСА) — не применять
+
+- ТМП-СМХ при неэффективности амоксициллина/амоксициллин-клавуланата — не рекомендуется
+
+- Макролиды (азитромицин, кларитромицин) при неэффективности амоксициллина/амоксициллин-клавуланата — не рекомендуются
+
+- Клиндамицин при неэффективности амоксициллина/амоксициллин-клавуланата — не рекомендуется
+
+- Пероральные цефалоспорины при неэффективности амоксициллин-клавуланата — не рекомендуются
+
+- Пероральные цефалоспорины в качестве терапии первой линии — не рекомендуются рутинно (не достигают достаточных концентраций для пенициллин-резистентных S. pneumoniae)
+
+- Назначение антибиотиков без подтверждённого диагноза ОСО — не показано
+
+- Сосудосуживающие капли/спреи в нос
+
+Не улучшают исходы ОСО 
+
+Не ускоряют разрешение выпота 
+
+Не уменьшают потребность в антибиотиках 
+
+Могут вызывать медикаментозный ринит при длительном применении 
+
+-  Антигистаминные препараты, при отсутсвии аллергического компонента
+
+Не рекомендуются при неосложнённом ОСО 
+
+Не улучшают разрешение выпота в среднем ухе 
+
+-  Системные деконгестанты
+
+Не имеют доказанной эффективности при ОСО у детей 
+
+- Муколитики
+
+Не имеют доказанной эффективности 
+
+- Ушные капли с антибиотиками при интактной барабанной перепонке
+
+Не показаны при обычном ОСО 
+
+Не проникают в полость среднего уха через интактную барабанную перепонку 
+
+- Комбинированные ушные капли (антибиотик + ГКС)
+
+Не рекомендуются рутинно при неосложнённом ОСО без тимпаностомической трубки или стойкой отореи 
+
+-  Фитопрепараты и гомеопатия
+
+Доказательства эффективности отсутствуют
+
+- Интраназальные глюкокортикостероиды (например, мометазон)
+
+Не рекомендуются рутинно при остром среднем отите 
+
+Не имеют убедительной доказательной базы для ускорения разрешения ОСО или выпота в среднем ухе 
+
+Могут рассматриваться только при сопутствующей патологии носоглотки (например, аллергическом рините или клинически значимой гипертрофии аденоидов)
 
 1.  Rovers MM, Glasziou P, Appelman CL et al. Antibiotics for acute otitis media: a meta-analysis with individual patient data. Lancet 2006; 368:1429.
 
 2.  Lieberthal AS, Carroll AE, Chonmaitree T et al. Диагностика и лечение острого среднего отита. Pediatrics 2013; 131:e964. [Клинические рекомендации AAP]
 
-
-# 12. Источники
-
-- NICE. Острый средний отит: назначение антимикробных препаратов. Март 2018 г. https://www.nice.org.uk/guidance/ng91
+# 3.  NICE. Острый средний отит: назначение антимикробных препаратов. Март 2018 г. https://www.nice.org.uk/guidance/ng91
 
 4.  de Sévaux JLH, Damoiseaux RA, van de Pol AC et al. Парацетамол или НПВП для облегчения боли при ОСО у детей. Cochrane Database Syst Rev 2023; 8:CD011534.
 
-- Foxlee R, Johansson A, Wejfalk J et al. Местное обезболивание при ОСО. Cochrane Database Syst Rev 2006; :CD005657.
+# 5.  Foxlee R, Johansson A, Wejfalk J et al. Местное обезболивание при ОСО. Cochrane Database Syst Rev 2006; :CD005657.
 
-- Hoberman A, Paradise JL, Reynolds EA, Urkin J. Эффективность Ауралгана при ОСО. Arch Pediatr Adolesc Med 1997; 151:675.
+# 6.  Hoberman A, Paradise JL, Reynolds EA, Urkin J. Эффективность Ауралгана при ОСО. Arch Pediatr Adolesc Med 1997; 151:675.
 
-- Bolt P, Barnett P, Babl FE, Sharwood LN. Местный лидокаин при ОСО: двойное слепое плацебо-контролируемое РКИ. Arch Dis Child 2008; 93:40.
+# 7.  Bolt P, Barnett P, Babl FE, Sharwood LN. Местный лидокаин при ОСО: двойное слепое плацебо-контролируемое РКИ. Arch Dis Child 2008; 93:40.
 
-- FDA. Вопросы и ответы: бензокаин-содержащие гели — метгемоглобинемия. www.fda.gov/Drugs/DrugSafety/ucm250029.htm
+# 8.  FDA. Вопросы и ответы: бензокаин-содержащие гели — метгемоглобинемия. www.fda.gov/Drugs/DrugSafety/ucm250029.htm
 
-- Rodeya OF Jr, Earl R Jr, Haggerty R. Миринготомия при ОСО. JAMA 1966; 197:849.
+# 9.  Rodeya OF Jr, Earl R Jr, Haggerty R. Миринготомия при ОСО. JAMA 1966; 197:849.
 
-- Picicchero ME, Casey JR, Almudevar A. Снижение частоты ОСО путём индивидуального подхода. Pediatr Infect Dis J 2013; 32:473.
+# 10. Picicchero ME, Casey JR, Almudevar A. Снижение частоты ОСО путём индивидуального подхода. Pediatr Infect Dis J 2013; 32:473.
 
-- Picicchero ME. Сокращённый курс антибиотиков при ОСО. N Engl J Med 2017; 376:e24.
+# 11. Picicchero ME. Сокращённый курс антибиотиков при ОСО. N Engl J Med 2017; 376:e24.
 
-- Hoberman A, Paradise JL, Rockette HE et al. Лечение ОСО у детей <2 лет. N Engl J Med 2011; 364:105.
+# 12. Hoberman A, Paradise JL, Rockette HE et al. Лечение ОСО у детей <2 лет. N Engl J Med 2011; 364:105.
 
-- Frost HM, Keith A, Fletcher DR et al. Клинические результаты при лечении амоксициллином ОСО. J Pediatric Infect Dis Soc 2024; 13:203.
+# 13. Frost HM, Keith A, Fletcher DR et al. Клинические результаты при лечении амоксициллином ОСО. J Pediatric Infect Dis Soc 2024; 13:203.
 
-- Picicchero ME, Poole MD. Оценка точности диагностики и навыков тимпаноцентеза. Arch Pediatr Adolesc Med 2001; 155:1137.
+# 14. Picicchero ME, Poole MD. Оценка точности диагностики и навыков тимпаноцентеза. Arch Pediatr Adolesc Med 2001; 155:1137.
 
-- Rosenfeld RM. Диагностическая достоверность ОСО. Int J Pediatr Otorhinolaryngol 2002; 64:89.
+# 15. Rosenfeld RM. Диагностическая достоверность ОСО. Int J Pediatr Otorhinolaryngol 2002; 64:89.
 
-- Ovnat Tamir S, Shemesh S, Oron Y, Marom T. Рекомендации по лечению ОСО в разных странах. Arch Dis Child 2017; 102:450.
+# 16. Ovnat Tamir S, Shemesh S, Oron Y, Marom T. Рекомендации по лечению ОСО в разных странах. Arch Dis Child 2017; 102:450.
 
-- Suzuki HG, Dewez JE, Nijman RG, Yeung S. Европейские национальные рекомендации по ОСО у детей. BMJ Open 2020; 10:e035343.
+# 17. Suzuki HG, Dewez JE, Nijman RG, Yeung S. Европейские национальные рекомендации по ОСО у детей. BMJ Open 2020; 10:e035343.
 
-- Американская академия педиатрии. Красная книга 2024–2027. AAP 2024:7.
+# 18. Американская академия педиатрии. Красная книга 2024–2027. AAP 2024:7.
 
-- Venekamp RP, Sanders SL, Glasziou PP, Rovers MM. Антибиотики при ОСО у детей. Cochrane Database Syst Rev 2023; 11:CD000219.
+# 19. Venekamp RP, Sanders SL, Glasziou PP, Rovers MM. Антибиотики при ОСО у детей. Cochrane Database Syst Rev 2023; 11:CD000219.
 
-- Thompson M, Vodicka TA, Blair PS et al. Продолжительность симптомов инфекций дыхательных путей у детей. BMJ 2013; 347:f7027.
+# 20. Thompson M, Vodicka TA, Blair PS et al. Продолжительность симптомов инфекций дыхательных путей у детей. BMJ 2013; 347:f7027.
 
-- Gerber JS, Ross RK, Bryan M et al. Антибиотики широкого и узкого спектра у детей. JAMA 2017; 318:2325.
+# 21. Gerber JS, Ross RK, Bryan M et al. Антибиотики широкого и узкого спектра у детей. JAMA 2017; 318:2325.
 
-- Hum SW, Sheikh KJ, Musa SS, Sheikh N. Побочные эффекты антибиотиков при ОСО у детей: мета-анализ. J Pediatr 2019; 215:139.
+# 22. Hum SW, Sheikh KJ, Musa SS, Sheikh N. Побочные эффекты антибиотиков при ОСО у детей: мета-анализ. J Pediatr 2019; 215:139.
 
-- McCormick DP, Chonmaitree T, Pittman C et al. Нетяжёлый ОСО: выжидательная тактика vs немедленные антибиотики. Pediatrics 2005; 115:1455.
+# 23. McCormick DP, Chonmaitree T, Pittman C et al. Нетяжёлый ОСО: выжидательная тактика vs немедленные антибиотики. Pediatrics 2005; 115:1455.
 
-- Hoberman A, Ruohola A, Shaikh N et al. ОСО у детей <2 лет. JAMA Pediatr 2013; 167:1171.
+# 24. Hoberman A, Ruohola A, Shaikh N et al. ОСО у детей <2 лет. JAMA Pediatr 2013; 167:1171.
 
 25. Spurling GK, Del Mar CB, Dooley L et al. Задержка назначения антибиотиков при респираторных инфекциях. Cochrane Database Syst Rev 2017; 9:CD004417.
 
-- Spiro DM, Tay KY, Arnold DH et al. Выжидательная тактика при ОСО: РКИ. JAMA 2006; 296:1235.
+# 26. Spiro DM, Tay KY, Arnold DH et al. Выжидательная тактика при ОСО: РКИ. JAMA 2006; 296:1235.
 
-- Little P, Gould C, Williamson I et al. РКИ стратегий назначения при ОСО у детей. BMJ 2001; 322:336.
+# 27. Little P, Gould C, Williamson I et al. РКИ стратегий назначения при ОСО у детей. BMJ 2001; 322:336.
 
-- Little P, Moore M, Warner G et al. Долгосрочные результаты РКИ стратегий назначения при среднем отите. Br J Gen Pract 2006; 56:176.
+# 28. Little P, Moore M, Warner G et al. Долгосрочные результаты РКИ стратегий назначения при среднем отите. Br J Gen Pract 2006; 56:176.
 
-- Tähtinen PA, Laine MK, Ruuskanen O, Ruohola A. Отсроченное и немедленное антимикробное лечение ОСО. Pediatr Infect Dis J 2012; 31:1227.
+# 29. Tähtinen PA, Laine MK, Ruuskanen O, Ruohola A. Отсроченное и немедленное антимикробное лечение ОСО. Pediatr Infect Dis J 2012; 31:1227.
 
-- Tähtinen PA, Laine MK, Huovinen P et al. Плацебо-контролируемое исследование антимикробного лечения ОСО. N Engl J Med 2011; 364:116.
+# 30. Tähtinen PA, Laine MK, Huovinen P et al. Плацебо-контролируемое исследование антимикробного лечения ОСО. N Engl J Med 2011; 364:116.
 
-- Frost HM, Keith A, Sebastian T, Jenkins TC. Мнения опекунов о лечении ОСО. Antimicrob Steward Healthc Epidemiol 2021; 1.
+# 31. Frost HM, Keith A, Sebastian T, Jenkins TC. Мнения опекунов о лечении ОСО. Antimicrob Steward Healthc Epidemiol 2021; 1.
 
-- Merenstein D, Diener-West M, Krist A et al. Совместное принятие решений у родителей детей с ОСО. Pediatrics 2005; 116:1267.
+# 32. Merenstein D, Diener-West M, Krist A et al. Совместное принятие решений у родителей детей с ОСО. Pediatrics 2005; 116:1267.
 
-- Palmu AA, Herva E, Savolainen H et al. Клинические признаки и бактериологические данные при ОСО. Clin Infect Dis 2004; 38:234.
+# 33. Palmu AA, Herva E, Savolainen H et al. Клинические признаки и бактериологические данные при ОСО. Clin Infect Dis 2004; 38:234.
 
-- Tähtinen PA, Laine MK, Ruohola A. Прогностические факторы неэффективности лечения ОСО. Pediatrics 2017; 140.
+# 34. Tähtinen PA, Laine MK, Ruohola A. Прогностические факторы неэффективности лечения ОСО. Pediatrics 2017; 140.
 
-- McCormick DP, Lim-Melia E, Saed K et al. Предсказание бактериальной или вирусной этиологии ОСО. Pediatr Infect Dis J 2000; 19:256.
+# 35. McCormick DP, Lim-Melia E, Saed K et al. Предсказание бактериальной или вирусной этиологии ОСО. Pediatr Infect Dis J 2000; 19:256.
 
-- Kaleida PH, Casselbrant ML, Rockette HE et al. Амоксициллин или миринготомия при ОСО. Pediatrics 1991; 87:466.
+# 36. Kaleida PH, Casselbrant ML, Rockette HE et al. Амоксициллин или миринготомия при ОСО. Pediatrics 1991; 87:466.
 
 37. Rovers MM, Glasziou P, Appelman CL et al. Факторы, предсказывающие боль/лихорадку при ОСО без начальных антибиотиков: метаанализ. Pediatrics 2007; 119:579.
 
-- Ruohola A, Laine MK, Tähtinen PA. Влияние антимикробной терапии на разрешение выпота при ОСО. JPIDS 2018; 7:64.
+# 38. Ruohola A, Laine MK, Tähtinen PA. Влияние антимикробной терапии на разрешение выпота при ОСО. JPIDS 2018; 7:64.
 
 39. Rosenfeld RM, Vertrees JE, Carr J et al. Клиническая эффективность антимикробных препаратов при ОСО: метаанализ 5400 детей. J Pediatr 1994; 124:355.
 
-- Coker TR, Chan LS, Newberry SJ et al. Диагностика, эпидемиология и лечение ОСО у детей. JAMA 2010; 304:2161.
+# 40. Coker TR, Chan LS, Newberry SJ et al. Диагностика, эпидемиология и лечение ОСО у детей. JAMA 2010; 304:2161.
 
-- Shekelle PG, Takata G, Newberry SJ et al. Лечение ОСО: обновление. Evid Rep Technol Assess 2010; :1.
+# 41. Shekelle PG, Takata G, Newberry SJ et al. Лечение ОСО: обновление. Evid Rep Technol Assess 2010; :1.
 
-- Mas-Dalmau G et al. Отсроченные антибиотики у детей с респираторными инфекциями: РКИ. Pediatrics 2021; 147.
+# 42. Mas-Dalmau G et al. Отсроченные антибиотики у детей с респираторными инфекциями: РКИ. Pediatrics 2021; 147.
 
-- Dowell SF, Butler JC, Giebink GS et al. ОСО: лечение в эпоху резистентности пневмококков. Pediatr Infect Dis J 1999; 18:1.
+# 43. Dowell SF, Butler JC, Giebink GS et al. ОСО: лечение в эпоху резистентности пневмококков. Pediatr Infect Dis J 1999; 18:1.
 
-- Sheikh N, Dando EE, Dunleavy ML et al. Экономическая эффективность 5 стратегий лечения ОСО у детей. J Pediatr 2017; 189:54.
+# 44. Sheikh N, Dando EE, Dunleavy ML et al. Экономическая эффективность 5 стратегий лечения ОСО у детей. J Pediatr 2017; 189:54.
 
-- Frost HM, Gerber JS, Hersh AL. Рекомендации по антибиотикам при ОСО и бактериальном синусите. Pediatr Infect Dis J 2019; 38:217.
+# 45. Frost HM, Gerber JS, Hersh AL. Рекомендации по антибиотикам при ОСО и бактериальном синусите. Pediatr Infect Dis J 2019; 38:217.
 
-- Kaur R, Morris M, Picicchero ME. Эпидемиология ОСО после вакцинации против пневмококка. Pediatrics 2017; 140.
+# 46. Kaur R, Morris M, Picicchero ME. Эпидемиология ОСО после вакцинации против пневмококка. Pediatrics 2017; 140.
 
-- Kaur R, Fuji N, Picicchero ME. Динамика отопатогенов после PCV13 в 2015–2019 гг. Eur J Clin Microbiol Infect Dis 2022; 41:37.
+# 47. Kaur R, Fuji N, Picicchero ME. Динамика отопатогенов после PCV13 в 2015–2019 гг. Eur J Clin Microbiol Infect Dis 2022; 41:37.
 
-- Picicchero ME. Смена антибиотика при среднем отите. J Pediatr 2020; 222:253.
+# 48. Picicchero ME. Смена антибиотика при среднем отите. J Pediatr 2020; 222:253.
 
-- Frost HM, Bizune D, Gerber JS et al. Амоксициллин vs другие антибиотики при ОСО у детей. J Pediatr 2022; 251:98.
+# 49. Frost HM, Bizune D, Gerber JS et al. Амоксициллин vs другие антибиотики при ОСО у детей. J Pediatr 2022; 251:98.
 
-- Wald ER, DeMuri GP. Рекомендации по антибиотикам при ОСО и бактериальном синусите. Pediatr Infect Dis J 2018; 37:1255.
+# 50. Wald ER, DeMuri GP. Рекомендации по антибиотикам при ОСО и бактериальном синусите. Pediatr Infect Dis J 2018; 37:1255.
 
-- Tanavivatchanich S et al. Амоксициллин 1–2 раза в день с/без клавуланата vs 3 раза в день при ОСО. Cochrane Database Syst Rev 2013; :CD004975.
+# 51. Tanavivatchanich S et al. Амоксициллин 1–2 раза в день с/без клавуланата vs 3 раза в день при ОСО. Cochrane Database Syst Rev 2013; :CD004975.
 
-- Dagan R. ФК/ФД принципы прогнозирования исхода при ОСО. Int J Antimicrob Agents 2007; 30 Suppl 2:S127.
+# 52. Dagan R. ФК/ФД принципы прогнозирования исхода при ОСО. Int J Antimicrob Agents 2007; 30 Suppl 2:S127.
 
-- Seikel K, Shelton S, McCracken GH Jr. Концентрации амоксициллина в среднем ухе при высоких дозах. Pediatr Infect Dis J 1997; 16:710.
+# 53. Seikel K, Shelton S, McCracken GH Jr. Концентрации амоксициллина в среднем ухе при высоких дозах. Pediatr Infect Dis J 1997; 16:710.
 
-- Weinstein MP, Klugman KP, Jones RN. Пороговые значения чувствительности к пенициллину. Clin Infect Dis 2009; 48:1596.
+# 54. Weinstein MP, Klugman KP, Jones RN. Пороговые значения чувствительности к пенициллину. Clin Infect Dis 2009; 48:1596.
 
-- NCCLS. Стандарты определения чувствительности к антимикробным препаратам. M100-S10, 2000.
+# 55. NCCLS. Стандарты определения чувствительности к антимикробным препаратам. M100-S10, 2000.
 
-- Jacobs MR et al. Чувствительность S. pneumoniae и H. influenzae к 10 пероральным препаратам. Antimicrob Agents Chemother 1999; 43:1901.
+# 56. Jacobs MR et al. Чувствительность S. pneumoniae и H. influenzae к 10 пероральным препаратам. Antimicrob Agents Chemother 1999; 43:1901.
 
-- Lee GM, Kleinman K, Pelton S et al. Иммунизация, антибиотики и колонизация пневмококком за 15 лет. Pediatrics 2017; 140.
+# 57. Lee GM, Kleinman K, Pelton S et al. Иммунизация, антибиотики и колонизация пневмококком за 15 лет. Pediatrics 2017; 140.
 
-- Tristram S, Jacobs MR, Appelbaum PC. Антимикробная резистентность H. influenzae. Clin Microbiol Rev 2007; 20:368.
+# 58. Tristram S, Jacobs MR, Appelbaum PC. Антимикробная резистентность H. influenzae. Clin Microbiol Rev 2007; 20:368.
 
-- Yamada S et al. Устойчивый к ампициллину H. influenzae с множественной резистентностью. J Infect Public Health 2020; 13:497.
+# 59. Yamada S et al. Устойчивый к ампициллину H. influenzae с множественной резистентностью. J Infect Public Health 2020; 13:497.
 
-- Wald ER, Mason EO Jr, Bradley JS et al. ОСО, вызванный S. pneumoniae, в детских больницах 1994–1997. Pediatr Infect Dis J 2001; 20:34.
+# 60. Wald ER, Mason EO Jr, Bradley JS et al. ОСО, вызванный S. pneumoniae, в детских больницах 1994–1997. Pediatr Infect Dis J 2001; 20:34.
 
-- Kellner JD, Ford-Jones EL. Носительство S. pneumoniae у детей в 59 канадских детских садах. Arch Pediatr Adolesc Med 1999; 153:495.
+# 61. Kellner JD, Ford-Jones EL. Носительство S. pneumoniae у детей в 59 канадских детских садах. Arch Pediatr Adolesc Med 1999; 153:495.
 
-- Chang A, Perera R, Bruggemann AB et al. Влияние антибиотиков на резистентность у детей в ПМСП. BMJ 2007; 335:429.
+# 62. Chang A, Perera R, Bruggemann AB et al. Влияние антибиотиков на резистентность у детей в ПМСП. BMJ 2007; 335:429.
 
-- Vro PK, Lee GM, Finkelstein JA et al. Носительство пневмококков и резистентность до PCV13. Pediatr Infect Dis J 2012; 31:249.
+# 63. Vro PK, Lee GM, Finkelstein JA et al. Носительство пневмококков и резистентность до PCV13. Pediatr Infect Dis J 2012; 31:249.
 
-- Hoberman A, Paradise JL, Rockette HE et al. Сокращённый курс антибиотиков при ОСО у маленьких детей. N Engl J Med 2016; 375:2446.
+# 64. Hoberman A, Paradise JL, Rockette HE et al. Сокращённый курс антибиотиков при ОСО у маленьких детей. N Engl J Med 2016; 375:2446.
 
-- Hendricske VA, Kusmec H, Shelton S, Nelson JD. Пяти- и десятидневная терапия ОСО. Pediatr Infect Dis J 1988; 7:14.
+# 65. Hendricske VA, Kusmec H, Shelton S, Nelson JD. Пяти- и десятидневная терапия ОСО. Pediatr Infect Dis J 1988; 7:14.
 
-- Kozyrskyj A, Klassen TP, Moffatt M, Harvey K. Краткосрочный курс антибиотиков при ОСО. Cochrane Database Syst Rev 2010; :CD001095.
+# 66. Kozyrskyj A, Klassen TP, Moffatt M, Harvey K. Краткосрочный курс антибиотиков при ОСО. Cochrane Database Syst Rev 2010; :CD001095.
 
-- Frost HM, Lu Y, Keith A et al. Увеличение продолжительности антибиотикотерапии при ОСО. J Pediatr 2022; 240:221.
+# 67. Frost HM, Lu Y, Keith A et al. Увеличение продолжительности антибиотикотерапии при ОСО. J Pediatr 2022; 240:221.
 
-- Vyles D, Adams J, Chiu A et al. Аллергологическое тестирование у детей с симптомами аллергии на пенициллин низкого риска. Pediatrics 2017; 140.
+# 68. Vyles D, Adams J, Chiu A et al. Аллергологическое тестирование у детей с симптомами аллергии на пенициллин низкого риска. Pediatrics 2017; 140.
 
-- Объединённая целевая группа. Лекарственная аллергия: обновлённые рекомендации. Ann Allergy Asthma Immunol 2010; 105:259.
+# 69. Объединённая целевая группа. Лекарственная аллергия: обновлённые рекомендации. Ann Allergy Asthma Immunol 2010; 105:259.
 
-- Jacobs MR. Прогнозирование бактериальной эрадикации. Int J Infect Dis 2003; 7 Suppl 1:S13.
+# 70. Jacobs MR. Прогнозирование бактериальной эрадикации. Int J Infect Dis 2003; 7 Suppl 1:S13.
 
-- Klein JO. Обзор консенсусных отчётов по лечению ОСО. Pediatr Infect Dis J 1999; 18:1152.
+# 71. Klein JO. Обзор консенсусных отчётов по лечению ОСО. Pediatr Infect Dis J 1999; 18:1152.
 
-- Critchley IA et al. Распространённость S. pneumoniae серотипа 19A в США 2005–2006. Antimicrob Agents Chemother 2008; 52:2639.
+# 72. Critchley IA et al. Распространённость S. pneumoniae серотипа 19A в США 2005–2006. Antimicrob Agents Chemother 2008; 52:2639.
 
-- Jacobs MR. Устойчивый S. pneumoniae: тенденции и лечение. Expert Rev Anti Infect Ther 2008; 6:619.
+# 73. Jacobs MR. Устойчивый S. pneumoniae: тенденции и лечение. Expert Rev Anti Infect Ther 2008; 6:619.
 
-- Американская академия педиатрии. Таблицы дозировок антибиотиков. Красная книга 2021–2024. AAP 2021, с. 876.
+# 74. Американская академия педиатрии. Таблицы дозировок антибиотиков. Красная книга 2021–2024. AAP 2021, с. 876.
 
-- Leibovitz E, Greenberg D, Piglansky L et al. Рецидивирующий ОСО в течение месяца после антибиотиков. Pediatr Infect Dis J 2003; 22:209.
+# 75. Leibovitz E, Greenberg D, Piglansky L et al. Рецидивирующий ОСО в течение месяца после антибиотиков. Pediatr Infect Dis J 2003; 22:209.
 
-- Arguedas A, Dagan R, Picicchero M et al. Левофлоксацин при рецидивирующем ОСО у детей. Pediatr Infect Dis J 2006; 25:1102.
+# 76. Arguedas A, Dagan R, Picicchero M et al. Левофлоксацин при рецидивирующем ОСО у детей. Pediatr Infect Dis J 2006; 25:1102.
 
 77. Rosenfeld RM, Tunkel DE, Schwartz SR et al. Рекомендации по тимпаностомическим трубкам у детей (обновление). Otolaryngol Head Neck Surg 2022; 166:S1.
 
@@ -935,36 +978,36 @@ status: "published"
 
 79. Imöhl M, Pernicaro S, Busse A, van der Linden M. Бактериальный спектр при спонтанной перфорации барабанной перепонки. Front Med (Lausanne) 2021; 8:675225.
 
-- Bluestone CD. Клиническое течение, осложнения и последствия ОСО. Pediatr Infect Dis J 2000; 19:S37.
+# 80. Bluestone CD. Клиническое течение, осложнения и последствия ОСО. Pediatr Infect Dis J 2000; 19:S37.
 
-- Bluestone CD. Эпидемиология и патогенез ХГСО. Int J Pediatr Otorhinolaryngol 1998; 42:207.
+# 81. Bluestone CD. Эпидемиология и патогенез ХГСО. Int J Pediatr Otorhinolaryngol 1998; 42:207.
 
-- McLaren SH, Cruz AT, Yen K et al. Инвазивные бактериальные инфекции у беслихорадочных младенцев с ОСО. Pediatrics 2021; 147.
+# 82. McLaren SH, Cruz AT, Yen K et al. Инвазивные бактериальные инфекции у беслихорадочных младенцев с ОСО. Pediatrics 2021; 147.
 
-- Hullegyi S, Venekamp RP et al. Распространённость и резистентность бактерий при ОСО с выделениями. Pediatr Infect Dis J 2021; 40:756.
+# 83. Hullegyi S, Venekamp RP et al. Распространённость и резистентность бактерий при ОСО с выделениями. Pediatr Infect Dis J 2021; 40:756.
 
-- Picicchero ME, Casey JR. Мультирезистентный серотип 19A S. pneumoniae как отопатоген у детей. JAMA 2007; 298:1772.
+# 84. Picicchero ME, Casey JR. Мультирезистентный серотип 19A S. pneumoniae как отопатоген у детей. JAMA 2007; 298:1772.
 
-- Cilveti R et al. Эпидемиология ОСО со спонтанной перфорацией у детей (исследование HERMES). PLoS One 2017; 12:e0170316.
+# 85. Cilveti R et al. Эпидемиология ОСО со спонтанной перфорацией у детей (исследование HERMES). PLoS One 2017; 12:e0170316.
 
-- Sonsuwan N et al. Основные возбудители ОСО с перфорацией. Int J Pediatr Otorhinolaryngol 2016; 90:20.
+# 86. Sonsuwan N et al. Основные возбудители ОСО с перфорацией. Int J Pediatr Otorhinolaryngol 2016; 90:20.
 
-- Marchisio P, Esposito S, Picca M et al. Этиология ОСО со спонтанной перфорацией. Clin Microbiol Infect 2017; 23:486.e1.
+# 87. Marchisio P, Esposito S, Picca M et al. Этиология ОСО со спонтанной перфорацией. Clin Microbiol Infect 2017; 23:486.e1.
 
-- Al-Shawwa BA, Wegner D. ТМП-СМХ + местные антибиотики при ОСО с CA-MRSA. Arch Otolaryngol Head Neck Surg 2005; 131:782.
+# 88. Al-Shawwa BA, Wegner D. ТМП-СМХ + местные антибиотики при ОСО с CA-MRSA. Arch Otolaryngol Head Neck Surg 2005; 131:782.
 
-- Santos F, Mancarius LA, Ivey RD. MRSA: детский отит. Arch Otolaryngol Head Neck Surg 2000; 126:1383.
+# 89. Santos F, Mancarius LA, Ivey RD. MRSA: детский отит. Arch Otolaryngol Head Neck Surg 2000; 126:1383.
 
-- Leibovitz E, Piglansky L, Raiz S et al. Однодневное vs трёхдневное введение цефтриаксона при ОСО. Pediatr Infect Dis J 2000; 19:1040.
+# 90. Leibovitz E, Piglansky L, Raiz S et al. Однодневное vs трёхдневное введение цефтриаксона при ОСО. Pediatr Infect Dis J 2000; 19:1040.
 
 91. Harrison CJ, Woods C, Stout G et al. Чувствительность H. influenzae, S. pneumoniae, M. catarrhalis 2005–2007. J Antimicrob Chemother 2009; 63:511.
 
 92. Sader HS, Mendes RE, Le J et al. Чувствительность S. pneumoniae в Северной Америке, Европе, Латинской Америке, АТР (SENTRY, 1997–2016). Open Forum Infect Dis 2019; 6:S14.
 
-- Sheikh N, Hoberman A, Kearney DH, Yellon R. Тимпаноцентез у детей с ОСО. N Engl J Med 2011; 364:e4.
+# 93. Sheikh N, Hoberman A, Kearney DH, Yellon R. Тимпаноцентез у детей с ОСО. N Engl J Med 2011; 364:e4.
 
-- Uitti JM, Tähtinen PA, Laine MK, Ruohola A. Наблюдение за детьми с ОСО без начальных антибиотиков. JAMA Pediatr 2016; 170:1107.
+# 94. Uitti JM, Tähtinen PA, Laine MK, Ruohola A. Наблюдение за детьми с ОСО без начальных антибиотиков. JAMA Pediatr 2016; 170:1107.
 
-- Bluestone CD, Klein JO. Лечение. В: Средний отит у младенцев и детей, 4-е изд. BC Decker, Гамильтон, 2007; с. 213.
+# 95. Bluestone CD, Klein JO. Лечение. В: Средний отит у младенцев и детей, 4-е изд. BC Decker, Гамильтон, 2007; с. 213.
 
 		Стр. **1**

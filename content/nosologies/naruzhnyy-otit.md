@@ -2,6 +2,8 @@
 title: "Наружный отит"
 publishedAt: "2026-05-22"
 status: "published"
+icd: "H60"
+aliases: "наружный отит, ухо пловца, воспаление слухового прохода, otitis externa, боль в ухе наружный, зуд в ухе отит, отит наружного уха, swimmer's ear, воспаление уха снаружи, выделения из уха отит, грибок уха"
 ---
 
 *Otitis Externa · Acute Otitis Externa · «Ухо пловца»*

@@ -3,6 +3,7 @@
 import { useState, useCallback, useRef } from 'react';
 import Link from 'next/link';
 import NosologyContent from '@/app/components/NosologyContent';
+import SideNav, { NavItem } from '@/app/components/SideNav';
 
 type Result = { anchor: string; title: string; snippet: string };
 
@@ -13,16 +14,25 @@ export default function NosologyPage({ title, content, updatedAt }: {
 }) {
   const [search, setSearch] = useState('');
   const [results, setResults] = useState<Result[]>([]);
+  const [navItems, setNavItems] = useState<NavItem[]>([]);
   const openSectionRef = useRef<((anchor: string) => void) | null>(null);
 
   const handleOpenSection = useCallback((fn: (anchor: string) => void) => {
     openSectionRef.current = fn;
   }, []);
 
+  const handleSections = useCallback((s: NavItem[]) => {
+    setNavItems(s);
+  }, []);
+
+  const navigateTo = (anchor: string) => {
+    openSectionRef.current?.(anchor);
+  };
+
   return (
     <main className="min-h-screen bg-gray-50">
       <div className="sticky top-0 z-50 bg-white border-b border-gray-200 shadow-sm">
-        <div className="max-w-4xl mx-auto px-4 py-3 flex items-center gap-3">
+        <div className="max-w-6xl mx-auto px-4 py-3 flex items-center gap-3">
           <Link href="/" className="text-blue-500 text-sm hover:underline whitespace-nowrap">← Все</Link>
           <span className="text-gray-300">|</span>
           <span className="text-sm font-semibold text-gray-900 truncate hidden sm:block">{title}</span>
@@ -62,17 +72,29 @@ export default function NosologyPage({ title, content, updatedAt }: {
           )}
         </div>
       </div>
-      <div className="max-w-4xl mx-auto px-4 py-8">
-        <h1 className="text-3xl font-semibold text-gray-900 mb-8">{title}</h1>
-        <NosologyContent
-          markdown={content}
-          externalSearch={search}
-          onResults={setResults}
-          onOpenSection={handleOpenSection}
-        />
-        <p className="text-xs text-gray-400 text-right mt-8">
-          Обновлено: {new Date(updatedAt).toLocaleDateString('ru-RU')}
-        </p>
+
+      <div className="max-w-6xl mx-auto px-4 py-8">
+        <div className="flex gap-8">
+          {/* Side navigation (desktop only) */}
+          {search === '' && (
+            <SideNav items={navItems} onNavigate={navigateTo} />
+          )}
+
+          {/* Main content */}
+          <div className="flex-1 min-w-0 max-w-3xl">
+            <h1 className="text-3xl font-semibold text-gray-900 mb-8">{title}</h1>
+            <NosologyContent
+              markdown={content}
+              externalSearch={search}
+              onResults={setResults}
+              onOpenSection={handleOpenSection}
+              onSections={handleSections}
+            />
+            <p className="text-xs text-gray-400 text-right mt-8">
+              Обновлено: {new Date(updatedAt).toLocaleDateString('ru-RU')}
+            </p>
+          </div>
+        </div>
       </div>
     </main>
   );

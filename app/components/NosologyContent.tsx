@@ -112,8 +112,6 @@ function scrollToAnchor(id: string) {
   window.scrollTo({ top, behavior: 'smooth' });
 }
 
-
-
 function SubSectionBlock({
   sub,
   forceOpen = false,
@@ -154,11 +152,13 @@ export default function NosologyContent({
   externalSearch = '',
   onResults,
   onOpenSection,
+  onSections,
 }: {
   markdown: string;
   externalSearch?: string;
   onResults?: (r: { anchor: string; title: string; snippet: string }[]) => void;
   onOpenSection?: (fn: (anchor: string) => void) => void;
+  onSections?: (s: { title: string; anchor: string }[]) => void;
 }) {
   const sections = parseSections(markdown);
   const namedSections = sections.filter(s => s.title);
@@ -168,6 +168,14 @@ export default function NosologyContent({
   const [openSubs, setOpenSubs] = useState<Record<string, boolean>>({});
   const [tocOpen, setTocOpen] = useState(false);
   const search = externalSearch;
+
+  // Send section list up for side navigation
+  useEffect(() => {
+    if (onSections) {
+      onSections(namedSections.map(s => ({ title: s.title, anchor: s.anchor })));
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [markdown]);
 
   useEffect(() => {
     const hash = window.location.hash.replace('#', '');
@@ -182,9 +190,7 @@ export default function NosologyContent({
   useEffect(() => {
     if (onOpenSection) {
       onOpenSection((anchor: string) => {
-        // anchor could be a section or subsection
         setOpen(prev => ({ ...prev, [anchor]: true }));
-        // also open parent section if it's a subsection
         namedSections.forEach(s => {
           s.subsections.forEach(sub => {
             if (sub.anchor === anchor) {
@@ -209,7 +215,6 @@ export default function NosologyContent({
     namedSections.forEach(s => {
       const sectionAllText = s.content + ' ' + s.subsections.map(sub => sub.title + ' ' + sub.content).join(' ');
       if (s.title.toLowerCase().includes(q) || sectionAllText.toLowerCase().includes(q)) {
-        // Check if match is in a subsection
         let matchAnchor = s.anchor;
         let matchTitle = s.title;
         let matchSnippet = '';
@@ -255,7 +260,7 @@ export default function NosologyContent({
       )}
 
       {search === '' && (
-        <div className="bg-gray-50 border border-gray-200 rounded-xl mb-8 overflow-hidden">
+        <div className="bg-gray-50 border border-gray-200 rounded-xl mb-8 overflow-hidden lg:hidden">
           <button
             onClick={() => setTocOpen(prev => !prev)}
             className="w-full flex items-center justify-between px-4 py-3 hover:bg-gray-100 transition-colors"
@@ -318,7 +323,7 @@ export default function NosologyContent({
 
       <div className="flex flex-col gap-3">
         {namedSections.map(s => (
-          <div key={s.anchor} id={s.anchor} className="border border-gray-200 rounded-xl overflow-hidden">
+          <div key={s.anchor} id={s.anchor} className="border border-gray-200 rounded-xl overflow-hidden scroll-mt-24">
             <button
               onClick={() => setOpen(prev => ({ ...prev, [s.anchor]: !prev[s.anchor] }))}
               className="w-full flex items-center justify-between px-6 py-4 text-left hover:bg-gray-50 transition-colors"
