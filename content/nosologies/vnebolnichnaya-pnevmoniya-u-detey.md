@@ -586,3 +586,81 @@ aliases: "пневмония, воспаление лёгких, ВП, пнев�
 - Боковая рентгенограмма как обязательный стандарт — ценность дополнительной информации сверх фронтальной не доказана у большинства
 - Рутинное применение макролидов при возрасте < 5 лет как первой линии — нецелесообразно (S. pneumoniae — основной патоген; макролиды не покрывают его надёжно)
 - ТМП-СМХ (триметоприм-сульфаметоксазол, Ко-тримоксазол), линкозамиды как первая линия при ВП без особых показаний — не рекомендуются
+
+# 12. Источники
+
+- Bradley JS, Byington CL, Shah SS, et al. The management of community-acquired pneumonia in infants and children older than 3 months: clinical practice guidelines by PIDS and IDSA. Clin Infect Dis 2011; 53:e25.
+- Shah SS, Spirman P. Acute pneumonia and its complications. In: Principles and Practice of Pediatric Infectious Diseases, 6th ed. Elsevier, 2022. p. 243.
+- Fiore AE, Shay DK, Broder K, et al. Prevention and control of seasonal influenza with vaccines: ACIP recommendations, 2009. MMWR Recomm Rep 2009; 58:1.
+- Griffin MR, Mitchell E, Moore MR, et al. Declines in pneumonia hospitalizations of children aged <2 years associated with pneumococcal conjugate vaccines — Tennessee, 1998–2012. MMWR Morb Mortal Wkly Rep 2014; 63:995.
+- McAllister DA, Liu L, Shi T, et al. Global, regional, and national estimates of pneumonia morbidity and mortality in children aged <5 years: a systematic analysis. Lancet Glob Health 2019; 7:e47.
+- GBD 2015 Child Mortality Collaborators. Global, regional, national, and selected subnational levels of stillbirths, neonatal, infant, and under-5 mortality, 1980–2015. JAMA Pediatr 2017; 171:573.
+- Jain S, Williams DJ, Arnold SR, et al. Community-acquired pneumonia requiring hospitalization among US children. N Engl J Med 2015; 372:835.
+- Moriyama M, Hugentobler WJ, Iwasaki A. Seasonality of respiratory viral infections. Annu Rev Virol 2020; 7:83.
+- Glezen P, Denny FW. Epidemiology of acute lower respiratory disease in children. N Engl J Med 1973; 288:498.
+- Jokinen C, Heiskanen L, Juvonen H, et al. Incidence of community-acquired pneumonia in the population of four municipalities in eastern Finland. Am J Epidemiol 1993; 137:977.
+- Pelton SI, Hammerschlag MR. Overcoming current obstacles in the management of bacterial community-acquired pneumonia in ambulatory children. Clin Pediatr (Phila) 2005; 44:1.
+- Madhi SA, Klugman KP, Vaccine Trialist Group. A role for Streptococcus pneumoniae in virus-associated pneumonia. Nat Med 2004; 10:811.
+- Margolis P, Gadomski A. The rational clinical examination. Does this infant have pneumonia? JAMA 1998; 279:308.
+- Kaplan SL, Mason EO Jr, Wald ER, et al. Decrease of invasive pneumococcal infections in children among 8 children's hospitals in the United States after the introduction of the 7-valent pneumococcal conjugate vaccine. Pediatrics 2004; 113:443.
+- Schwartz KL, Nourse C. Panton-Valentine leukocidin-associated Staphylococcus aureus necrotizing pneumonia in infants. Eur J Pediatr 2012; 171:711.
+- Hageman JC, Uyeki TM, Francis JS, et al. Severe community-acquired pneumonia due to Staphylococcus aureus, 2003–04 influenza season. Emerg Infect Dis 2006; 12:894.
+- De Ceulaer C, McMullen KW, Maude GH, et al. Pneumonia in young children with homozygous sickle cell disease. Eur J Pediatr 1985; 144:255.
+- Anderson A, Bijlmer H, Fournier PE, et al. Diagnosis and management of Q fever — United States, 2013: recommendations from CDC and the Q Fever Working Group. MMWR Recomm Rep 2013; 62:1.
+- Harris M, Clark J, Coote N, et al. BTS guidelines for the management of CAP in children: update 2011. Thorax 2011; 66 Suppl 2:ii1.
+- St. Peter SD, Ampofah K, Brogan T, et al. PIDS/IDSA 2026 Guideline Update on Management of CAP in Infants and Children Older Than 3 Months. Clin Infect Dis 2026.
+- Shah SN, Bachur RG, Simel DL, Neuman MI. Does this child have pneumonia? The rational clinical examination systematic review. JAMA 2017; 318:462.
+- Murphy SG, van de Pol AC, Harper MB, Bachur RG. Clinical predictors of occult pneumonia in the febrile child. Acad Emerg Med 2007; 14:243.
+- Bachur R, Perry H, Harper MB. Occult pneumonias: empiric chest radiographs in febrile children with leukocytosis. Ann Emerg Med 1999; 33:166.
+- Wang K, Gill P, Perera R, et al. Clinical symptoms and signs for the diagnosis of Mycoplasma pneumoniae in children with CAP. Cochrane Database Syst Rev 2012; 10:CD009175.
+- McIntosh K. Community-acquired pneumonia in children. N Engl J Med 2002; 346:429.
+- Broughton RA. Infections due to Mycoplasma pneumoniae in childhood. Pediatr Infect Dis 1986; 5:71.
+- Diaz MH, Hersh AL, Olson J, et al. Mycoplasma pneumoniae infections in hospitalized US children, 2018–2024. MMWR Morb Mortal Wkly Rep 2025; 74:394.
+- Turner RB, Lande AE, Chase P, et al. Pneumonia in pediatric outpatients: cause and clinical manifestations. J Pediatr 1987; 111:194.
+- Walliham R, Barson WJ. Empyema and lung abscess. In: Textbook of Pediatric Infectious Diseases, 9th ed. Elsevier, 2025. p. 220.
+- Lemaitre C, Angoulvant F, Gabor F, et al. Necrotizing pneumonia in children: report of 41 cases. Pediatr Infect Dis J 2013; 32:1146.
+- de Benedictis FM, Kerem E, Chang AB, et al. Complicated pneumonia in children. Lancet 2020; 396:786.
+- Singhi S, Dhawan A. Frequency and significance of electrolyte abnormalities in pneumonia. Indian Pediatr 1992; 29:735.
+- Don M, Valerio G, Korppi M, Canciani M. Hyponatremia in community-acquired pneumonia. Pediatr Nephrol 2008; 23:2247.
+- Lynch T, Platt R, Gouin S, et al. Can we predict which children with clinically suspected pneumonia will have focal infiltrates on chest radiographs? Pediatrics 2004; 113:e186.
+- Florin TA, Ambroggio L, Brokamp C, et al. Reliability of examination findings in suspected community-acquired pneumonia. Pediatrics 2017; 140.
+- Nascimento-Carvalho AC, et al. Wheezing is an independent predictor of viral infection in children with CAP. Pediatr Pulmonol 2019; 54:1022.
+- Swingler GH, Hussey GD, Zwarenstein M. RCT of clinical outcome after chest radiograph in ambulatory acute lower-respiratory infection in children. Lancet 1998; 351:404.
+- Cao AM, Choy JP, Mohanakrishnan LN, et al. Chest radiographs for acute lower respiratory tract infections. Cochrane Database Syst Rev 2013; :CD009119.
+- Kim YW, Donnelly LF. Round pneumonia: imaging findings in a large series of children. Pediatr Radiol 2007; 37:1235.
+- Lipsett SC, Monuteaux MC, Bachur RG, et al. Negative chest radiography and risk of pneumonia. Pediatrics 2018; 142.
+- Pereda MA, Chavez MA, Hooper-Miele CC, et al. Lung ultrasound for the diagnosis of pneumonia in children: a meta-analysis. Pediatrics 2015; 135:714.
+- Tsou PY, Chen KP, Wang YH, et al. Diagnostic accuracy of lung ultrasound performed by novice versus experienced sonographers for pneumonia. Acad Emerg Med 2019; 26:1074.
+- Myers AL, Hall M, Williams DJ, et al. Prevalence of bacteremia in hospitalized pediatric patients with CAP. Pediatr Infect Dis J 2013; 32:736.
+- Neuman MI, Hall M, Lipsett SC, et al. Utility of blood culture among children hospitalized with CAP. Pediatrics 2017; 140.
+- Fritz CQ, Edwards KM, Self WH, et al. Prevalence, risk factors, and outcomes of bacteremic pneumonia in children. Pediatrics 2019; 144.
+- Gunaratnam LC, Robinson JL, Hawkes MT. Systematic review and meta-analysis of diagnostic biomarkers for pediatric pneumonia. J Pediatric Infect Dis Soc 2021; 10:891.
+- WHO. Revised WHO classification and treatment of childhood pneumonia at health facilities (2014). https://www.who.int/publications/i/item/9789241507813
+- Deen P, Florin TA. Factors associated with pneumonia severity in children: a systematic review. J Pediatric Infect Dis Soc 2018; 7:323.
+- Russell G. Community-acquired pneumonia. Arch Dis Child 2001; 85:445.
+- Katz SE, Williams DJ. Pediatric community-acquired pneumonia in the United States. Infect Dis Clin North Am 2018; 32:47.
+- Chang CC, Cheng AC, Chang AB. Over-the-counter (OTC) medications to reduce cough as adjunct to antibiotics for acute pneumonia. Cochrane Database Syst Rev 2014; :CD006088.
+- Harris JA, Kolokathis A, Campbell M, et al. Safety and efficacy of azithromycin in the treatment of CAP in children. Pediatr Infect Dis J 1998; 17:865.
+- NCIRD. Mycoplasma pneumoniae infections have been increasing. https://www.cdc.gov/ncird/ (дата обращения: 31 октября 2024 г.)
+- Leber AL, Embrey T, Everhart K, et al. Macrolide-resistant Mycoplasma pneumoniae infections among children after the COVID-19 pandemic, Ohio, USA. Emerg Infect Dis 2025; 31:555.
+- Kaur R, Pham M, Yu KOA, Pichero ME. Rising pneumococcal antibiotic resistance in the post-13-valent pneumococcal conjugate vaccine era. Clin Infect Dis 2021; 72:797.
+- Bielicki JA, Stöhr W, Barratt S, et al. Effect of amoxicillin dose and treatment duration on the need for antibiotic re-treatment in children with CAP: the CAP-IT randomized clinical trial. JAMA 2021; 326:1713.
+- Pöyschän O, Menary A, et al. Increased macrolide resistance of M. pneumoniae in France directly detected in clinical specimens. J Antimicrob Chemother 2009; 64:52.
+- Averbuch D, Hidalgo-Grass C, Moses AE, et al. Macrolide resistance in Mycoplasma pneumoniae, Israel, 2010. Emerg Infect Dis 2011; 17:1079.
+- Kim K, Jeon S, Kim M, et al. Global trends in the proportion of M. pneumoniae infections resistant to macrolides. JAMA Netw Open 2022; 5:e2220949.
+- Shenoy ES, Macy E, Rowe T, Blumenthal KG. Evaluation and management of penicillin allergy: a review. JAMA 2019; 321:188.
+- Baskin MN, O'Rourke EJ, Fleisher GR. Outpatient treatment of febrile infants 28–89 days of age with intramuscular ceftriaxone. J Pediatr 1992; 120:22.
+- Bradley JS, Arguedas A, Blumer JL, et al. Comparative study of levofloxacin in the treatment of children with CAP. Pediatr Infect Dis J 2007; 26:868.
+- Todd SR, Dahlgren FS, Traeger MS, et al. No visible dental staining in children treated with doxycycline for suspected Rocky Mountain spotted fever. J Pediatr 2015; 166:1246.
+- Pöyhönen H, Nurmi M, Peltola V, et al. Dental staining after doxycycline use in children. J Antimicrob Chemother 2017; 72:2887.
+- Pernica JM, Harman S, Kam AJ, et al. Short-course antimicrobial therapy for paediatric CAP: the SAFER randomised clinical trial. JAMA Pediatr 2021; 175:475.
+- Greenberg D, Givon-Lavi N, Sadaka Y, et al. Short-course antibiotic treatment for community-acquired alveolar pneumonia in ambulatory children. Pediatr Infect Dis J 2014; 33:136.
+- Williams DJ, Creech CB, Walter EB, et al. Short- vs standard-course outpatient antibiotic therapy for CAP in children: the SCOUT-CAP randomized clinical trial. JAMA Pediatr 2022; 176:253.
+- Kuitunen I, Jääskeläinen J, Korppi M, Renko M. Duration of antibiotic therapy in CAP in outpatient children in high-income countries: meta-analysis. Clin Infect Dis 2023; 76:e1123.
+- Lee C, Zhou C, Flores ID, et al. Short- vs long-course antibiotic therapy in children with mild CAP: a systematic review and meta-analysis. JAMA Pediatr 2022; 176:1199.
+- McCrossan P, McNaughton B, Shields M, Thompson A. Is repeat chest X-ray required in children with round pneumonia? Arch Dis Child 2017; 102:1182.
+- Gaston B. Pneumonia. Pediatr Rev 2002; 23:132.
+- Grossman LK, Wald ER, Nair P, Papiez J. Roentgenographic follow-up of acute pneumonia in children. Pediatrics 1979; 63:30.
+- Clark JE, Coote JM, Silver DA, Halpin DM. Asthma after childhood pneumonia: six year follow up study. BMJ 2000; 320:1514.
+- Hyde TB, Gay K, Stephens DS, et al. Macrolide resistance among invasive Streptococcus pneumoniae isolates. JAMA 2001; 286:1857.
+- Nour I, Mahgoub M, Sherif SM, Rabe AM. Non-infectious diseases mimicking community-acquired pneumonia. Respir Med 2004; 98:488.
