@@ -280,11 +280,324 @@ function CentorCalculator() {
   );
 }
 
+const bsaMosteller = (h: number, w: number) => Math.sqrt((h * w) / 3600);
+const BSA_ROWS = [
+  ['< 0,5', 'Новорождённые, груднички'],
+  ['0,5–1,0', 'Дети раннего возраста'],
+  ['1,0–1,5', 'Дети школьного возраста, подростки'],
+  ['1,5–1,8', 'Взрослые среднего телосложения'],
+  ['1,8–2,2', 'Взрослые крупного телосложения'],
+  ['> 2,2', 'Крупное телосложение / ожирение'],
+];
+function bsaIndex(b: number) { if (b < 0.5) return 0; if (b < 1.0) return 1; if (b < 1.5) return 2; if (b < 1.8) return 3; if (b < 2.2) return 4; return 5; }
+
+function BSACalculator() {
+  const [height, setHeight] = useState('');
+  const [weight, setWeight] = useState('');
+  const calc = useMemo(() => {
+    const h = parseFloat(height), w = parseFloat(weight);
+    if (!h || !w) return null;
+    return { duBois: bsaDuBois(h, w), mosteller: bsaMosteller(h, w) };
+  }, [height, weight]);
+  return (
+    <div>
+      <div className="grid sm:grid-cols-2 gap-4">
+        <Field label="Рост" hint="см"><NumberInput value={height} onChange={setHeight} placeholder="170" unit="см" min={0} /></Field>
+        <Field label="Масса тела" hint="кг"><NumberInput value={weight} onChange={setWeight} placeholder="70" unit="кг" min={0} /></Field>
+      </div>
+      {calc ? (
+        <>
+          <div className="grid sm:grid-cols-2 gap-4 mt-5">
+            <ResultCard label="ППТ (Дюбуа)" value={calc.duBois.toFixed(2)} unit="м²" />
+            <ResultCard muted label="ППТ (Мостеллер)" value={calc.mosteller.toFixed(2)} unit="м²" />
+          </div>
+          <RefTable head={['ППТ, м²', 'Типичная группа']} rows={BSA_ROWS} activeIndex={bsaIndex(calc.duBois)} />
+        </>
+      ) : <p className="text-sm text-gray-400 mt-5 pt-4 border-t border-gray-100">Заполните рост и вес для расчёта</p>}
+      <FormulaNote>
+        <p><b>Дюбуа:</b> 0,007184 × рост(см)<sup>0,725</sup> × вес(кг)<sup>0,425</sup>. Du Bois D, Du Bois EF, 1916.</p>
+        <p><b>Мостеллер:</b> √(рост(см) × вес(кг) / 3600). Mosteller RD, N Engl J Med, 1987 — проще, значения близки к формуле Дюбуа.</p>
+      </FormulaNote>
+    </div>
+  );
+}
+
+const NA_SEVERITY_ROWS = [
+  ['< 125', 'Тяжёлая гипонатриемия'],
+  ['125–129', 'Умеренная гипонатриемия'],
+  ['130–134', 'Лёгкая гипонатриемия'],
+  ['135–145', 'Норма'],
+  ['> 145', 'Гипернатриемия'],
+];
+function naSeverityIndex(na: number) { if (na < 125) return 0; if (na < 130) return 1; if (na < 135) return 2; if (na <= 145) return 3; return 4; }
+
+function SodiumDeficitCalculator() {
+  const [sex, setSex] = useState<'m' | 'f'>('m');
+  const [weight, setWeight] = useState('');
+  const [current, setCurrent] = useState('');
+  const [target, setTarget] = useState('135');
+  const calc = useMemo(() => {
+    const w = parseFloat(weight), cur = parseFloat(current), tgt = parseFloat(target);
+    if (!w || !cur || !tgt) return null;
+    const tbw = w * (sex === 'f' ? 0.5 : 0.6);
+    return { deficit: (tgt - cur) * tbw, tbw, current: cur };
+  }, [sex, weight, current, target]);
+  return (
+    <div>
+      <div className="mb-4"><Segmented options={[{ value: 'm', label: 'Мужской' }, { value: 'f', label: 'Женский' }]} value={sex} onChange={setSex} /></div>
+      <div className="grid sm:grid-cols-2 gap-4">
+        <Field label="Масса тела" hint="кг"><NumberInput value={weight} onChange={setWeight} placeholder="70" unit="кг" min={0} /></Field>
+        <Field label="Текущий Na" hint="ммоль/л"><NumberInput value={current} onChange={setCurrent} placeholder="120" unit="ммоль/л" min={0} /></Field>
+        <Field label="Целевой Na" hint="ммоль/л"><NumberInput value={target} onChange={setTarget} placeholder="135" unit="ммоль/л" min={0} /></Field>
+      </div>
+      {calc ? (
+        <>
+          <div className="grid sm:grid-cols-2 gap-4 mt-5">
+            <ResultCard label="Дефицит натрия" value={calc.deficit.toFixed(0)} unit="ммоль" />
+            <ResultCard muted label="Общая вода организма" value={calc.tbw.toFixed(1)} unit="л" />
+          </div>
+          <RefTable head={['Na, ммоль/л', 'Тяжесть']} rows={NA_SEVERITY_ROWS} activeIndex={naSeverityIndex(calc.current)} />
+        </>
+      ) : <p className="text-sm text-gray-400 mt-5 pt-4 border-t border-gray-100">Заполните все поля для расчёта</p>}
+      <FormulaNote>
+        <p>Формула: дефицит Na (ммоль) = (целевой Na − текущий Na) × ОВО, где ОВО = вес(кг) × 0,6 (мужчины) или × 0,5 (женщины).</p>
+        <p>Скорость коррекции гипонатриемии не должна превышать 8–10 ммоль/л за 24 ч — риск осмотического демиелинизирующего синдрома. Adrogué HJ, Madias NE. Hyponatremia. N Engl J Med, 2000.</p>
+      </FormulaNote>
+    </div>
+  );
+}
+
+const K_SEVERITY_ROWS = [
+  ['< 2,5', 'Тяжёлая гипокалиемия'],
+  ['2,5–2,9', 'Умеренная гипокалиемия'],
+  ['3,0–3,5', 'Лёгкая гипокалиемия'],
+  ['3,5–5,0', 'Норма'],
+  ['> 5,0', 'Гиперкалиемия'],
+];
+function kSeverityIndex(k: number) { if (k < 2.5) return 0; if (k < 3.0) return 1; if (k <= 3.5) return 2; if (k <= 5.0) return 3; return 4; }
+
+function PotassiumDeficitCalculator() {
+  const [weight, setWeight] = useState('');
+  const [current, setCurrent] = useState('');
+  const [target, setTarget] = useState('4.0');
+  const calc = useMemo(() => {
+    const w = parseFloat(weight), cur = parseFloat(current), tgt = parseFloat(target);
+    if (!w || !cur || !tgt) return null;
+    return { deficit: (tgt - cur) * w * 0.4, current: cur };
+  }, [weight, current, target]);
+  return (
+    <div>
+      <div className="grid sm:grid-cols-2 gap-4">
+        <Field label="Масса тела" hint="кг"><NumberInput value={weight} onChange={setWeight} placeholder="70" unit="кг" min={0} /></Field>
+        <Field label="Текущий K⁺" hint="ммоль/л"><NumberInput value={current} onChange={setCurrent} placeholder="2.8" unit="ммоль/л" min={0} /></Field>
+        <Field label="Целевой K⁺" hint="ммоль/л"><NumberInput value={target} onChange={setTarget} placeholder="4.0" unit="ммоль/л" min={0} /></Field>
+      </div>
+      {calc ? (
+        <>
+          <div className="mt-5"><ResultCard label="Ориентировочный дефицит калия" value={calc.deficit.toFixed(0)} unit="ммоль" /></div>
+          <RefTable head={['K⁺, ммоль/л', 'Тяжесть']} rows={K_SEVERITY_ROWS} activeIndex={kSeverityIndex(calc.current)} />
+        </>
+      ) : <p className="text-sm text-gray-400 mt-5 pt-4 border-t border-gray-100">Заполните все поля для расчёта</p>}
+      <FormulaNote>
+        <p>Ориентировочная формула: дефицит K⁺ (ммоль) = (целевой K⁺ − текущий K⁺) × вес(кг) × 0,4.</p>
+        <p>Калий преимущественно внутриклеточный ион — расчёт даёт лишь приближённую оценку, фактический дефицит может быть существенно больше. Возмещать дробно, под контролем ЭКГ и уровня калия.</p>
+      </FormulaNote>
+    </div>
+  );
+}
+
+const CA_ROWS_MGDL = [
+  ['< 8,5', 'Гипокальциемия'],
+  ['8,5–10,5', 'Норма'],
+  ['> 10,5', 'Гиперкальциемия'],
+];
+const CA_ROWS_MMOL = [
+  ['< 2,15', 'Гипокальциемия'],
+  ['2,15–2,55', 'Норма'],
+  ['> 2,55', 'Гиперкальциемия'],
+];
+function caIndex(c: number, unit: 'mgdl' | 'mmol') {
+  const lo = unit === 'mgdl' ? 8.5 : 2.15, hi = unit === 'mgdl' ? 10.5 : 2.55;
+  if (c < lo) return 0; if (c <= hi) return 1; return 2;
+}
+
+function CorrectedCalciumCalculator() {
+  const [unit, setUnit] = useState<'mgdl' | 'mmol'>('mmol');
+  const [calcium, setCalcium] = useState('');
+  const [albumin, setAlbumin] = useState('');
+  const calc = useMemo(() => {
+    const ca = parseFloat(calcium), alb = parseFloat(albumin);
+    if (!ca || !alb) return null;
+    return unit === 'mgdl' ? ca + 0.8 * (4.0 - alb) : ca + 0.02 * (40 - alb);
+  }, [unit, calcium, albumin]);
+  return (
+    <div>
+      <div className="mb-4 w-48"><Segmented options={[{ value: 'mmol', label: 'ммоль/л' }, { value: 'mgdl', label: 'мг/дл' }]} value={unit} onChange={setUnit} /></div>
+      <div className="grid sm:grid-cols-2 gap-4">
+        <Field label="Общий кальций" hint={unit === 'mgdl' ? 'мг/дл' : 'ммоль/л'}>
+          <NumberInput value={calcium} onChange={setCalcium} placeholder={unit === 'mgdl' ? '8.0' : '2.0'} unit={unit === 'mgdl' ? 'мг/дл' : 'ммоль/л'} min={0} />
+        </Field>
+        <Field label="Альбумин" hint={unit === 'mgdl' ? 'г/дл' : 'г/л'}>
+          <NumberInput value={albumin} onChange={setAlbumin} placeholder={unit === 'mgdl' ? '2.5' : '25'} unit={unit === 'mgdl' ? 'г/дл' : 'г/л'} min={0} />
+        </Field>
+      </div>
+      {calc != null ? (
+        <>
+          <div className="mt-5"><ResultCard label="Скорректированный кальций" value={calc.toFixed(2)} unit={unit === 'mgdl' ? 'мг/дл' : 'ммоль/л'} /></div>
+          <RefTable head={['Кальций', 'Интерпретация']} rows={unit === 'mgdl' ? CA_ROWS_MGDL : CA_ROWS_MMOL} activeIndex={caIndex(calc, unit)} />
+        </>
+      ) : <p className="text-sm text-gray-400 mt-5 pt-4 border-t border-gray-100">Заполните оба поля для расчёта</p>}
+      <FormulaNote>
+        <p>мг/дл: скорр. Ca = общий Ca + 0,8 × (4,0 − альбумин).</p>
+        <p>ммоль/л: скорр. Ca = общий Ca + 0,02 × (40 − альбумин).</p>
+        <p>Payne RB, Little AJ, Williams RB, Milner JR. Interpretation of serum calcium in patients with abnormal serum proteins. BMJ, 1973.</p>
+      </FormulaNote>
+    </div>
+  );
+}
+
+const toMgDlGluc = (g: string, unit: 'mmol' | 'mgdl') => { const v = parseFloat(g); if (!v) return NaN; return unit === 'mmol' ? v * 18.016 : v; };
+
+function CorrectedSodiumCalculator() {
+  const [na, setNa] = useState('');
+  const [glucose, setGlucose] = useState('');
+  const [glucUnit, setGlucUnit] = useState<'mmol' | 'mgdl'>('mmol');
+  const calc = useMemo(() => {
+    const naVal = parseFloat(na), gMgDl = toMgDlGluc(glucose, glucUnit);
+    if (!naVal || !gMgDl) return null;
+    return { katz: naVal + 1.6 * ((gMgDl - 100) / 100), hillier: naVal + 2.4 * ((gMgDl - 100) / 100) };
+  }, [na, glucose, glucUnit]);
+  return (
+    <div>
+      <div className="grid sm:grid-cols-2 gap-4">
+        <Field label="Натрий (измеренный)" hint="ммоль/л"><NumberInput value={na} onChange={setNa} placeholder="128" unit="ммоль/л" min={0} /></Field>
+        <Field label="Глюкоза">
+          <div className="flex gap-2">
+            <NumberInput value={glucose} onChange={setGlucose} placeholder={glucUnit === 'mmol' ? '25' : '450'} min={0} />
+            <div className="shrink-0 w-28"><Segmented options={[{ value: 'mmol', label: 'ммоль/л' }, { value: 'mgdl', label: 'мг/дл' }]} value={glucUnit} onChange={setGlucUnit} /></div>
+          </div>
+        </Field>
+      </div>
+      {calc ? (
+        <>
+          <div className="grid sm:grid-cols-2 gap-4 mt-5">
+            <ResultCard label="Скорр. Na (Katz, ×1,6)" value={calc.katz.toFixed(1)} unit="ммоль/л" />
+            <ResultCard muted label="Скорр. Na (Hillier, ×2,4)" value={calc.hillier.toFixed(1)} unit="ммоль/л" />
+          </div>
+          <RefTable head={['Na, ммоль/л', 'Интерпретация']} rows={NA_SEVERITY_ROWS} activeIndex={naSeverityIndex(calc.katz)} />
+        </>
+      ) : <p className="text-sm text-gray-400 mt-5 pt-4 border-t border-gray-100">Заполните оба поля для расчёта</p>}
+      <FormulaNote>
+        <p>Katz MA: скорр. Na = измеренный Na + 1,6 × (глюкоза(мг/дл) − 100) / 100. N Engl J Med, 1973.</p>
+        <p>Hillier TA et al.: коэффициент 2,4 точнее при выраженной гипергликемии (глюкоза выше ~22 ммоль/л). Am J Med, 1999.</p>
+        <p>Перевод глюкозы: 1 ммоль/л = 18,016 мг/дл.</p>
+      </FormulaNote>
+    </div>
+  );
+}
+
+const AG_ROWS = [
+  ['< 8', 'Снижена (гипоальбуминемия, парапротеинемия, интоксикация бромидом/литием)'],
+  ['8–12', 'Норма'],
+  ['12–20', 'Умеренно повышена'],
+  ['> 20', 'Значительно повышена (кетоацидоз, лактат-ацидоз, уремия, отравления)'],
+];
+function agIndex(ag: number) { if (ag < 8) return 0; if (ag <= 12) return 1; if (ag <= 20) return 2; return 3; }
+
+function AnionGapCalculator() {
+  const [unit, setUnit] = useState<'gdl' | 'gl'>('gl');
+  const [na, setNa] = useState('');
+  const [cl, setCl] = useState('');
+  const [hco3, setHco3] = useState('');
+  const [albumin, setAlbumin] = useState('');
+  const calc = useMemo(() => {
+    const naVal = parseFloat(na), clVal = parseFloat(cl), hco3Val = parseFloat(hco3), albVal = parseFloat(albumin);
+    if (!naVal || !clVal || !hco3Val) return null;
+    const ag = naVal - (clVal + hco3Val);
+    const hasAlbumin = !!albVal;
+    const albGdl = unit === 'gl' ? albVal / 10 : albVal;
+    const corrected = hasAlbumin ? ag + 2.5 * (4.0 - albGdl) : ag;
+    return { ag, corrected, hasAlbumin };
+  }, [na, cl, hco3, albumin, unit]);
+  return (
+    <div>
+      <div className="grid sm:grid-cols-2 gap-4">
+        <Field label="Натрий" hint="ммоль/л"><NumberInput value={na} onChange={setNa} placeholder="140" unit="ммоль/л" min={0} /></Field>
+        <Field label="Хлор" hint="ммоль/л"><NumberInput value={cl} onChange={setCl} placeholder="104" unit="ммоль/л" min={0} /></Field>
+        <Field label="Бикарбонат (HCO₃⁻)" hint="ммоль/л"><NumberInput value={hco3} onChange={setHco3} placeholder="24" unit="ммоль/л" min={0} /></Field>
+        <Field label="Альбумин (опционально)">
+          <div className="flex gap-2">
+            <NumberInput value={albumin} onChange={setAlbumin} placeholder={unit === 'gl' ? '40' : '4.0'} min={0} />
+            <div className="shrink-0 w-28"><Segmented options={[{ value: 'gl', label: 'г/л' }, { value: 'gdl', label: 'г/дл' }]} value={unit} onChange={setUnit} /></div>
+          </div>
+        </Field>
+      </div>
+      {calc ? (
+        <>
+          <div className="grid sm:grid-cols-2 gap-4 mt-5">
+            <ResultCard muted={calc.hasAlbumin} label="Анионная разница" value={calc.ag.toFixed(1)} unit="ммоль/л" />
+            {calc.hasAlbumin && <ResultCard label="Скорректированная на альбумин" value={calc.corrected.toFixed(1)} unit="ммоль/л" />}
+          </div>
+          <RefTable head={['АР, ммоль/л', 'Интерпретация']} rows={AG_ROWS} activeIndex={agIndex(calc.hasAlbumin ? calc.corrected : calc.ag)} />
+        </>
+      ) : <p className="text-sm text-gray-400 mt-5 pt-4 border-t border-gray-100">Заполните Na, Cl и HCO₃⁻ для расчёта</p>}
+      <FormulaNote>
+        <p>Формула: АР = Na − (Cl + HCO₃⁻).</p>
+        <p>Поправка на альбумин: АР(корр.) = АР + 2,5 × (4,0 − альбумин, г/дл) — при гипоальбуминемии истинная анионная разница занижается. Figge J, Jabor A, Kazda A, Fencl V. Anion gap and hypoalbuminemia. Crit Care Med, 1998.</p>
+        <p>Референсный диапазон зависит от лаборатории (метод определения хлора); указан ориентировочный.</p>
+      </FormulaNote>
+    </div>
+  );
+}
+
+const SMOKING_ROWS = [
+  ['< 10', 'Низкий риск'],
+  ['10–19', 'Умеренный риск'],
+  ['20–29', 'Повышенный риск — порог для скрининга рака лёгкого (USPSTF, с 2021 г.)'],
+  ['≥ 30', 'Высокий риск — классический критерий скрининга (NLST) и предиктор ХОБЛ'],
+];
+function smokingIndex(py: number) { if (py < 10) return 0; if (py < 20) return 1; if (py < 30) return 2; return 3; }
+
+function SmokingIndexCalculator() {
+  const [perDay, setPerDay] = useState('');
+  const [years, setYears] = useState('');
+  const packYears = useMemo(() => {
+    const p = parseFloat(perDay), y = parseFloat(years);
+    if (!p || !y) return null;
+    return (p / 20) * y;
+  }, [perDay, years]);
+  return (
+    <div>
+      <div className="grid sm:grid-cols-2 gap-4">
+        <Field label="Сигарет в день"><NumberInput value={perDay} onChange={setPerDay} placeholder="20" unit="шт" min={0} /></Field>
+        <Field label="Стаж курения" hint="лет"><NumberInput value={years} onChange={setYears} placeholder="15" unit="лет" min={0} /></Field>
+      </div>
+      {packYears != null ? (
+        <>
+          <div className="mt-5"><ResultCard label="Индекс курения" value={packYears.toFixed(1)} unit="пачка-лет" /></div>
+          <RefTable head={['Пачка-лет', 'Категория риска']} rows={SMOKING_ROWS} activeIndex={smokingIndex(packYears)} />
+        </>
+      ) : <p className="text-sm text-gray-400 mt-5 pt-4 border-t border-gray-100">Заполните оба поля для расчёта</p>}
+      <FormulaNote>
+        <p>Формула: индекс курения (пачка-лет) = (сигарет в день / 20) × стаж курения (лет).</p>
+        <p>US Preventive Services Task Force. Screening for Lung Cancer, 2021 (порог ≥ 20 пачка-лет для скрининга); National Lung Screening Trial — критерий ≥ 30 пачка-лет.</p>
+      </FormulaNote>
+    </div>
+  );
+}
+
 const CALCULATORS = [
   { id: 'bmi', title: 'Индекс массы тела (ИМТ)', description: 'Оценка массы тела по росту и весу', component: BMICalculator },
   { id: 'gfr-adult', title: 'Скорость клубочковой фильтрации (взрослые)', description: 'CKD-EPI 2021, MDRD, Кокрофт-Голт', component: GFRAdultCalculator },
   { id: 'gfr-child', title: 'СКФ у детей', description: 'Формулы Шварца и Куннахана-Барратта', component: GFRChildCalculator },
   { id: 'centor', title: 'Шкала Centor / McIsaac', description: 'Вероятность стрептококкового фарингита', component: CentorCalculator },
+  { id: 'bsa', title: 'Площадь поверхности тела (ППТ)', description: 'Формулы Дюбуа и Мостеллера', component: BSACalculator },
+  { id: 'na-deficit', title: 'Дефицит натрия', description: 'Расчёт по общей воде организма', component: SodiumDeficitCalculator },
+  { id: 'k-deficit', title: 'Дефицит калия', description: 'Ориентировочный расчёт по массе тела', component: PotassiumDeficitCalculator },
+  { id: 'ca-corrected', title: 'Скорректированный кальций', description: 'Поправка на альбумин', component: CorrectedCalciumCalculator },
+  { id: 'na-corrected', title: 'Скорректированный натрий', description: 'Поправка на гликемию (Katz, Hillier)', component: CorrectedSodiumCalculator },
+  { id: 'anion-gap', title: 'Анионная разница', description: 'Na − (Cl + HCO₃⁻), с поправкой на альбумин', component: AnionGapCalculator },
+  { id: 'smoking-index', title: 'Индекс курения', description: 'Пачка-лет', component: SmokingIndexCalculator },
 ];
 
 export default function CalculatorsPage() {
