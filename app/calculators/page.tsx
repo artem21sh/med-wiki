@@ -480,6 +480,71 @@ function NEWS2Calculator() {
   );
 }
 
+const WELLS_3TIER_ROWS = [
+  ['0–1', 'Низкая вероятность ТЭЛА'],
+  ['2–6', 'Промежуточная вероятность'],
+  ['≥ 7', 'Высокая вероятность'],
+];
+function wells3TierIndex(s: number) { if (s <= 1) return 0; if (s <= 6) return 1; return 2; }
+
+const WELLS_2TIER_ROWS = [
+  ['≤ 4', 'ТЭЛА маловероятна — рекомендован D-димер; при отрицательном результате ТЭЛА исключена'],
+  ['> 4', 'ТЭЛА вероятна — рекомендована КТ-ангиопульмонография'],
+];
+function wells2TierIndex(s: number) { return s > 4 ? 1 : 0; }
+
+function WellsPECalculator() {
+  const [dvt, setDvt] = useState(false);
+  const [altDx, setAltDx] = useState(false);
+  const [tachycardia, setTachycardia] = useState(false);
+  const [immobSurgery, setImmobSurgery] = useState(false);
+  const [priorVte, setPriorVte] = useState(false);
+  const [hemoptysis, setHemoptysis] = useState(false);
+  const [malignancy, setMalignancy] = useState(false);
+  const score = useMemo(() => {
+    let s = 0;
+    if (dvt) s += 3;
+    if (altDx) s += 3;
+    if (tachycardia) s += 1.5;
+    if (immobSurgery) s += 1.5;
+    if (priorVte) s += 1.5;
+    if (hemoptysis) s += 1;
+    if (malignancy) s += 1;
+    return s;
+  }, [dvt, altDx, tachycardia, immobSurgery, priorVte, hemoptysis, malignancy]);
+  const Check = ({ checked, onChange, label }: { checked: boolean; onChange: (v: boolean) => void; label: string }) => (
+    <label className="flex items-center gap-3 py-2.5 cursor-pointer group">
+      <span className={`w-5 h-5 rounded border flex items-center justify-center transition-colors shrink-0 ${checked ? 'bg-blue-500 border-blue-500' : 'border-gray-300 group-hover:border-gray-400'}`}>
+        {checked && <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-6" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /></svg>}
+      </span>
+      <input type="checkbox" checked={checked} onChange={(e) => onChange(e.target.checked)} className="sr-only" />
+      <span className="text-sm text-gray-700">{label}</span>
+    </label>
+  );
+  return (
+    <div>
+      <div className="divide-y divide-gray-100">
+        <Check checked={dvt} onChange={setDvt} label="Клинические признаки ТГВ (отёк, боль при пальпации вен ноги) — 3 балла" />
+        <Check checked={altDx} onChange={setAltDx} label="Альтернативный диагноз менее вероятен, чем ТЭЛА — 3 балла" />
+        <Check checked={tachycardia} onChange={setTachycardia} label="ЧСС > 100 в минуту — 1,5 балла" />
+        <Check checked={immobSurgery} onChange={setImmobSurgery} label="Иммобилизация ≥ 3 дней или операция в предыдущие 4 недели — 1,5 балла" />
+        <Check checked={priorVte} onChange={setPriorVte} label="ТГВ или ТЭЛА в анамнезе — 1,5 балла" />
+        <Check checked={hemoptysis} onChange={setHemoptysis} label="Кровохарканье — 1 балл" />
+        <Check checked={malignancy} onChange={setMalignancy} label="Онкозаболевание (активное, лечение в последние 6 мес или паллиативное) — 1 балл" />
+      </div>
+      <div className="mt-5"><ResultCard label="Сумма баллов Wells" value={score.toFixed(1)} unit="баллов" /></div>
+      <p className="text-sm font-medium text-gray-700 mt-5 mb-1">Трёхуровневая интерпретация</p>
+      <RefTable head={['Баллы', 'Интерпретация']} rows={WELLS_3TIER_ROWS} activeIndex={wells3TierIndex(score)} />
+      <p className="text-sm font-medium text-gray-700 mt-6 mb-1">Двухуровневая интерпретация (упрощённая, Christopher Study)</p>
+      <RefTable head={['Баллы', 'Интерпретация']} rows={WELLS_2TIER_ROWS} activeIndex={wells2TierIndex(score)} />
+      <FormulaNote>
+        <p>Шкала Wells оценивает клиническую вероятность ТЭЛА. Используется для выбора тактики обследования: при низкой/маловероятной вероятности — D-димер, при высокой/вероятной — визуализация (КТ-ангиопульмонография).</p>
+        <p>Wells PS et al., 2000; двухуровневая модель — Christopher Study, 2006.</p>
+      </FormulaNote>
+    </div>
+  );
+}
+
 const bsaMosteller = (h: number, w: number) => Math.sqrt((h * w) / 3600);
 const BSA_ROWS = [
   ['< 0,5', 'Новорождённые, груднички'],
@@ -794,6 +859,7 @@ const CALCULATORS = [
   { id: 'gcs', title: 'Шкала комы Глазго (GCS)', description: 'Открывание глаз, речевая и двигательная реакция', component: GCSCalculator },
   { id: 'qsofa', title: 'qSOFA (quick SOFA)', description: 'Скрининг риска неблагоприятного исхода при подозрении на сепсис', component: QSofaCalculator },
   { id: 'news2', title: 'NEWS2 (National Early Warning Score 2)', description: 'Шкала раннего предупреждения (RCP / NHS)', component: NEWS2Calculator },
+  { id: 'wells-pe', title: 'Шкала Wells (ТЭЛА)', description: 'Клиническая вероятность тромбоэмболии лёгочной артерии', component: WellsPECalculator },
   { id: 'bsa', title: 'Площадь поверхности тела (ППТ)', description: 'Формулы Дюбуа и Мостеллера', component: BSACalculator },
   { id: 'na-deficit', title: 'Дефицит натрия', description: 'Расчёт по общей воде организма', component: SodiumDeficitCalculator },
   { id: 'k-deficit', title: 'Дефицит калия', description: 'Ориентировочный расчёт по массе тела', component: PotassiumDeficitCalculator },
