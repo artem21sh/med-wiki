@@ -396,6 +396,90 @@ function QSofaCalculator() {
   );
 }
 
+function newsRRScore(v: number) { if (v <= 8) return 3; if (v <= 11) return 1; if (v <= 20) return 0; if (v <= 24) return 2; return 3; }
+function newsSpo2Score(v: number) { if (v <= 91) return 3; if (v <= 93) return 2; if (v <= 95) return 1; return 0; }
+function newsSbpScore(v: number) { if (v <= 90) return 3; if (v <= 100) return 2; if (v <= 110) return 1; if (v <= 219) return 0; return 3; }
+function newsHrScore(v: number) { if (v <= 40) return 3; if (v <= 50) return 1; if (v <= 90) return 0; if (v <= 110) return 1; if (v <= 130) return 2; return 3; }
+function newsTempScore(v: number) { if (v <= 35.0) return 3; if (v <= 36.0) return 1; if (v <= 38.0) return 0; if (v <= 39.0) return 1; return 2; }
+
+const NEWS2_ROWS = [
+  ['0', 'Минимальный риск — плановое наблюдение'],
+  ['1–4', 'Низкий риск — оценка медсестрой, частота наблюдения по протоколу'],
+  ['3 в одном параметре', 'Низко-средний риск — срочная оценка врачом'],
+  ['5–6', 'Средний риск — срочная оценка врачом, рассмотреть перевод в палату интенсивного наблюдения'],
+  ['≥ 7', 'Высокий риск — экстренная оценка реанимационной бригадой, непрерывный мониторинг'],
+];
+function news2Index(total: number, anyThree: boolean) {
+  if (total >= 7) return 4;
+  if (total >= 5) return 3;
+  if (anyThree) return 2;
+  if (total >= 1) return 1;
+  return 0;
+}
+
+function NEWS2Calculator() {
+  const [rr, setRr] = useState('16');
+  const [spo2, setSpo2] = useState('98');
+  const [oxygen, setOxygen] = useState<'air' | 'o2'>('air');
+  const [sbp, setSbp] = useState('120');
+  const [hr, setHr] = useState('70');
+  const [consciousness, setConsciousness] = useState<'alert' | 'cvpu'>('alert');
+  const [temp, setTemp] = useState('36.6');
+  const calc = useMemo(() => {
+    const rrVal = parseFloat(rr), spo2Val = parseFloat(spo2), sbpVal = parseFloat(sbp), hrVal = parseFloat(hr), tempVal = parseFloat(temp);
+    if ([rrVal, spo2Val, sbpVal, hrVal, tempVal].some((v) => Number.isNaN(v))) return null;
+    const scores = {
+      rr: newsRRScore(rrVal),
+      spo2: newsSpo2Score(spo2Val),
+      oxygen: oxygen === 'o2' ? 2 : 0,
+      sbp: newsSbpScore(sbpVal),
+      hr: newsHrScore(hrVal),
+      consciousness: consciousness === 'cvpu' ? 3 : 0,
+      temp: newsTempScore(tempVal),
+    };
+    const total = Object.values(scores).reduce((a, b) => a + b, 0);
+    const anyThree = Object.values(scores).some((s) => s === 3);
+    return { total, anyThree };
+  }, [rr, spo2, oxygen, sbp, hr, consciousness, temp]);
+  return (
+    <div>
+      <div className="grid sm:grid-cols-2 gap-4">
+        <Field label="Частота дыхания" hint="в минуту"><NumberInput value={rr} onChange={setRr} placeholder="16" unit="/мин" min={0} /></Field>
+        <Field label="SpO₂" hint="шкала 1"><NumberInput value={spo2} onChange={setSpo2} placeholder="98" unit="%" min={0} /></Field>
+        <Field label="Систолическое АД" hint="мм рт. ст."><NumberInput value={sbp} onChange={setSbp} placeholder="120" unit="мм рт. ст." min={0} /></Field>
+        <Field label="ЧСС" hint="в минуту"><NumberInput value={hr} onChange={setHr} placeholder="70" unit="/мин" min={0} /></Field>
+        <Field label="Температура тела" hint="°C"><NumberInput value={temp} onChange={setTemp} placeholder="36.6" unit="°C" min={0} /></Field>
+      </div>
+      <div className="grid sm:grid-cols-2 gap-4 mt-4">
+        <div>
+          <span className="block text-sm font-medium text-gray-700 mb-2">Подача кислорода</span>
+          <Segmented options={[{ value: 'air', label: 'Воздух' }, { value: 'o2', label: 'На кислороде' }]} value={oxygen} onChange={setOxygen} />
+        </div>
+        <div>
+          <span className="block text-sm font-medium text-gray-700 mb-2">Уровень сознания</span>
+          <Segmented options={[{ value: 'alert', label: 'Ясное (Alert)' }, { value: 'cvpu', label: 'Изменение (CVPU)' }]} value={consciousness} onChange={setConsciousness} />
+        </div>
+      </div>
+      {calc ? (
+        <>
+          <div className="mt-5"><ResultCard label="Сумма баллов NEWS2" value={String(calc.total)} unit="баллов" /></div>
+          {calc.anyThree && (
+            <p className="mt-3 text-sm font-medium text-amber-700 bg-amber-50 border border-amber-200 rounded-lg px-3 py-2">
+              ⚠ Один из параметров дал 3 балла — показана срочная оценка врачом независимо от суммарного балла.
+            </p>
+          )}
+          <RefTable head={['Баллы', 'Интерпретация']} rows={NEWS2_ROWS} activeIndex={news2Index(calc.total, calc.anyThree)} />
+        </>
+      ) : <p className="text-sm text-gray-400 mt-5 pt-4 border-t border-gray-100">Заполните все параметры для расчёта</p>}
+      <FormulaNote>
+        <p>NEWS2 — стандартизированная шкала раннего предупреждения (Royal College of Physicians, 2017), рекомендована NHS для оценки остроты состояния и динамики у взрослых.</p>
+        <p>Шкала SpO₂ №1 применяется у большинства пациентов; шкала №2 — только при хронической гиперкапнической дыхательной недостаточности с целевой сатурацией 88–92% (в данном калькуляторе используется шкала №1).</p>
+        <p>Не применяется у беременных и лиц младше 16 лет.</p>
+      </FormulaNote>
+    </div>
+  );
+}
+
 const bsaMosteller = (h: number, w: number) => Math.sqrt((h * w) / 3600);
 const BSA_ROWS = [
   ['< 0,5', 'Новорождённые, груднички'],
@@ -709,6 +793,7 @@ const CALCULATORS = [
   { id: 'centor', title: 'Шкала Centor / McIsaac', description: 'Вероятность стрептококкового фарингита', component: CentorCalculator },
   { id: 'gcs', title: 'Шкала комы Глазго (GCS)', description: 'Открывание глаз, речевая и двигательная реакция', component: GCSCalculator },
   { id: 'qsofa', title: 'qSOFA (quick SOFA)', description: 'Скрининг риска неблагоприятного исхода при подозрении на сепсис', component: QSofaCalculator },
+  { id: 'news2', title: 'NEWS2 (National Early Warning Score 2)', description: 'Шкала раннего предупреждения (RCP / NHS)', component: NEWS2Calculator },
   { id: 'bsa', title: 'Площадь поверхности тела (ППТ)', description: 'Формулы Дюбуа и Мостеллера', component: BSACalculator },
   { id: 'na-deficit', title: 'Дефицит натрия', description: 'Расчёт по общей воде организма', component: SodiumDeficitCalculator },
   { id: 'k-deficit', title: 'Дефицит калия', description: 'Ориентировочный расчёт по массе тела', component: PotassiumDeficitCalculator },
