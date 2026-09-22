@@ -545,6 +545,68 @@ function WellsPECalculator() {
   );
 }
 
+function WeightDoseCalculator() {
+  const [weight, setWeight] = useState('');
+  const [dosePerKg, setDosePerKg] = useState('');
+  const [mode, setMode] = useState<'daily' | 'perDose'>('daily');
+  const [frequency, setFrequency] = useState('');
+  const [concentration, setConcentration] = useState('');
+  const [maxDaily, setMaxDaily] = useState('');
+  const calc = useMemo(() => {
+    const w = parseFloat(weight), doseKg = parseFloat(dosePerKg), freq = parseFloat(frequency), conc = parseFloat(concentration), maxDose = parseFloat(maxDaily);
+    if (!w || !doseKg) return null;
+    let dailyRaw: number | null = null;
+    let perDoseRaw: number | null = null;
+    if (mode === 'daily') {
+      dailyRaw = w * doseKg;
+      perDoseRaw = freq ? dailyRaw / freq : null;
+    } else {
+      perDoseRaw = w * doseKg;
+      dailyRaw = freq ? perDoseRaw * freq : null;
+    }
+    const exceeded = !!maxDose && dailyRaw != null && dailyRaw > maxDose;
+    const daily = exceeded ? maxDose : dailyRaw;
+    const perDose = exceeded && freq ? daily! / freq : perDoseRaw;
+    const volume = conc && perDose != null ? perDose / conc : null;
+    return { daily, perDose, volume, exceeded };
+  }, [weight, dosePerKg, mode, frequency, concentration, maxDaily]);
+  return (
+    <div>
+      <div className="grid sm:grid-cols-2 gap-4">
+        <Field label="Масса тела" hint="кг"><NumberInput value={weight} onChange={setWeight} placeholder="20" unit="кг" min={0} /></Field>
+        <Field label="Доза препарата" hint="мг/кг"><NumberInput value={dosePerKg} onChange={setDosePerKg} placeholder="10" unit="мг/кг" min={0} /></Field>
+      </div>
+      <div className="mt-4">
+        <span className="block text-sm font-medium text-gray-700 mb-2">Режим дозы</span>
+        <Segmented options={[{ value: 'daily', label: 'В сутки' }, { value: 'perDose', label: 'На приём' }]} value={mode} onChange={setMode} />
+      </div>
+      <div className="grid sm:grid-cols-2 gap-4 mt-4">
+        <Field label="Кратность приёма" hint="раз/сутки"><NumberInput value={frequency} onChange={setFrequency} placeholder="3" unit="раз/сут" min={0} /></Field>
+        <Field label="Концентрация препарата" hint="необязательно"><NumberInput value={concentration} onChange={setConcentration} placeholder="50" unit="мг/мл" min={0} /></Field>
+        <Field label="Максимальная суточная доза" hint="необязательно"><NumberInput value={maxDaily} onChange={setMaxDaily} placeholder="1000" unit="мг" min={0} /></Field>
+      </div>
+      {calc ? (
+        <>
+          <div className="grid sm:grid-cols-2 gap-4 mt-5">
+            {calc.daily != null && <ResultCard label="Суточная доза" value={calc.daily.toFixed(1)} unit="мг" />}
+            {calc.perDose != null && <ResultCard label="Разовая доза" value={calc.perDose.toFixed(1)} unit="мг" />}
+            {calc.volume != null && <ResultCard muted label="Объём на приём" value={calc.volume.toFixed(2)} unit="мл" />}
+          </div>
+          {calc.exceeded && (
+            <p className="mt-3 text-sm font-medium text-amber-700 bg-amber-50 border border-amber-200 rounded-lg px-3 py-2">
+              ⚠ Расчётная суточная доза превышает заданную максимальную — использована максимальная суточная доза.
+            </p>
+          )}
+        </>
+      ) : <p className="text-sm text-gray-400 mt-5 pt-4 border-t border-gray-100">Заполните массу тела и дозу (мг/кг) для расчёта</p>}
+      <FormulaNote>
+        <p>Универсальный расчёт дозы. Все параметры (доза мг/кг, концентрация, максимальная доза) вводятся пользователем из инструкции к препарату или клинических рекомендаций.</p>
+        <p>Калькулятор не содержит справочника доз и не заменяет проверку по инструкции. Всегда сверяйте расчётную дозу с официальной инструкцией и возрастными ограничениями.</p>
+      </FormulaNote>
+    </div>
+  );
+}
+
 const bsaMosteller = (h: number, w: number) => Math.sqrt((h * w) / 3600);
 const BSA_ROWS = [
   ['< 0,5', 'Новорождённые, груднички'],
@@ -860,6 +922,7 @@ const CALCULATORS = [
   { id: 'qsofa', title: 'qSOFA (quick SOFA)', description: 'Скрининг риска неблагоприятного исхода при подозрении на сепсис', component: QSofaCalculator },
   { id: 'news2', title: 'NEWS2 (National Early Warning Score 2)', description: 'Шкала раннего предупреждения (RCP / NHS)', component: NEWS2Calculator },
   { id: 'wells-pe', title: 'Шкала Wells (ТЭЛА)', description: 'Клиническая вероятность тромбоэмболии лёгочной артерии', component: WellsPECalculator },
+  { id: 'weight-dose', title: 'Расчёт дозы по весу', description: 'Универсальный расчёт суточной/разовой дозы и объёма', component: WeightDoseCalculator },
   { id: 'bsa', title: 'Площадь поверхности тела (ППТ)', description: 'Формулы Дюбуа и Мостеллера', component: BSACalculator },
   { id: 'na-deficit', title: 'Дефицит натрия', description: 'Расчёт по общей воде организма', component: SodiumDeficitCalculator },
   { id: 'k-deficit', title: 'Дефицит калия', description: 'Ориентировочный расчёт по массе тела', component: PotassiumDeficitCalculator },
