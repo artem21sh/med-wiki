@@ -15,6 +15,17 @@ export default async function Home() {
           <p className="text-gray-500 mb-6">База знаний нозологий</p>
           <SiteSearch />
         </div>
+        <Link
+          href="/calculators"
+          className="flex items-center gap-4 bg-blue-50 border border-blue-200 rounded-xl px-6 py-4 mb-6 hover:border-blue-400 hover:shadow-sm transition-all"
+        >
+          <span className="text-2xl shrink-0" aria-hidden="true">🧮</span>
+          <div className="flex-1">
+            <div className="text-gray-900 font-medium">Калькуляторы</div>
+            <div className="text-sm text-gray-500">Клинические расчёты и шкалы</div>
+          </div>
+          <span className="text-blue-500 text-lg shrink-0">→</span>
+        </Link>
         <div className="flex flex-col gap-3">
           {nosologies.map((item) => (
             <Link
