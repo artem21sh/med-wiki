@@ -280,6 +280,80 @@ function CentorCalculator() {
   );
 }
 
+const GCS_E_OPTIONS = [
+  { value: 4, label: 'Спонтанное' },
+  { value: 3, label: 'На звук/речь' },
+  { value: 2, label: 'На боль' },
+  { value: 1, label: 'Отсутствует' },
+];
+const GCS_V_OPTIONS = [
+  { value: 5, label: 'Ориентирован, осмысленная речь' },
+  { value: 4, label: 'Спутанная речь, дезориентация' },
+  { value: 3, label: 'Отдельные слова (неадекватные)' },
+  { value: 2, label: 'Нечленораздельные звуки' },
+  { value: 1, label: 'Отсутствует' },
+];
+const GCS_M_OPTIONS = [
+  { value: 6, label: 'Выполняет команды' },
+  { value: 5, label: 'Локализует боль (целенаправленно отталкивает)' },
+  { value: 4, label: 'Отдёргивание на боль (сгибание)' },
+  { value: 3, label: 'Патологическое сгибание (декортикация)' },
+  { value: 2, label: 'Патологическое разгибание (децеребрация)' },
+  { value: 1, label: 'Отсутствует' },
+];
+const GCS_ROWS = [
+  ['15', 'Ясное сознание'],
+  ['14–13', 'Оглушение'],
+  ['12–9', 'Сопор'],
+  ['8–4', 'Кома'],
+  ['3', 'Запредельная кома (терминальная)'],
+];
+function gcsIndex(s: number) { if (s === 15) return 0; if (s >= 13) return 1; if (s >= 9) return 2; if (s >= 4) return 3; return 4; }
+
+function GCSOptionGroup({ label, options, value, onChange }: {
+  label: string; options: { value: number; label: string }[]; value: number; onChange: (v: number) => void;
+}) {
+  return (
+    <div>
+      <span className="block text-sm font-medium text-gray-700 mb-2">{label}</span>
+      <div className="flex flex-col gap-1.5">
+        {options.map((o) => (
+          <button key={o.value} type="button" onClick={() => onChange(o.value)}
+            className={`flex items-center gap-3 px-3 py-2 rounded-lg border text-left text-sm transition-colors ${
+              value === o.value ? 'bg-blue-50 border-blue-300 text-blue-900' : 'border-gray-200 text-gray-600 hover:bg-gray-50'}`}>
+            <span className={`shrink-0 w-6 h-6 rounded-full flex items-center justify-center text-xs font-semibold ${
+              value === o.value ? 'bg-blue-500 text-white' : 'bg-gray-100 text-gray-500'}`}>{o.value}</span>
+            <span>{o.label}</span>
+          </button>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function GCSCalculator() {
+  const [eye, setEye] = useState(4);
+  const [verbal, setVerbal] = useState(5);
+  const [motor, setMotor] = useState(6);
+  const total = useMemo(() => eye + verbal + motor, [eye, verbal, motor]);
+  return (
+    <div>
+      <div className="flex flex-col gap-5">
+        <GCSOptionGroup label="Открывание глаз (E)" options={GCS_E_OPTIONS} value={eye} onChange={setEye} />
+        <GCSOptionGroup label="Речевая реакция (V)" options={GCS_V_OPTIONS} value={verbal} onChange={setVerbal} />
+        <GCSOptionGroup label="Двигательная реакция (M)" options={GCS_M_OPTIONS} value={motor} onChange={setMotor} />
+      </div>
+      <div className="mt-5"><ResultCard label="Шкала комы Глазго (GCS)" value={String(total)} unit="баллов" badge={`E${eye} V${verbal} M${motor}`} /></div>
+      <RefTable head={['Баллы', 'Интерпретация']} rows={GCS_ROWS} activeIndex={gcsIndex(total)} />
+      <FormulaNote>
+        <p>Сумма трёх компонентов (открывание глаз, речевая и двигательная реакция), диапазон 3–15 баллов. GCS ≤ 8 — показание к рассмотрению защиты дыхательных путей (интубации).</p>
+        <p>У интубированных пациентов речевую реакцию оценить нельзя — балл отмечают пометкой «Т» (например, GCS 8T), а не как V1, чтобы не завышать тяжесть состояния.</p>
+        <p>Teasdale G, Jennett B. Assessment of coma and impaired consciousness. A practical scale. Lancet, 1974.</p>
+      </FormulaNote>
+    </div>
+  );
+}
+
 const bsaMosteller = (h: number, w: number) => Math.sqrt((h * w) / 3600);
 const BSA_ROWS = [
   ['< 0,5', 'Новорождённые, груднички'],
@@ -591,6 +665,7 @@ const CALCULATORS = [
   { id: 'gfr-adult', title: 'Скорость клубочковой фильтрации (взрослые)', description: 'CKD-EPI 2021, MDRD, Кокрофт-Голт', component: GFRAdultCalculator },
   { id: 'gfr-child', title: 'СКФ у детей', description: 'Формулы Шварца и Куннахана-Барратта', component: GFRChildCalculator },
   { id: 'centor', title: 'Шкала Centor / McIsaac', description: 'Вероятность стрептококкового фарингита', component: CentorCalculator },
+  { id: 'gcs', title: 'Шкала комы Глазго (GCS)', description: 'Открывание глаз, речевая и двигательная реакция', component: GCSCalculator },
   { id: 'bsa', title: 'Площадь поверхности тела (ППТ)', description: 'Формулы Дюбуа и Мостеллера', component: BSACalculator },
   { id: 'na-deficit', title: 'Дефицит натрия', description: 'Расчёт по общей воде организма', component: SodiumDeficitCalculator },
   { id: 'k-deficit', title: 'Дефицит калия', description: 'Ориентировочный расчёт по массе тела', component: PotassiumDeficitCalculator },
