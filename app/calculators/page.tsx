@@ -354,6 +354,48 @@ function GCSCalculator() {
   );
 }
 
+const QSOFA_ROWS = [
+  ['0–1', 'Низкий риск неблагоприятного исхода'],
+  ['≥ 2', 'Высокий риск: повышенная вероятность летального исхода и длительной интенсивной терапии, показана оценка на сепсис (полная шкала SOFA, лактат, посевы)'],
+];
+function qsofaIndex(s: number) { return s >= 2 ? 1 : 0; }
+
+function QSofaCalculator() {
+  const [rr, setRr] = useState(false);
+  const [mentation, setMentation] = useState(false);
+  const [sbp, setSbp] = useState(false);
+  const score = useMemo(() => {
+    let s = 0;
+    [rr, mentation, sbp].forEach((v) => v && (s += 1));
+    return s;
+  }, [rr, mentation, sbp]);
+  const Check = ({ checked, onChange, label }: { checked: boolean; onChange: (v: boolean) => void; label: string }) => (
+    <label className="flex items-center gap-3 py-2.5 cursor-pointer group">
+      <span className={`w-5 h-5 rounded border flex items-center justify-center transition-colors shrink-0 ${checked ? 'bg-blue-500 border-blue-500' : 'border-gray-300 group-hover:border-gray-400'}`}>
+        {checked && <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-6" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /></svg>}
+      </span>
+      <input type="checkbox" checked={checked} onChange={(e) => onChange(e.target.checked)} className="sr-only" />
+      <span className="text-sm text-gray-700">{label}</span>
+    </label>
+  );
+  const word = (n: number) => { if (n === 1) return 'балл'; if (n >= 2 && n <= 4) return 'балла'; return 'баллов'; };
+  return (
+    <div>
+      <div className="divide-y divide-gray-100">
+        <Check checked={rr} onChange={setRr} label="Частота дыхания ≥ 22 в минуту" />
+        <Check checked={mentation} onChange={setMentation} label="Изменение сознания (GCS < 15 / любое нарушение ментального статуса)" />
+        <Check checked={sbp} onChange={setSbp} label="Систолическое АД ≤ 100 мм рт. ст." />
+      </div>
+      <div className="mt-5"><ResultCard label="Сумма баллов qSOFA" value={String(score)} unit={word(score)} /></div>
+      <RefTable head={['Баллы', 'Интерпретация']} rows={QSOFA_ROWS} activeIndex={qsofaIndex(score)} />
+      <FormulaNote>
+        <p>qSOFA — прикроватный инструмент для быстрого выявления пациентов с подозрением на инфекцию, у которых повышен риск неблагоприятного исхода. Оценивается вне ОРИТ.</p>
+        <p>≥ 2 баллов — сигнал к углублённой оценке на сепсис, но qSOFA не является диагностическим критерием сепсиса и не заменяет полную шкалу SOFA. Seymour CW et al. JAMA, 2016 (Sepsis-3).</p>
+      </FormulaNote>
+    </div>
+  );
+}
+
 const bsaMosteller = (h: number, w: number) => Math.sqrt((h * w) / 3600);
 const BSA_ROWS = [
   ['< 0,5', 'Новорождённые, груднички'],
@@ -666,6 +708,7 @@ const CALCULATORS = [
   { id: 'gfr-child', title: 'СКФ у детей', description: 'Формулы Шварца и Куннахана-Барратта', component: GFRChildCalculator },
   { id: 'centor', title: 'Шкала Centor / McIsaac', description: 'Вероятность стрептококкового фарингита', component: CentorCalculator },
   { id: 'gcs', title: 'Шкала комы Глазго (GCS)', description: 'Открывание глаз, речевая и двигательная реакция', component: GCSCalculator },
+  { id: 'qsofa', title: 'qSOFA (quick SOFA)', description: 'Скрининг риска неблагоприятного исхода при подозрении на сепсис', component: QSofaCalculator },
   { id: 'bsa', title: 'Площадь поверхности тела (ППТ)', description: 'Формулы Дюбуа и Мостеллера', component: BSACalculator },
   { id: 'na-deficit', title: 'Дефицит натрия', description: 'Расчёт по общей воде организма', component: SodiumDeficitCalculator },
   { id: 'k-deficit', title: 'Дефицит калия', description: 'Ориентировочный расчёт по массе тела', component: PotassiumDeficitCalculator },
