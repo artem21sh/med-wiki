@@ -24,9 +24,35 @@ interface ResultItem {
   // where the link points
   anchor?: string;
   // type of match, drives label + ordering
-  kind: 'title' | 'alias' | 'section' | 'content';
+  kind: 'title' | 'alias' | 'section' | 'content' | 'calculator';
   label: string;   // secondary line ("Лечение", "также: гайморит", snippet...)
 }
+
+interface CalcEntry {
+  id: string;
+  title: string;
+  aliases: string[];
+}
+
+// hardcoded index of app/calculators/page.tsx CALCULATORS — keep ids in sync
+const CALCULATORS_INDEX: CalcEntry[] = [
+  { id: 'bmi', title: 'Индекс массы тела (ИМТ)', aliases: ['имт', 'индекс массы тела', 'bmi'] },
+  { id: 'gfr-adult', title: 'Скорость клубочковой фильтрации (взрослые)', aliases: ['скф', 'клиренс креатинина', 'скорость клубочковой фильтрации', 'gfr', 'ckd-epi', 'мдрд', 'кокрофт-голт'] },
+  { id: 'gfr-child', title: 'СКФ у детей', aliases: ['скф у детей', 'клиренс креатинина у детей', 'шварц', 'куннахан-барратт'] },
+  { id: 'centor', title: 'Шкала Centor / McIsaac', aliases: ['centor', 'центор', 'mcisaac', 'макайзек', 'стрептококк', 'ангина', 'фарингит'] },
+  { id: 'gcs', title: 'Шкала комы Глазго (GCS)', aliases: ['gcs', 'глазго', 'шкала комы глазго', 'кома', 'сознание'] },
+  { id: 'qsofa', title: 'qSOFA (quick SOFA)', aliases: ['qsofa', 'quick sofa', 'сепсис'] },
+  { id: 'news2', title: 'NEWS2 (National Early Warning Score 2)', aliases: ['news2', 'news', 'национальная шкала раннего предупреждения', 'раннее предупреждение'] },
+  { id: 'wells-pe', title: 'Шкала Wells (ТЭЛА)', aliases: ['wells', 'уэллс', 'тэла', 'тромбоэмболия', 'тромбоэмболия лёгочной артерии'] },
+  { id: 'weight-dose', title: 'Расчёт дозы по весу', aliases: ['доза по весу', 'дозировка', 'мг/кг', 'расчёт дозы'] },
+  { id: 'bsa', title: 'Площадь поверхности тела (ППТ)', aliases: ['ппт', 'площадь поверхности тела', 'bsa'] },
+  { id: 'na-deficit', title: 'Дефицит натрия', aliases: ['дефицит натрия', 'гипонатриемия', 'натрий'] },
+  { id: 'k-deficit', title: 'Дефицит калия', aliases: ['дефицит калия', 'гипокалиемия', 'калий'] },
+  { id: 'ca-corrected', title: 'Скорректированный кальций', aliases: ['скорректированный кальций', 'кальций', 'поправка на альбумин'] },
+  { id: 'na-corrected', title: 'Скорректированный натрий', aliases: ['скорректированный натрий', 'натрий'] },
+  { id: 'anion-gap', title: 'Анионная разница', aliases: ['анионная разница', 'anion gap', 'анионный интервал'] },
+  { id: 'smoking-index', title: 'Индекс курения', aliases: ['индекс курения', 'пачка-лет', 'пачколет'] },
+];
 
 // strip markdown noise from a text fragment
 function clean(text: string): string {
@@ -167,8 +193,23 @@ export default function SiteSearch() {
       }
     }
 
+    // 5) Calculators — matched by title or alias, shown after nosologies with a badge
+    for (const c of CALCULATORS_INDEX) {
+      const titleLower = c.title.toLowerCase();
+      const aliasesLower = c.aliases.map(a => a.toLowerCase());
+      const matched = titleLower.includes(q) || aliasesLower.some(a => a.includes(q) || q.includes(a));
+      if (matched) {
+        pushUnique(`calc:${c.id}`, {
+          slug: c.id,
+          title: c.title,
+          kind: 'calculator',
+          label: 'Калькулятор',
+        });
+      }
+    }
+
     // order by kind priority
-    const priority = { title: 0, section: 1, alias: 2, content: 3 };
+    const priority = { title: 0, section: 1, alias: 2, content: 3, calculator: 4 };
     out.sort((a, b) => priority[a.kind] - priority[b.kind]);
 
     setResults(out.slice(0, 10));
@@ -186,7 +227,9 @@ export default function SiteSearch() {
   }, []);
 
   const hrefFor = (r: ResultItem) =>
-    r.anchor ? `/nosologies/${r.slug}#${r.anchor}` : `/nosologies/${r.slug}`;
+    r.kind === 'calculator'
+      ? `/calculators#${r.slug}`
+      : r.anchor ? `/nosologies/${r.slug}#${r.anchor}` : `/nosologies/${r.slug}`;
 
   return (
     <div ref={ref} className="relative">
@@ -211,8 +254,11 @@ export default function SiteSearch() {
                 {r.kind === 'section' && (
                   <span className="text-blue-500 font-normal">→ {r.label}</span>
                 )}
+                {r.kind === 'calculator' && (
+                  <span className="text-xs font-medium text-blue-700 bg-blue-50 rounded px-1.5 py-0.5 shrink-0">Калькулятор</span>
+                )}
               </div>
-              {r.kind !== 'section' && r.label && (
+              {r.kind !== 'section' && r.kind !== 'calculator' && r.label && (
                 <div className="text-xs text-gray-500">{r.label}</div>
               )}
             </Link>

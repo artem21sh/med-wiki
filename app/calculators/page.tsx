@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 
 function Field({ label, hint, children }: { label: string; hint?: string; children: React.ReactNode }) {
   return (
@@ -933,7 +933,15 @@ const CALCULATORS = [
 ];
 
 export default function CalculatorsPage() {
-  const [openId, setOpenId] = useState<string | null>('bmi');
+  const [openId, setOpenId] = useState<string | null>(null);
+
+  useEffect(() => {
+    const hash = window.location.hash.slice(1);
+    if (!hash || !CALCULATORS.some((c) => c.id === hash)) return;
+    setOpenId(hash);
+    document.getElementById(hash)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }, []);
+
   return (
     <main className="min-h-screen bg-gray-50">
       <div className="sticky top-0 z-40 bg-white border-b border-gray-200">
@@ -951,7 +959,7 @@ export default function CalculatorsPage() {
             const isOpen = openId === calc.id;
             const Comp = calc.component;
             return (
-              <div key={calc.id} className="bg-white border border-gray-200 rounded-xl overflow-hidden">
+              <div key={calc.id} id={calc.id} className="bg-white border border-gray-200 rounded-xl overflow-hidden scroll-mt-[72px]">
                 <button onClick={() => setOpenId(isOpen ? null : calc.id)} className="w-full flex items-center justify-between px-5 py-4 text-left hover:bg-gray-50 transition-colors">
                   <span>
                     <span className="block font-medium text-gray-900">{calc.title}</span>
