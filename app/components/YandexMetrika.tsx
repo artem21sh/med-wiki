@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { usePathname, useSearchParams } from 'next/navigation';
 
 declare global {
@@ -9,19 +9,29 @@ declare global {
   }
 }
 
+// Module-level flag — guarantees the loader/init snippet runs exactly once
+// for the page's lifetime, unaffected by StrictMode's double-invoke,
+// Fast Refresh, or a Suspense remount of this subtree.
+let ymLoaded = false;
+
 export default function YandexMetrika({ ymId }: { ymId: string }) {
   const pathname = usePathname();
   const searchParams = useSearchParams();
+  const isFirstRender = useRef(true);
 
-  // Load and init the counter once
+  // Load and init the counter — guaranteed to run exactly once
   useEffect(() => {
-    if (!ymId) return;
-    if (window.ym && window.ym.a === undefined) return; // already fully initialized
+    if (!ymId || ymLoaded) return;
+    ymLoaded = true;
 
-    // Standard Metrika loader (self-contained), WITHOUT the "return if script exists" guard
+    // Official Yandex Metrika snippet — unmodified, including the
+    // duplicate-script guard (for (var j...) if src === r return).
     (function (m: any, e: any, t: any, r: any, i: any) {
       m[i] = m[i] || function () { (m[i].a = m[i].a || []).push(arguments); };
       m[i].l = 1 * (new Date() as any);
+      for (let j = 0; j < e.scripts.length; j++) {
+        if (e.scripts[j].src === r) return;
+      }
       const k = e.createElement(t);
       const a = e.getElementsByTagName(t)[0];
       k.async = 1;
@@ -39,9 +49,15 @@ export default function YandexMetrika({ ymId }: { ymId: string }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [ymId]);
 
-  // Track SPA route changes
+  // Track SPA route changes. Skip the very first render — 'init' above
+  // already registers the initial pageview, so firing 'hit' here too
+  // would double-count it.
   useEffect(() => {
     if (!ymId || typeof window.ym !== 'function') return;
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+      return;
+    }
     const url = pathname + (searchParams?.toString() ? `?${searchParams.toString()}` : '');
     window.ym(Number(ymId), 'hit', url);
   }, [pathname, searchParams, ymId]);
