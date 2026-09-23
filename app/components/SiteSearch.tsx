@@ -197,7 +197,7 @@ export default function SiteSearch() {
     for (const c of CALCULATORS_INDEX) {
       const titleLower = c.title.toLowerCase();
       const aliasesLower = c.aliases.map(a => a.toLowerCase());
-      const matched = titleLower.includes(q) || aliasesLower.some(a => a.includes(q) || q.includes(a));
+      const matched = titleLower.includes(q) || aliasesLower.some(a => a.includes(q));
       if (matched) {
         pushUnique(`calc:${c.id}`, {
           slug: c.id,
@@ -209,7 +209,7 @@ export default function SiteSearch() {
     }
 
     // order by kind priority
-    const priority = { title: 0, section: 1, alias: 2, content: 3, calculator: 4 };
+    const priority = { title: 0, section: 1, alias: 2, calculator: 3, content: 4 };
     out.sort((a, b) => priority[a.kind] - priority[b.kind]);
 
     setResults(out.slice(0, 10));
