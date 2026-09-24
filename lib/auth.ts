@@ -10,6 +10,7 @@ export interface SessionUser {
   name: string | null;
   subscription_status: string;
   subscription_until: Date | null;
+  created_at: Date;
 }
 
 export async function hashPassword(password: string): Promise<string> {
@@ -31,7 +32,7 @@ export async function createSession(userId: string): Promise<string> {
 
 export async function getSessionUser(sessionId: string): Promise<SessionUser | null> {
   const rows = await query<SessionUser>(
-    `SELECT u.id, u.email, u.name, u.subscription_status, u.subscription_until
+    `SELECT u.id, u.email, u.name, u.subscription_status, u.subscription_until, u.created_at
      FROM sessions s
      JOIN users u ON u.id = s.user_id
      WHERE s.id = $1 AND s.expires_at > now()`,

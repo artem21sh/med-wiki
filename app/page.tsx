@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { getNosologies } from '@/lib/content';
 import SiteSearch from '@/app/components/SiteSearch';
+import AuthStatus from '@/app/components/AuthStatus';
 
 export const revalidate = 0;
 
@@ -11,7 +12,10 @@ export default async function Home() {
     <main className="min-h-screen bg-gray-50">
       <div className="max-w-3xl mx-auto px-4 py-12">
         <div className="mb-10">
-          <h1 className="text-3xl font-semibold text-gray-900 mb-2">МедСправочник</h1>
+          <div className="flex items-center justify-between mb-2">
+            <h1 className="text-3xl font-semibold text-gray-900">МедСправочник</h1>
+            <AuthStatus />
+          </div>
           <p className="text-gray-500 mb-6">База знаний нозологий</p>
           <SiteSearch />
         </div>
