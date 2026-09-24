@@ -42,7 +42,7 @@ export default function NosologyPage({ title, content, updatedAt }: {
               placeholder="Поиск по странице..."
               value={search}
               onChange={e => setSearch(e.target.value)}
-              className="w-full px-3 py-1.5 border border-gray-200 rounded-lg text-sm focus:outline-none focus:border-blue-400 bg-gray-50"
+              className="w-full px-3 py-1.5 border border-gray-200 rounded-lg text-sm text-gray-900 placeholder:text-gray-400 focus:outline-none focus:border-blue-400 bg-gray-50"
             />
             {search && results.length > 0 && (
               <div className="absolute left-0 right-0 top-full mt-1 bg-white border border-gray-200 rounded-xl shadow-lg overflow-hidden z-50 max-h-80 overflow-y-auto">

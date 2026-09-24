@@ -238,7 +238,7 @@ export default function SiteSearch() {
         placeholder="Поиск: название, синоним или «лечение синусита»..."
         value={query}
         onChange={e => setQuery(e.target.value)}
-        className="w-full px-4 py-3 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-blue-400 bg-white"
+        className="w-full px-4 py-3 border border-gray-200 rounded-xl text-sm text-gray-900 placeholder:text-gray-400 focus:outline-none focus:border-blue-400 bg-white"
       />
       {open && results.length > 0 && (
         <div className="absolute z-10 w-full mt-2 bg-white border border-gray-200 rounded-xl shadow-lg overflow-hidden max-h-96 overflow-y-auto">
