@@ -4,6 +4,8 @@ import { FormEvent, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 
+const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
 export default function LoginPage() {
   const router = useRouter();
   const [email, setEmail] = useState('');
@@ -14,6 +16,17 @@ export default function LoginPage() {
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setError(null);
+
+    const trimmedEmail = email.trim();
+    if (!trimmedEmail) {
+      setError('Введите email');
+      return;
+    }
+    if (!EMAIL_REGEX.test(trimmedEmail)) {
+      setError('Введите корректный email');
+      return;
+    }
+
     setLoading(true);
     try {
       const res = await fetch('/api/auth/login', {
@@ -39,8 +52,9 @@ export default function LoginPage() {
     <main className="min-h-screen bg-gray-50">
       <div className="max-w-md mx-auto px-4 py-16">
         <div className="bg-white border border-gray-200 rounded-xl p-8">
+          <Link href="/" className="text-blue-500 text-sm hover:underline whitespace-nowrap mb-4 inline-block">← На главную</Link>
           <h1 className="text-2xl font-semibold text-gray-900 mb-6">Вход</h1>
-          <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+          <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-4">
             <label className="block">
               <span className="block text-sm font-medium text-gray-700 mb-1">Email</span>
               <input
