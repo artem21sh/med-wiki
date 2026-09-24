@@ -608,6 +608,85 @@ function GenevaCalculator() {
   );
 }
 
+const PESI_CLASS_LABELS = ['I', 'II', 'III', 'IV', 'V'];
+const PESI_ROWS = [
+  ['< 66', 'Класс I: очень низкий риск (0–1,6%) — кандидат на амбулаторное лечение'],
+  ['66–85', 'Класс II: низкий риск (1,7–3,5%) — кандидат на амбулаторное лечение'],
+  ['86–105', 'Класс III: умеренный риск (3,2–7,1%) — рекомендована госпитализация'],
+  ['106–125', 'Класс IV: высокий риск (4–11,4%) — рекомендована госпитализация'],
+  ['> 125', 'Класс V: очень высокий риск (10–24,5%) — рекомендована госпитализация'],
+];
+function pesiIndex(s: number) { if (s < 66) return 0; if (s <= 85) return 1; if (s <= 105) return 2; if (s <= 125) return 3; return 4; }
+
+function PESICalculator() {
+  const [age, setAge] = useState('');
+  const [sex, setSex] = useState<'m' | 'f'>('m');
+  const [cancer, setCancer] = useState(false);
+  const [chf, setChf] = useState(false);
+  const [chronicLung, setChronicLung] = useState(false);
+  const [tachycardia, setTachycardia] = useState(false);
+  const [hypotension, setHypotension] = useState(false);
+  const [tachypnea, setTachypnea] = useState(false);
+  const [hypothermia, setHypothermia] = useState(false);
+  const [alteredMentation, setAlteredMentation] = useState(false);
+  const [hypoxemia, setHypoxemia] = useState(false);
+  const calc = useMemo(() => {
+    const a = parseFloat(age);
+    if (!a) return null;
+    let s = a;
+    if (sex === 'm') s += 10;
+    if (cancer) s += 30;
+    if (chf) s += 10;
+    if (chronicLung) s += 10;
+    if (tachycardia) s += 20;
+    if (hypotension) s += 30;
+    if (tachypnea) s += 20;
+    if (hypothermia) s += 20;
+    if (alteredMentation) s += 60;
+    if (hypoxemia) s += 20;
+    return s;
+  }, [age, sex, cancer, chf, chronicLung, tachycardia, hypotension, tachypnea, hypothermia, alteredMentation, hypoxemia]);
+  const Check = ({ checked, onChange, label }: { checked: boolean; onChange: (v: boolean) => void; label: string }) => (
+    <label className="flex items-center gap-3 py-2.5 cursor-pointer group">
+      <span className={`w-5 h-5 rounded border flex items-center justify-center transition-colors shrink-0 ${checked ? 'bg-blue-500 border-blue-500' : 'border-gray-300 group-hover:border-gray-400'}`}>
+        {checked && <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-6" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /></svg>}
+      </span>
+      <input type="checkbox" checked={checked} onChange={(e) => onChange(e.target.checked)} className="sr-only" />
+      <span className="text-sm text-gray-700">{label}</span>
+    </label>
+  );
+  return (
+    <div>
+      <div className="mb-4 w-64"><Segmented options={[{ value: 'm', label: 'Мужской' }, { value: 'f', label: 'Женский' }]} value={sex} onChange={setSex} /></div>
+      <div className="grid sm:grid-cols-2 gap-4">
+        <Field label="Возраст" hint="лет"><NumberInput value={age} onChange={setAge} placeholder="65" unit="лет" min={0} /></Field>
+      </div>
+      <div className="divide-y divide-gray-100 mt-4">
+        <Check checked={cancer} onChange={setCancer} label="Онкологическое заболевание (текущее или в анамнезе) — 30 баллов" />
+        <Check checked={chf} onChange={setChf} label="Хроническая сердечная недостаточность — 10 баллов" />
+        <Check checked={chronicLung} onChange={setChronicLung} label="Хроническое заболевание лёгких (ХОБЛ и др.) — 10 баллов" />
+        <Check checked={tachycardia} onChange={setTachycardia} label="ЧСС ≥ 110 в минуту — 20 баллов" />
+        <Check checked={hypotension} onChange={setHypotension} label="Систолическое АД < 100 мм рт. ст. — 30 баллов" />
+        <Check checked={tachypnea} onChange={setTachypnea} label="Частота дыхания ≥ 30 в минуту — 20 баллов" />
+        <Check checked={hypothermia} onChange={setHypothermia} label="Температура тела < 36 °C — 20 баллов" />
+        <Check checked={alteredMentation} onChange={setAlteredMentation} label="Нарушение сознания (спутанность, летаргия, ступор, кома) — 60 баллов" />
+        <Check checked={hypoxemia} onChange={setHypoxemia} label="SpO₂ < 90% — 20 баллов" />
+      </div>
+      {calc != null ? (
+        <>
+          <div className="mt-5"><ResultCard label="Индекс PESI" value={String(calc)} unit="баллов" badge={`Класс ${PESI_CLASS_LABELS[pesiIndex(calc)]}`} /></div>
+          <RefTable head={['Баллы', 'Класс / риск']} rows={PESI_ROWS} activeIndex={pesiIndex(calc)} />
+        </>
+      ) : <p className="text-sm text-gray-400 mt-5 pt-4 border-t border-gray-100">Введите возраст для расчёта</p>}
+      <FormulaNote>
+        <p>PESI прогнозирует 30-дневную летальность у пациентов с подтверждённой ТЭЛА и помогает выбрать между амбулаторным и стационарным лечением.</p>
+        <p>Классы I–II (низкий риск) — возможно амбулаторное ведение при отсутствии социальных/логистических противопоказаний.</p>
+        <p>Aujesky D et al. Derivation and validation of a prognostic model for pulmonary embolism. Am J Respir Crit Care Med. 2005;172(8):1041-6.</p>
+      </FormulaNote>
+    </div>
+  );
+}
+
 function WeightDoseCalculator() {
   const [weight, setWeight] = useState('');
   const [dosePerKg, setDosePerKg] = useState('');
@@ -986,6 +1065,7 @@ const CALCULATORS = [
   { id: 'news2', title: 'NEWS2 (National Early Warning Score 2)', description: 'Шкала раннего предупреждения (RCP / NHS)', component: NEWS2Calculator },
   { id: 'wells-pe', title: 'Шкала Wells (ТЭЛА)', description: 'Клиническая вероятность тромбоэмболии лёгочной артерии', component: WellsPECalculator },
   { id: 'geneva', title: 'Индекс Geneva (пересмотренный)', description: 'Объективная альтернатива Wells для оценки вероятности ТЭЛА', component: GenevaCalculator },
+  { id: 'pesi', title: 'Индекс тяжести ТЭЛА (PESI)', description: 'Прогноз 30-дневной летальности, выбор амбулаторно/стационар', component: PESICalculator },
   { id: 'weight-dose', title: 'Расчёт дозы по весу', description: 'Универсальный расчёт суточной/разовой дозы и объёма', component: WeightDoseCalculator },
   { id: 'bsa', title: 'Площадь поверхности тела (ППТ)', description: 'Формулы Дюбуа и Мостеллера', component: BSACalculator },
   { id: 'na-deficit', title: 'Дефицит натрия', description: 'Расчёт по общей воде организма', component: SodiumDeficitCalculator },
