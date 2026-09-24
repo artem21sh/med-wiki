@@ -2,7 +2,7 @@ import bcrypt from 'bcrypt';
 import { query } from '@/lib/db';
 
 const SALT_ROUNDS = 10;
-const SESSION_TTL_MS = 30 * 24 * 60 * 60 * 1000; // 30 days
+export const SESSION_TTL_MS = 30 * 24 * 60 * 60 * 1000; // 30 days
 
 export interface SessionUser {
   id: string;
