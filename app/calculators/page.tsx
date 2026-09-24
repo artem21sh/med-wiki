@@ -18,7 +18,7 @@ function NumberInput({ value, onChange, placeholder, unit, min }: {
     <div className="relative">
       <input type="number" inputMode="decimal" value={value} min={min} placeholder={placeholder}
         onChange={(e) => onChange(e.target.value)}
-        className="w-full px-3 py-2 pr-16 border border-gray-300 rounded-lg text-base text-gray-900 placeholder:text-gray-400 focus:outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-400" />
+        className="no-spinner w-full px-3 py-2 pr-16 border border-gray-300 rounded-lg text-base text-gray-900 placeholder:text-gray-400 focus:outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-400" />
       {unit && <span className="absolute right-3 top-1/2 -translate-y-1/2 text-sm text-gray-400 pointer-events-none">{unit}</span>}
     </div>
   );
@@ -31,7 +31,7 @@ function Segmented<T extends string>({ options, value, onChange }: {
     <div className="inline-flex rounded-lg border border-gray-300 p-0.5 bg-gray-50 w-full">
       {options.map((o) => (
         <button key={o.value} type="button" onClick={() => onChange(o.value)}
-          className={`flex-1 px-2 py-1.5 text-sm rounded-md transition-colors ${
+          className={`flex-1 px-2 py-1.5 text-xs whitespace-nowrap rounded-md transition-colors ${
             value === o.value ? 'bg-white text-blue-600 shadow-sm font-medium' : 'text-gray-500 hover:text-gray-700'}`}>
           {o.label}
         </button>
@@ -165,7 +165,7 @@ function GFRAdultCalculator() {
         <Field label="Креатинин плазмы">
           <div className="flex gap-2">
             <NumberInput value={scr} onChange={setScr} placeholder={scrUnit === 'umol' ? '88' : '1.0'} min={0} />
-            <div className="shrink-0 w-32"><Segmented options={[{ value: 'umol', label: 'мкмоль/л' }, { value: 'mgdl', label: 'мг/дл' }]} value={scrUnit} onChange={setScrUnit} /></div>
+            <div className="shrink-0 w-36"><Segmented options={[{ value: 'umol', label: 'мкмоль/л' }, { value: 'mgdl', label: 'мг/дл' }]} value={scrUnit} onChange={setScrUnit} /></div>
           </div>
         </Field>
         <Field label="Рост" hint="для Кокрофта-Голта с ППТ"><NumberInput value={height} onChange={setHeight} placeholder="180" unit="см" min={0} /></Field>
@@ -208,7 +208,7 @@ function GFRChildCalculator() {
         <Field label="Креатинин плазмы">
           <div className="flex gap-2">
             <NumberInput value={scr} onChange={setScr} placeholder={scrUnit === 'umol' ? '40' : '0.5'} min={0} />
-            <div className="shrink-0 w-32"><Segmented options={[{ value: 'umol', label: 'мкмоль/л' }, { value: 'mgdl', label: 'мг/дл' }]} value={scrUnit} onChange={setScrUnit} /></div>
+            <div className="shrink-0 w-36"><Segmented options={[{ value: 'umol', label: 'мкмоль/л' }, { value: 'mgdl', label: 'мг/дл' }]} value={scrUnit} onChange={setScrUnit} /></div>
           </div>
         </Field>
       </div>
