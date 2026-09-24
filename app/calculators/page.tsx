@@ -18,7 +18,7 @@ function NumberInput({ value, onChange, placeholder, unit, min }: {
     <div className="relative">
       <input type="number" inputMode="decimal" value={value} min={min} placeholder={placeholder}
         onChange={(e) => onChange(e.target.value)}
-        className="no-spinner w-full px-3 py-2 pr-16 border border-gray-300 rounded-lg text-base text-gray-900 placeholder:text-gray-400 focus:outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-400" />
+        className="no-spinner w-full px-3 py-2 pr-16 border border-gray-300 rounded-lg text-base text-gray-900 font-medium placeholder:text-gray-300 placeholder:font-normal focus:outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-400" />
       {unit && <span className="absolute right-3 top-1/2 -translate-y-1/2 text-sm text-gray-400 pointer-events-none">{unit}</span>}
     </div>
   );
