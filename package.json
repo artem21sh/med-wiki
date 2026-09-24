@@ -11,11 +11,13 @@
   "dependencies": {
     "@notionhq/client": "^2.2.15",
     "@tailwindcss/typography": "^0.5.19",
+    "bcrypt": "^6.0.0",
     "gray-matter": "^4.0.3",
     "next": "16.2.6",
     "next-themes": "^0.4.6",
     "notion-to-md": "^3.1.9",
     "outstatic": "^2.1.9",
+    "pg": "^8.23.0",
     "react": "19.2.4",
     "react-dom": "19.2.4",
     "react-markdown": "^10.1.0",
@@ -24,7 +26,9 @@
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
+    "@types/bcrypt": "^6.0.0",
     "@types/node": "^20",
+    "@types/pg": "^8.23.1",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",
