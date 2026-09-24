@@ -545,6 +545,69 @@ function WellsPECalculator() {
   );
 }
 
+const GENEVA_ROWS = [
+  ['0–3', 'Низкая вероятность ТЭЛА (~8%)'],
+  ['4–10', 'Промежуточная вероятность (~29%)'],
+  ['≥ 11', 'Высокая вероятность (~74%)'],
+];
+function genevaIndex(s: number) { if (s <= 3) return 0; if (s <= 10) return 1; return 2; }
+
+function GenevaCalculator() {
+  const [age65, setAge65] = useState(false);
+  const [priorVte, setPriorVte] = useState(false);
+  const [surgeryFracture, setSurgeryFracture] = useState(false);
+  const [malignancy, setMalignancy] = useState(false);
+  const [unilateralPain, setUnilateralPain] = useState(false);
+  const [hemoptysis, setHemoptysis] = useState(false);
+  const [heartRate, setHeartRate] = useState<'lt75' | '75-94' | 'gte95'>('lt75');
+  const [palpationEdema, setPalpationEdema] = useState(false);
+  const score = useMemo(() => {
+    let s = 0;
+    if (age65) s += 1;
+    if (priorVte) s += 3;
+    if (surgeryFracture) s += 2;
+    if (malignancy) s += 2;
+    if (unilateralPain) s += 3;
+    if (hemoptysis) s += 2;
+    if (heartRate === '75-94') s += 3; else if (heartRate === 'gte95') s += 5;
+    if (palpationEdema) s += 4;
+    return s;
+  }, [age65, priorVte, surgeryFracture, malignancy, unilateralPain, hemoptysis, heartRate, palpationEdema]);
+  const Check = ({ checked, onChange, label }: { checked: boolean; onChange: (v: boolean) => void; label: string }) => (
+    <label className="flex items-center gap-3 py-2.5 cursor-pointer group">
+      <span className={`w-5 h-5 rounded border flex items-center justify-center transition-colors shrink-0 ${checked ? 'bg-blue-500 border-blue-500' : 'border-gray-300 group-hover:border-gray-400'}`}>
+        {checked && <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-6" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /></svg>}
+      </span>
+      <input type="checkbox" checked={checked} onChange={(e) => onChange(e.target.checked)} className="sr-only" />
+      <span className="text-sm text-gray-700">{label}</span>
+    </label>
+  );
+  const word = (n: number) => { if (n === 1) return 'балл'; if (n >= 2 && n <= 4) return 'балла'; return 'баллов'; };
+  return (
+    <div>
+      <div className="divide-y divide-gray-100">
+        <Check checked={age65} onChange={setAge65} label="Возраст > 65 лет — 1 балл" />
+        <Check checked={priorVte} onChange={setPriorVte} label="ТГВ или ТЭЛА в анамнезе — 3 балла" />
+        <Check checked={surgeryFracture} onChange={setSurgeryFracture} label="Операция (под общим наркозом) или перелом нижней конечности в течение последнего месяца — 2 балла" />
+        <Check checked={malignancy} onChange={setMalignancy} label="Активное онкологическое заболевание (текущее или излеченное < 1 года) — 2 балла" />
+        <Check checked={unilateralPain} onChange={setUnilateralPain} label="Односторонняя боль в ноге — 3 балла" />
+        <Check checked={hemoptysis} onChange={setHemoptysis} label="Кровохарканье — 2 балла" />
+        <Check checked={palpationEdema} onChange={setPalpationEdema} label="Боль при глубокой пальпации вены ноги и односторонний отёк — 4 балла" />
+      </div>
+      <div className="mt-4">
+        <span className="block text-sm font-medium text-gray-700 mb-2">ЧСС</span>
+        <Segmented options={[{ value: 'lt75', label: '< 75 (0)' }, { value: '75-94', label: '75–94 (3)' }, { value: 'gte95', label: '≥ 95 (5)' }]} value={heartRate} onChange={setHeartRate} />
+      </div>
+      <div className="mt-5"><ResultCard label="Сумма баллов Geneva" value={String(score)} unit={word(score)} /></div>
+      <RefTable head={['Баллы', 'Интерпретация']} rows={GENEVA_ROWS} activeIndex={genevaIndex(score)} />
+      <FormulaNote>
+        <p>Пересмотренная шкала Geneva — альтернатива шкале Wells для оценки клинической вероятности ТЭЛА, основана только на объективных критериях (не требует клинической интуиции врача, в отличие от Wells).</p>
+        <p>Le Gal G et al. Prediction of pulmonary embolism in the emergency department: the revised Geneva score. Ann Intern Med. 2006;144(3):165-71.</p>
+      </FormulaNote>
+    </div>
+  );
+}
+
 function WeightDoseCalculator() {
   const [weight, setWeight] = useState('');
   const [dosePerKg, setDosePerKg] = useState('');
@@ -922,6 +985,7 @@ const CALCULATORS = [
   { id: 'qsofa', title: 'qSOFA (quick SOFA)', description: 'Скрининг риска неблагоприятного исхода при подозрении на сепсис', component: QSofaCalculator },
   { id: 'news2', title: 'NEWS2 (National Early Warning Score 2)', description: 'Шкала раннего предупреждения (RCP / NHS)', component: NEWS2Calculator },
   { id: 'wells-pe', title: 'Шкала Wells (ТЭЛА)', description: 'Клиническая вероятность тромбоэмболии лёгочной артерии', component: WellsPECalculator },
+  { id: 'geneva', title: 'Индекс Geneva (пересмотренный)', description: 'Объективная альтернатива Wells для оценки вероятности ТЭЛА', component: GenevaCalculator },
   { id: 'weight-dose', title: 'Расчёт дозы по весу', description: 'Универсальный расчёт суточной/разовой дозы и объёма', component: WeightDoseCalculator },
   { id: 'bsa', title: 'Площадь поверхности тела (ППТ)', description: 'Формулы Дюбуа и Мостеллера', component: BSACalculator },
   { id: 'na-deficit', title: 'Дефицит натрия', description: 'Расчёт по общей воде организма', component: SodiumDeficitCalculator },
