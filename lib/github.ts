@@ -36,6 +36,13 @@ export async function getFile(filePath: string): Promise<{ content: string; sha:
   if (!res.ok) throw new Error(`GitHub GET ${filePath} failed: ${res.status}`);
 
   const json = await res.json();
+  // GitHub's Contents API omits/empties `content` for files it won't
+  // inline (notably >1MB — those need the Blobs API instead), and always
+  // reports `encoding: "base64"` for the inline case. Treat anything else
+  // as "unexpected format", not a silently empty file.
+  if (json.encoding !== 'base64' || typeof json.content !== 'string' || json.content.length === 0) {
+    throw new Error(`Unexpected GitHub Contents API response for ${filePath}: file may be too large or in an unexpected format`);
+  }
   const content = Buffer.from(json.content, 'base64').toString('utf-8');
   return { content, sha: json.sha };
 }

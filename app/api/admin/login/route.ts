@@ -5,6 +5,7 @@ import {
   checkRateLimit,
   recordFailedAttempt,
   clearRateLimit,
+  sanitizeAdminName,
 } from '@/lib/admin-auth';
 
 function getClientIp(request: NextRequest): string {
@@ -35,7 +36,7 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: 'Некорректное тело запроса' }, { status: 400 });
   }
 
-  const name = typeof body.name === 'string' ? body.name.trim() : '';
+  const name = sanitizeAdminName(body.name);
   const password = typeof body.password === 'string' ? body.password : '';
 
   if (!name) {

@@ -6,6 +6,9 @@ import {
   buildFileWithFrontmatter,
   buildFileWithBlock,
   isValidNosologySlug,
+  hasInvalidHeadingStructure,
+  normalizeBlockTail,
+  otherBlocksUnchanged,
 } from '@/lib/nosology-blocks';
 
 const CONTENT_DIR = 'content/nosologies';
@@ -99,23 +102,37 @@ export async function PUT(request: NextRequest, { params }: { params: Promise<{ 
     sectionLabel = 'Основная информация';
   } else if (body.type === 'block') {
     const blockId = typeof body.blockId === 'string' ? body.blockId : '';
-    const block = parsed.blocks.find((b) => b.id === blockId);
-    if (!block) {
+    const blockIndex = parsed.blocks.findIndex((b) => b.id === blockId);
+    if (blockIndex === -1) {
       return NextResponse.json({ error: 'Раздел не найден' }, { status: 400 });
     }
+    const block = parsed.blocks[blockIndex];
     const content = typeof body.content === 'string' ? body.content : '';
-    if (block.id !== 'intro') {
-      if (!content.trim()) {
-        return NextResponse.json({ error: 'Раздел нельзя сохранить пустым' }, { status: 400 });
-      }
-      if (!/^#[ \t]+\S/.test(content)) {
-        return NextResponse.json(
-          { error: 'Раздел должен начинаться со строки вида "# N. Название"' },
-          { status: 400 }
-        );
-      }
+
+    if (block.id !== 'intro' && !content.trim()) {
+      return NextResponse.json({ error: 'Раздел нельзя сохранить пустым' }, { status: 400 });
     }
-    newRaw = buildFileWithBlock(parsed, block.id, content);
+    if (hasInvalidHeadingStructure(block.id, content)) {
+      return NextResponse.json(
+        {
+          error:
+            'В блоке не должно быть дополнительных строк вида "# Заголовок" (подзаголовки пишите как "## Название")',
+        },
+        { status: 400 }
+      );
+    }
+
+    const isLast = blockIndex === parsed.blocks.length - 1;
+    const normalizedContent = normalizeBlockTail(content, isLast);
+
+    newRaw = buildFileWithBlock(parsed, block.id, normalizedContent);
+
+    // Belt-and-suspenders: the edit must only ever touch this one block.
+    const reparsed = parseNosologyFile(newRaw);
+    if (!otherBlocksUnchanged(parsed.blocks, reparsed.blocks, block.id)) {
+      return NextResponse.json({ error: 'Правка нарушает структуру файла' }, { status: 400 });
+    }
+
     sectionLabel = block.title || 'Вводная часть';
   } else {
     return NextResponse.json({ error: 'Некорректный запрос' }, { status: 400 });

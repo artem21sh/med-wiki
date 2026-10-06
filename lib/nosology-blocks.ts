@@ -134,3 +134,47 @@ export function isValidNosologySlug(slug: string): boolean {
   const filePath = path.join(CONTENT_DIR, `${slug}.md`);
   return fs.existsSync(filePath) && path.dirname(filePath) === CONTENT_DIR;
 }
+
+/** A section block must contain exactly one "# N. ..." line, as its first
+ *  line; an intro block must contain none at all (extra "# " lines would
+ *  be silently reinterpreted as new sections on the next parse, splitting
+ *  or merging blocks). Subheadings use "##", which this never matches. */
+export function hasInvalidHeadingStructure(blockId: string, content: string): boolean {
+  const re = new RegExp(H1_LINE_RE);
+  let count = 0;
+  let firstIndex = -1;
+  let m: RegExpExecArray | null;
+  while ((m = re.exec(content)) !== null) {
+    if (count === 0) firstIndex = m.index;
+    count++;
+  }
+  if (blockId === 'intro') return count > 0;
+  return count !== 1 || firstIndex !== 0;
+}
+
+/** Strip trailing whitespace and reapply exactly the separator a block
+ *  needs: a blank line before the next block's heading, or a single
+ *  trailing newline if this is the last block in the file. Without this,
+ *  a block saved without its own trailing blank line would visually glue
+ *  onto the next heading on the next parse (or, for the last block, lose
+ *  its newline entirely). */
+export function normalizeBlockTail(content: string, isLast: boolean): string {
+  const trimmed = content.replace(/[ \t\r\n]+$/, '');
+  return isLast ? `${trimmed}\n` : `${trimmed}\n\n`;
+}
+
+/** After rebuilding the file around one edited block, re-parsing it must
+ *  yield the same number of blocks, and every block OTHER than the edited
+ *  one must come back byte-identical (title and content). This is the
+ *  belt-and-suspenders check behind replaceBlock()/buildFileWithBlock():
+ *  if it ever fails, something upstream is broken and the edit must not
+ *  be committed. */
+export function otherBlocksUnchanged(before: ContentBlock[], after: ContentBlock[], editedId: string): boolean {
+  if (before.length !== after.length) return false;
+  for (const b of before) {
+    if (b.id === editedId) continue;
+    const a = after.find((x) => x.id === b.id);
+    if (!a || a.title !== b.title || a.content !== b.content) return false;
+  }
+  return true;
+}

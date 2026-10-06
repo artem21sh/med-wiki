@@ -74,6 +74,16 @@ export async function clearAdminSessionCookie(): Promise<void> {
   (await cookies()).delete(ADMIN_SESSION_COOKIE);
 }
 
+const MAX_NAME_LENGTH = 40;
+
+/** Collapses newlines and any run of whitespace to a single space, trims,
+ *  and caps length — so a name can't inject extra lines into anything
+ *  that later interpolates it as plain text (e.g. the commit message). */
+export function sanitizeAdminName(raw: unknown): string {
+  if (typeof raw !== 'string') return '';
+  return raw.replace(/\s+/g, ' ').trim().slice(0, MAX_NAME_LENGTH);
+}
+
 // --- password check ---------------------------------------------------
 // timingSafeEqual requires equal-length buffers; hashing both sides to a
 // fixed-length digest first is the standard way to compare secrets of
